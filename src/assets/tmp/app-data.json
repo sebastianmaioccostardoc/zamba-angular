@@ -1,16 +1,42 @@
 {
   "app": {
-    "name": "Alain",
-    "description": "Ng-zorro admin panel front-end framework"
+    "name": "stardoc",
+    "description": "Stardoc Sa"
   },
   "user": {
-    "name": "Admin",
-    "avatar": "./assets/tmp/img/avatar.jpg",
-    "email": "cipchk@qq.com"
+    "name": "",
+    "avatar": "",
+    "email": ""
   },
   "menu": [
     {
-      "text": "主导航",
+      "text": "Principal",
+      "i18n": "menu.main",
+      "group": true,
+      "hideInBreadcrumb": true, 
+      "children": [
+        {
+          "text": "Escritorio",
+          "icon": "anticon-dashboard",
+          "link": "/init"
+        },
+        {
+          "text": "Empleado",
+          "icon": "anticon-profile",
+          "link": "/init",
+          "children": [
+            {
+              "text": "Empleado",
+              "link": "/ges/empleado",
+              "i18n": "menu.dashboard.v1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "menu2": [
+    {
       "i18n": "menu.main",
       "group": true,
       "hideInBreadcrumb": true,
