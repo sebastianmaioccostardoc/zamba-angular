@@ -22,7 +22,7 @@ import { CountdownModule } from 'ngx-countdown';
 import { DashboardAnalysisComponent } from './analysis/analysis.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardMonitorComponent } from './monitor/monitor.component';
-import { DashboardV1Component } from './v1/v1.component';
+import { DashboardV1Component } from './v2/v2.component';
 import { DashboardWorkplaceComponent } from './workplace/workplace.component';
 
 const COMPONENTS = [DashboardV1Component, DashboardAnalysisComponent, DashboardMonitorComponent, DashboardWorkplaceComponent];
