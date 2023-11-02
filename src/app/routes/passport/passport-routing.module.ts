@@ -22,12 +22,12 @@ const routes: Routes = [
       {
         path: 'register',
         component: UserRegisterComponent,
-        data: { title: '注册', titleI18n: 'app.register.register' }
+        data: { title: 'Registrarse', titleI18n: 'app.register.register' }
       },
       {
         path: 'register-result',
         component: UserRegisterResultComponent,
-        data: { title: '注册结果', titleI18n: 'app.register.register' }
+        data: { title: 'resultados de registro', titleI18n: 'app.register.register' }
       },
       {
         path: 'lock',
