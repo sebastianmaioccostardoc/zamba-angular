@@ -2,7 +2,7 @@
   "menu": {
     "dashboard": {
       "": "仪表盘",
-      "v1": "默认页",
+      "v1": "Empleado",
       "analysis": "分析页",
       "monitor": "监控页",
       "workplace": "工作台"
@@ -13,7 +13,7 @@
   "menu.fullscreen.exit": "退出全屏",
   "menu.clear.local.storage": "清理本地缓存",
   "menu.lang": "语言",
-  "menu.main": "主导航",
+  "menu.main": "Menu",
   "menu.shortcut": "快捷菜单",
   "menu.widgets": "小部件",
   "menu.alain": "Alain",
