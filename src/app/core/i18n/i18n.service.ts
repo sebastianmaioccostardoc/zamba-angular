@@ -2,6 +2,7 @@
 import { Platform } from '@angular/cdk/platform';
 import { registerLocaleData } from '@angular/common';
 import ngEn from '@angular/common/locales/en';
+import ngEs from '@angular/common/locales/es-AR';
 import ngZh from '@angular/common/locales/zh';
 import ngZhTw from '@angular/common/locales/zh-Hant';
 import { Injectable } from '@angular/core';
@@ -29,8 +30,9 @@ interface LangConfigData {
   delon: NzSafeAny;
 }
 
-const DEFAULT = 'zh-CN';
+const DEFAULT = 'es-ES';
 const LANGS: { [key: string]: LangConfigData } = {
+  /*
   'zh-CN': {
     text: '简体中文',
     ng: ngZh,
@@ -47,13 +49,22 @@ const LANGS: { [key: string]: LangConfigData } = {
     delon: delonZhTw,
     abbr: '🇭🇰'
   },
+  */
   'en-US': {
     text: 'English',
-    ng: ngEn,
+    ng: ngEs,
     zorro: zorroEnUS,
     date: dfEn,
     delon: delonEnUS,
     abbr: '🇬🇧'
+  },
+  'es-ES': {
+    text: 'Español',
+    ng: ngEn,
+    zorro: zorroEnUS,
+    date: dfEn,
+    delon: delonEnUS,
+    abbr: '🇪🇸'
   }
 };
 

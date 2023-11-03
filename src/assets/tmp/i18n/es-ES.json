@@ -149,5 +149,9 @@
   "validation.title.required": "Por favor, introduzca un título",
   "validation.date.required": "Seleccione la fecha de inicio y de finalización",
   "validation.goal.required": "Por favor, introduzca una descripción del objetivo",
-  "validation.standard.required": "Por favor, introduzca una métrica"
+  "validation.standard.required": "Por favor, introduzca una métrica",
+  "section.data.title": "Info",
+  "section.data.first-item": "Datos personales",
+  "section.data.second-item": "Datos familiares",
+  "section.data.third-item": "Datos de formación academica"
 }

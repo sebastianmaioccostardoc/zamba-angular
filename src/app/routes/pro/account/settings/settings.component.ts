@@ -18,19 +18,15 @@ export class ProAccountSettingsComponent implements AfterViewInit, OnDestroy {
   menus: Array<{ key: string; title: string; selected?: boolean }> = [
     {
       key: 'base',
-      title: '基本设置'
+      title: 'section.data.first-item'
     },
     {
       key: 'security',
-      title: '安全设置'
+      title: 'section.data.second-item'
     },
     {
       key: 'binding',
-      title: '账号绑定'
-    },
-    {
-      key: 'notification',
-      title: '新消息通知'
+      title: 'section.data.third-item'
     }
   ];
   constructor(
