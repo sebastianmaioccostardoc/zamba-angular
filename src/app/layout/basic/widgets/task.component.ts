@@ -11,9 +11,6 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/
       nzPlacement="bottomRight"
       (nzVisibleChange)="change()"
     >
-      <nz-badge [nzDot]="true">
-        <i nz-icon nzType="bell" class="alain-default__nav-item-icon"></i>
-      </nz-badge>
     </div>
     <nz-dropdown-menu #taskMenu="nzDropdownMenu">
       <div nz-menu class="wd-lg">
