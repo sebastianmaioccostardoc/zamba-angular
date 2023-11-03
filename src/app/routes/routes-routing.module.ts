@@ -29,9 +29,8 @@ const routes: Routes = [
       },
       { path: 'style', loadChildren: () => import('./style/style.module').then(m => m.StyleModule) },
       { path: 'delon', loadChildren: () => import('./delon/delon.module').then(m => m.DelonModule) },
-      { path: 'extras', loadChildren: () => import('./extras/extras.module').then(m => m.ExtrasModule) },
       { path: 'pro', loadChildren: () => import('./pro/pro.module').then(m => m.ProModule) },
-      { path: 'ges', loadChildren: () => import('./ges/ges.routes').then(r => r.GesRoutes) },
+      { path: 'ges', loadChildren: () => import('./ges/ges.module').then(r => r.GesModule) }
     ]
   },
   // Blak Layout 空白布局
@@ -60,4 +59,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class RouteRoutingModule { }
+export class RouteRoutingModule {}
