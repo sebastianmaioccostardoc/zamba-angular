@@ -17,7 +17,7 @@ import { environment } from '@env/environment';
           <i nz-icon nzType="search"></i>
         </div>
       </layout-default-header-item>
-      <layout-default-header-item direction="middle />>
+      <layout-default-header-item direction="middle" />
       <layout-default-header-item direction="right">
         <header-notify />
       </layout-default-header-item>
