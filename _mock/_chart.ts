@@ -26,7 +26,7 @@ for (let i = 0; i < fakeY2.length; i += 1) {
 const salesData: any[] = [];
 for (let i = 0; i < 12; i += 1) {
   salesData.push({
-    x: `${i + 1}月`,
+    x: `mounth ${i + 1}`,
     y: Math.floor(Math.random() * 1000) + 200,
   });
 }
