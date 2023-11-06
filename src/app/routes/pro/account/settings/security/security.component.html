@@ -1,12 +1,16 @@
 <nz-list nzItemLayout="horizontal">
+  <!-- 
   <nz-list-item [nzActions]="[passwordOp]">
     <ng-template #passwordOp>
       <a (click)="msg.success('Edit')">修改</a>
     </ng-template>
+
     <nz-list-item-meta nzTitle="账户密码" [nzDescription]="passwordDesc">
       <ng-template #passwordDesc> 当前密码强度：<span class="text-green">强</span> </ng-template>
     </nz-list-item-meta>
+
   </nz-list-item>
+
   <nz-list-item [nzActions]="[phoneOp]">
     <ng-template #phoneOp>
       <a (click)="msg.success('Edit')">修改</a>
@@ -15,6 +19,7 @@
       <ng-template #phoneDesc> 已绑定手机：159****2231 </ng-template>
     </nz-list-item-meta>
   </nz-list-item>
+
   <nz-list-item [nzActions]="[questionOp]">
     <ng-template #questionOp>
       <a (click)="msg.success('Edit')">修改</a>
@@ -23,6 +28,7 @@
       <ng-template #questionDesc> 未设置密保问题，密保问题可有效保护账户安全 </ng-template>
     </nz-list-item-meta>
   </nz-list-item>
+
   <nz-list-item [nzActions]="[emailOp]">
     <ng-template #emailOp>
       <a (click)="msg.success('Edit')">修改</a>
@@ -31,6 +37,7 @@
       <ng-template #emailDesc> 已绑定邮箱：cip*****.com </ng-template>
     </nz-list-item-meta>
   </nz-list-item>
+
   <nz-list-item [nzActions]="[mfaOp]">
     <ng-template #mfaOp>
       <a (click)="msg.success('Edit')">修改</a>
@@ -39,4 +46,174 @@
       <ng-template #mfaDesc> 未绑定 MFA 设备，绑定后，可以进行二次确认 </ng-template>
     </nz-list-item-meta>
   </nz-list-item>
+-->
+
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="12">Empresa CUIT
+      <input nz-input placeholder="Basic usage" type="number" [disabled]="true">
+    </div>
+
+    <div nz-col nzSpan="12">N° Legajo
+      <input nz-input placeholder="Basic usage" type="number" />
+    </div>
+  </div>
+
+  <br>
+
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="12">Apellido y Nombre
+      <input nz-input placeholder="Basic usage" type="text" />
+    </div>
+
+    <div nz-col nzSpan="12">CUIL / CUIT
+      <input nz-input placeholder="Basic usage" type="number" />
+    </div>
+  </div>
+
+  <br>
+  <hr>
+  <h1>Parentezco</h1>
+
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="12">Nombre
+      <input nz-input placeholder="Basic usage" type="text" />
+    </div>
+
+    <div nz-col nzSpan="12">Apellido
+      <input nz-input placeholder="Basic usage" type="text" />
+    </div>
+  </div>
+
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="12"> Fecha de nacimiento: <br>
+      <nz-date-picker style="width: 100%"></nz-date-picker>
+    </div>
+
+    <div nz-col nzSpan="12">Nacionalidad
+      <input nz-input placeholder="Basic usage" type="text" />
+    </div>
+  </div>
+
+  <br>
+
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="6">Tipo de Documento
+      <input nz-input placeholder="Basic usage" type="text" />
+    </div>
+
+    <div nz-col nzSpan="18">Numero de Documento
+      <input nz-input placeholder="Basic usage" type="text" />
+    </div>
+  </div>
+
+  <br>
+
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="24">Sexo <br>
+      <nz-radio-group>
+        <label nz-radio nzValue="A">A</label>
+        <label nz-radio nzValue="B">B</label>
+        <label nz-radio nzValue="C">C</label>
+      </nz-radio-group>
+    </div>
+  </div>
+
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="24">Estado Civil <br>
+      <nz-radio-group>
+        <label nz-radio nzValue="A">A</label> <br>
+        <label nz-radio nzValue="B">B</label> <br>
+        <label nz-radio nzValue="C">C</label> <br>
+        <label nz-radio nzValue="D">D</label>
+      </nz-radio-group>
+    </div>
+  </div>
+
+  <br>
+  <hr>
+  <br>
+
+  <div nz-row [nzGutter]="16">
+    <div nz-col>Pais <br>
+      <nz-select>
+        <nz-option nzValue="Argentina" nzLabel="Argentina"></nz-option>
+        <nz-option nzValue="EE.UU." nzLabel="EE.UU."></nz-option>
+        <nz-option nzValue="Cordoba" nzLabel="Cordoba"></nz-option>
+      </nz-select>
+    </div>
+
+    <div nz-col nzSpan="12">Provincia <br>
+      <nz-select>
+        <nz-option nzValue="Buenos Aires" nzLabel="Buenos Aires"></nz-option>
+        <nz-option nzValue="Catamarca" nzLabel="Catamarca"></nz-option>
+        <nz-option nzValue="Chaco" nzLabel="Chaco"></nz-option>
+        <nz-option nzValue="Chubut" nzLabel="Chubut"></nz-option>
+        <nz-option nzValue="Córdoba" nzLabel="Córdoba"></nz-option>
+        <nz-option nzValue="Corrientes" nzLabel="Corrientes"></nz-option>
+        <nz-option nzValue="Entre Ríos" nzLabel="Entre Ríos"></nz-option>
+        <nz-option nzValue="Formosa" nzLabel="Formosa"></nz-option>
+        <nz-option nzValue="Jujuy" nzLabel="Jujuy"></nz-option>
+        <nz-option nzValue="La Pampa" nzLabel="La Pampa"></nz-option>
+        <nz-option nzValue="La Rioja" nzLabel="La Rioja"></nz-option>
+        <nz-option nzValue="Mendoza" nzLabel="Mendoza"></nz-option>
+        <nz-option nzValue="Misiones" nzLabel="Misiones"></nz-option>
+        <nz-option nzValue="Neuquén" nzLabel="Neuquén"></nz-option>
+        <nz-option nzValue="Río Negro" nzLabel="Río Negro"></nz-option>
+        <nz-option nzValue="Salta" nzLabel="Salta"></nz-option>
+        <nz-option nzValue="San Juan" nzLabel="San Juan"></nz-option>
+        <nz-option nzValue="San Luis" nzLabel="San Luis"></nz-option>
+        <nz-option nzValue="Santa Cruz" nzLabel="Santa Cruz"></nz-option>
+        <nz-option nzValue="Santa Fe" nzLabel="Santa Fe"></nz-option>
+        <nz-option nzValue="Santiago del Estero" nzLabel="Santiago del Estero"></nz-option>
+        <nz-option nzValue="Tierra del Fuego, Antártida e Islas del Atlántico Sur"
+          nzLabel="Tierra del Fuego, Antártida e Islas del Atlántico Sur"></nz-option>
+        <nz-option nzValue="Tucumán" nzLabel="Tucumán"></nz-option>
+      </nz-select>
+    </div>
+
+    <div nz-col nzSpan="12">Localidad
+      <input nz-input placeholder="Basic usage" type="text" />
+    </div>
+
+    <div nz-col nzSpan="12">Barrio
+      <input nz-input placeholder="Basic usage" type="text" />
+    </div>
+
+
+    <div nz-col nzSpan="12">Municipio
+      <input nz-input placeholder="Basic usage" type="text" />
+    </div>
+
+    <div nz-col nzSpan="12">Departamento provincial
+      <input nz-input placeholder="Basic usage" type="text" />
+    </div>
+
+
+    <div nz-col nzSpan="12">Calle
+      <input nz-input placeholder="Basic usage" type="text" />
+    </div>
+
+    <div nz-col nzSpan="12">Altura calle
+      <input nz-input placeholder="Basic usage" type="text" />
+    </div>
+
+  </div>
+  <br>
+  <hr>
+  <br>
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="24">Beneficio seguro de vida obligatorio
+      <input nz-input placeholder="Basic usage" type="text" />
+    </div>
+  </div>
+
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="12">Persona a Cargo
+      <input nz-input placeholder="Basic usage" type="text" />
+    </div>
+
+    <div nz-col nzSpan="12">Porcentaje deduccion ganancia
+      <input nz-input placeholder="Basic usage" type="text" />
+    </div>
+  </div>
 </nz-list>

@@ -143,14 +143,14 @@ export class HeaderNotifyComponent {
         {
           id: '000000008',
           avatar: 'https://gw.alipayobjects.com/zos/rmsportal/fcHMVNCjPOsbUGdEduuv.jpeg',
-          title: 'title',
+          title: 'Zhu Qianyou replied to you',
           description: 'This kind of template is used to remind who has interacted with you, and the avatar of "who" is placed on the left',
           datetime: '2017-08-07',
           type: 'Info.'
         },
         {
           id: '000000009',
-          title: 'mission name',
+          title: 'Third-party emergency code changes',
           description: 'The task needs to be started before 2017-01-12 20:00',
           extra: 'has not started',
           status: 'todo',
