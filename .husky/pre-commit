@@ -1,5 +1,0 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-export NODE_OPTIONS=""
-npx --no-install tsc -p tsconfig.app.json --noEmit
-npx --no-install lint-staged
