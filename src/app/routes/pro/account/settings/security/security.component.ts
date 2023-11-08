@@ -6,10 +6,10 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   selector: 'app-account-settings-security',
   templateUrl: './security.component.html',
   styles: [`
-      nz-select {
-        margin: 0 8px 10px 0;
-        width: 200px;
-      }
+  nz-select {
+    margin: 0 8px 10px 0;
+    width: 100%;
+  }
 
     `],
   changeDetection: ChangeDetectionStrategy.OnPush
