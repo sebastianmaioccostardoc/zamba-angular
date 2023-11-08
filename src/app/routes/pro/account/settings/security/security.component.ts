@@ -7,8 +7,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   templateUrl: './security.component.html',
   styles: [
     `
-      
-
       nz-select {
         margin: 0 8px 10px 0;
         width: 200px;
