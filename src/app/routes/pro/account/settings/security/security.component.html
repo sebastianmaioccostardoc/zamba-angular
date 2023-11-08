@@ -1,11 +1,11 @@
 <nz-list nzItemLayout="horizontal">
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="12">Empresa CUIT
-      <input nz-input placeholder="Basic usage" type="number">
+      <input nz-input placeholder="Basic usage" [(ngModel)]="Family.CuitEmpresa" type="number" disabled>
     </div>
 
     <div nz-col nzSpan="12">N° Legajo
-      <input nz-input placeholder="Basic usage" type="number" />
+      <input nz-input placeholder="Basic usage" [(ngModel)]="Family.Legajo" type="number" />
     </div>
   </div>
 
@@ -13,11 +13,11 @@
 
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="12">Apellido y Nombre
-      <input nz-input placeholder="Basic usage" type="text" />
+      <input nz-input placeholder="Basic usage" [(ngModel)]="Family.ApellidoNombre" type="text" />
     </div>
 
     <div nz-col nzSpan="12">CUIL / CUIT
-      <input nz-input placeholder="Basic usage" type="text" />
+      <input nz-input placeholder="Basic usage" [(ngModel)]="Family.CuilCuit" type="text" />
     </div>
   </div>
 
@@ -29,11 +29,11 @@
 
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="12">Nombre
-      <input nz-input placeholder="Basic usage" type="text" />
+      <input nz-input placeholder="Basic usage" [(ngModel)]="Family.Nombre" type="text" />
     </div>
 
     <div nz-col nzSpan="12">Apellido
-      <input nz-input placeholder="Basic usage" type="text" />
+      <input nz-input placeholder="Basic usage" [(ngModel)]="Family.Apellido" type="text" />
     </div>
   </div>
 
@@ -43,17 +43,17 @@
     </div>
 
     <div nz-col nzSpan="12">Nacionalidad
-      <input nz-input placeholder="Basic usage" type="text" />
+      <input nz-input placeholder="Basic usage" [(ngModel)]="Family.Nacionalidad" type="text" />
     </div>
   </div>
 
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="6">Tipo de Documento
-      <input nz-input placeholder="Basic usage" type="text" />
+      <input nz-input placeholder="Basic usage" [(ngModel)]="Family.TipoDocumento" type="text" />
     </div>
 
     <div nz-col nzSpan="18">Numero de Documento
-      <input nz-input placeholder="Basic usage" type="text" />
+      <input nz-input placeholder="Basic usage" [(ngModel)]="Family.NumeroDocumento" type="text" />
     </div>
   </div>
 
@@ -61,7 +61,7 @@
 
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="24">Sexo <br>
-      <nz-radio-group>
+      <nz-radio-group [(ngModel)]="Family.Genero">
         <label nz-radio nzValue="Male">Masculino</label>
         <label nz-radio nzValue="Fem">Femenino</label>
         <label nz-radio nzValue="Others">Otros</label>
@@ -71,7 +71,7 @@
 
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="24">Estado Civil <br>
-      <nz-radio-group>
+      <nz-radio-group [(ngModel)]="Family.EstadoCivil">
         <label nz-radio nzValue="Single">Soltero/a</label> <br>
         <label nz-radio nzValue="Married">Casado/a</label> <br>
         <label nz-radio nzValue="Separate">Separado/a</label> <br>
@@ -90,7 +90,7 @@
   <div nz-row [nzGutter]="16">
     <br>
     <div nz-col nzSpan="6">Pais <br>
-      <nz-select>
+      <nz-select [(ngModel)]="Family.Pais">
         <nz-option nzValue="Argentina" nzLabel="Argentina"></nz-option>
         <nz-option nzValue="EE.UU." nzLabel="EE.UU."></nz-option>
         <nz-option nzValue="Cordoba" nzLabel="Cordoba"></nz-option>
@@ -98,7 +98,7 @@
     </div>
 
     <div nz-col nzSpan="6">Provincia <br>
-      <nz-select>
+      <nz-select [(ngModel)]="Family.Provincia">
         <nz-option nzValue="Buenos Aires" nzLabel="Buenos Aires"></nz-option>
         <nz-option nzValue="Catamarca" nzLabel="Catamarca"></nz-option>
         <nz-option nzValue="Chaco" nzLabel="Chaco"></nz-option>
@@ -129,31 +129,31 @@
 
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="12">Localidad
-      <input nz-input placeholder="Basic usage" type="text" />
+      <input nz-input placeholder="Basic usage" [(ngModel)]="Family.Localidad" type="text" />
     </div>
 
     <div nz-col nzSpan="12">Barrio
-      <input nz-input placeholder="Basic usage" type="text" />
+      <input nz-input placeholder="Basic usage" [(ngModel)]="Family.Barrio" type="text" />
     </div>
   </div>
 
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="12">Municipio
-      <input nz-input placeholder="Basic usage" type="text" />
+      <input nz-input placeholder="Basic usage" [(ngModel)]="Family.Municipio" type="text" />
     </div>
 
     <div nz-col nzSpan="12">Departamento provincial
-      <input nz-input placeholder="Basic usage" type="text" />
+      <input nz-input placeholder="Basic usage" [(ngModel)]="Family.DepartamentoProvincial" type="text" />
     </div>
   </div>
 
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="12">Calle
-      <input nz-input placeholder="Basic usage" type="text" />
+      <input nz-input placeholder="Basic usage" [(ngModel)]="Family.Calle" type="text" />
     </div>
 
     <div nz-col nzSpan="12">Altura calle
-      <input nz-input placeholder="Basic usage" type="text" />
+      <input nz-input placeholder="Basic usage" [(ngModel)]="Family.Altura" type="number" />
     </div>
   </div>
 
@@ -165,17 +165,17 @@
 
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="24">Beneficio seguro de vida obligatorio
-      <input nz-input placeholder="Basic usage" type="text" />
+      <input nz-input placeholder="Basic usage" [(ngModel)]="Family.BeneficioSeguroDeVida" type="text" />
     </div>
   </div>
 
   <div nz-row [nzGutter]="16">
     <div nz-col nzSpan="12">Persona a Cargo
-      <input nz-input placeholder="Basic usage" type="text" />
+      <input nz-input placeholder="Basic usage" [(ngModel)]="Family.PersonaACargo" type="text" />
     </div>
 
     <div nz-col nzSpan="12">Porcentaje deduccion ganancia
-      <input nz-input placeholder="Basic usage" type="text" />
+      <input nz-input placeholder="Basic usage" [(ngModel)]="Family.ProcentajeDeduccionGanancia" type="text" />
     </div>
   </div>
 </nz-list>
