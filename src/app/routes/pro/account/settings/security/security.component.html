@@ -1,204 +1,360 @@
-<nz-list nzItemLayout="horizontal">
-  <div nz-row [nzGutter]="16">
-    <div nz-col nzSpan="12">
-      <nz-form-label>Empresa CUIT</nz-form-label>
-      <input nz-input placeholder="" [(ngModel)]="Family.CuitEmpresa" type="number" disabled>
-    </div>
-
-    <div nz-col nzSpan="12">
-      <nz-form-label>N° Legajo</nz-form-label>
-      <input nz-input placeholder="" [(ngModel)]="Family.Legajo" type="number" />
-    </div>
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Empresa CUIT</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.CuitEmpresa" type="number" disabled>
   </div>
 
-  <div nz-row [nzGutter]="16">
-    <div nz-col nzSpan="12">
-      <nz-form-label>Apellido y Nomblabel</nz-form-label>
-      <input nz-input placeholder="" [(ngModel)]="Family.ApellidoNombre" type="text" />
-    </div>
+  <div nz-col nzSpan="12">
+    <nz-form-label>N° Legajo</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Legajo" type="number" />
+  </div>
+</div>
 
-    <div nz-col nzSpan="12">
-      <nz-form-label>Cuil / Cual</nz-form-label>
-      <input nz-input placeholder="" [(ngModel)]="Family.CuilCuit" type="text" />
-    </div>
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Apellido y Nomblabel</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.ApellidoNombre" type="text" />
   </div>
 
+  <div nz-col nzSpan="12">
+    <nz-form-label>Cuil / Cual</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.CuilCuit" type="text" />
+  </div>
+</div>
+
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="24">
+    <nz-form-label>Parentezco</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Apellido" type="text" />
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Nombre</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Nombre" type="text" />
+  </div>
+
+  <div nz-col nzSpan="12">
+    <nz-form-label>Apellido</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Apellido" type="text" />
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Fecha de nacimiento</nz-form-label>
+    <nz-date-picker style="width: 100%"></nz-date-picker>
+  </div>
+
+  <div nz-col nzSpan="12">
+    <nz-form-label>Nacionalidad</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Nacionalidad" type="text" />
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="6">
+    <nz-form-label>Tipo Doc.</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.TipoDocumento" type="text" />
+  </div>
+
+  <div nz-col nzSpan="18">
+    <nz-form-label>Numero de Documento</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.NumeroDocumento" type="text" />
+  </div>
+</div>
+
+<br>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="24">
+    <nz-form-label>Sexo</nz-form-label><br>
+    <nz-radio-group [(ngModel)]="Family.Genero">
+      <label nz-radio nzValue="Male">Masculino</label><br>
+      <label nz-radio nzValue="Fem">Femenino</label><br>
+      <label nz-radio nzValue="Others" disabled="true">Otros</label>
+    </nz-radio-group>
+  </div>
+</div>
+
+<br>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="24">
+    <nz-form-label>Estado Civil </nz-form-label> <br>
+    <nz-radio-group [(ngModel)]="Family.EstadoCivil">
+      <label nz-radio nzValue="Single">Soltero/a</label> <br>
+      <label nz-radio nzValue="Married">Casado/a</label> <br>
+      <label nz-radio nzValue="Separate">Separado/a</label> <br>
+      <label nz-radio nzValue="Divorced">Divorciado/a</label> <br>
+      <label nz-radio nzValue="Widower">Viudo/a</label>
+    </nz-radio-group>
+  </div>
+</div>
+
+<br>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Codigo Pais Tel o Celular 1</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Calle" type="text" />
+  </div>
+
+  <div nz-col nzSpan="12">
+    <nz-form-label>Codigo Area Tel o Celular 1</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Altura" type="number" />
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Numero Telefono 1</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Calle" type="text" />
+  </div>
+
+  <div nz-col nzSpan="12">
+    <nz-form-label>Numero Celular 1</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Altura" type="number" />
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Codigo Pais Tel o Celular 2</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Calle" type="text" />
+  </div>
+
+  <div nz-col nzSpan="12">
+    <nz-form-label>Codigo Area Tel o Celular 2</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Altura" type="number" />
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Numero Telefono 2</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Calle" type="text" />
+  </div>
+
+  <div nz-col nzSpan="12">
+    <nz-form-label>Numero Celular 2</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Altura" type="number" />
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="24">
+    <nz-form-label>Mail Personal</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Calle" type="text" />
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="24">
+    <nz-form-label>Avisar x Emergencia</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Altura" type="number" />
+  </div>
+</div>
+
+<br>
+<hr>
+<br>
+
+<h1>Domicilio</h1>
+
+<div nz-row [nzGutter]="16">
   <br>
-  <hr>
-  <br>
-
-  <h1>Parentezco</h1>
-
-  <div nz-row [nzGutter]="16">
-    <div nz-col nzSpan="12">
-      <nz-form-label>Nombre</nz-form-label>
-      <input nz-input placeholder="" [(ngModel)]="Family.Nombre" type="text" />
-    </div>
-
-    <div nz-col nzSpan="12">
-      <nz-form-label>Apellido</nz-form-label>
-      <input nz-input placeholder="" [(ngModel)]="Family.Apellido" type="text" />
-    </div>
+  <div nz-col nzSpan="12">
+    <nz-form-label>Pais </nz-form-label> <br>
+    <nz-select nz-input [(ngModel)]="Family.Pais">
+      <nz-option nzValue="Argentina" nzLabel="Argentina"></nz-option>
+      <nz-option nzValue="EE.UU." nzLabel="EE.UU."></nz-option>
+      <nz-option nzValue="Cordoba" nzLabel="Cordoba"></nz-option>
+    </nz-select>
   </div>
 
-  <div nz-row [nzGutter]="16">
-    <div nz-col nzSpan="12">
-      <nz-form-label>Fecha de nacimiento</nz-form-label>
-      <nz-date-picker style="width: 100%"></nz-date-picker>
-    </div>
+  <div nz-col nz-input nzSpan="12">
+    <nz-form-label>Provincia </nz-form-label> <br>
+    <nz-select [(ngModel)]="Family.Provincia">
+      <nz-option nzValue="Buenos Aires" nzLabel="Buenos Aires"></nz-option>
+      <nz-option nzValue="Catamarca" nzLabel="Catamarca"></nz-option>
+      <nz-option nzValue="Chaco" nzLabel="Chaco"></nz-option>
+      <nz-option nzValue="Chubut" nzLabel="Chubut"></nz-option>
+      <nz-option nzValue="Córdoba" nzLabel="Córdoba"></nz-option>
+      <nz-option nzValue="Corrientes" nzLabel="Corrientes"></nz-option>
+      <nz-option nzValue="Entre Ríos" nzLabel="Entre Ríos"></nz-option>
+      <nz-option nzValue="Formosa" nzLabel="Formosa"></nz-option>
+      <nz-option nzValue="Jujuy" nzLabel="Jujuy"></nz-option>
+      <nz-option nzValue="La Pampa" nzLabel="La Pampa"></nz-option>
+      <nz-option nzValue="La Rioja" nzLabel="La Rioja"></nz-option>
+      <nz-option nzValue="Mendoza" nzLabel="Mendoza"></nz-option>
+      <nz-option nzValue="Misiones" nzLabel="Misiones"></nz-option>
+      <nz-option nzValue="Neuquén" nzLabel="Neuquén"></nz-option>
+      <nz-option nzValue="Río Negro" nzLabel="Río Negro"></nz-option>
+      <nz-option nzValue="Salta" nzLabel="Salta"></nz-option>
+      <nz-option nzValue="San Juan" nzLabel="San Juan"></nz-option>
+      <nz-option nzValue="San Luis" nzLabel="San Luis"></nz-option>
+      <nz-option nzValue="Santa Cruz" nzLabel="Santa Cruz"></nz-option>
+      <nz-option nzValue="Santa Fe" nzLabel="Santa Fe"></nz-option>
+      <nz-option nzValue="Santiago del Estero" nzLabel="Santiago del Estero"></nz-option>
+      <nz-option nzValue="Tierra del Fuego, Antártida e Islas del Atlántico Sur"
+        nzLabel="Tierra del Fuego, Antártida e Islas del Atlántico Sur"></nz-option>
+      <nz-option nzValue="Tucumán" nzLabel="Tucumán"></nz-option>
+    </nz-select>
+  </div>
+</div>
 
-    <div nz-col nzSpan="12">
-      <nz-form-label>Nacionalidad</nz-form-label>
-      <input nz-input placeholder="" [(ngModel)]="Family.Nacionalidad" type="text" />
-    </div>
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Localidad</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Localidad" type="text" />
   </div>
 
-  <div nz-row [nzGutter]="16">
-    <div nz-col nzSpan="6">
-      <nz-form-label>Tipo Doc.</nz-form-label>
-      <input nz-input placeholder="" [(ngModel)]="Family.TipoDocumento" type="text" />
-    </div>
+  <div nz-col nzSpan="12">
+    <nz-form-label>Barrio</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Barrio" type="text" />
+  </div>
+</div>
 
-    <div nz-col nzSpan="18">
-      <nz-form-label>Numero de Documento</nz-form-label>
-      <input nz-input placeholder="" [(ngModel)]="Family.NumeroDocumento" type="text" />
-    </div>
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Municipio</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Municipio" type="text" />
   </div>
 
-  <br>
+  <div nz-col nzSpan="12">
+    <nz-form-label>Departamento provincial</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.DepartamentoProvincial" type="text" />
+  </div>
+</div>
 
-  <div nz-row [nzGutter]="16">
-    <div nz-col nzSpan="24">
-      <nz-form-label>Sexo</nz-form-label><br>
-      <nz-radio-group [(ngModel)]="Family.Genero">
-        <label nz-radio nzValue="Male">Masculino</label><br>
-        <label nz-radio nzValue="Fem">Femenino</label><br>
-        <label nz-radio nzValue="Others" disabled="true">Otros</label>
-      </nz-radio-group>
-    </div>
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Calle</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Calle" type="text" />
   </div>
 
-  <br>
+  <div nz-col nzSpan="12">
+    <nz-form-label>Altura calle</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Altura" type="number" />
+  </div>
+</div>
 
-  <div nz-row [nzGutter]="16">
-    <div nz-col nzSpan="24">
-      <nz-form-label>Estado Civil </nz-form-label> <br>
-      <nz-radio-group [(ngModel)]="Family.EstadoCivil">
-        <label nz-radio nzValue="Single">Soltero/a</label> <br>
-        <label nz-radio nzValue="Married">Casado/a</label> <br>
-        <label nz-radio nzValue="Separate">Separado/a</label> <br>
-        <label nz-radio nzValue="Divorced">Divorciado/a</label> <br>
-        <label nz-radio nzValue="Widower">Viudo/a</label>
-      </nz-radio-group>
-    </div>
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Piso</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Calle" type="text" />
   </div>
 
-  <br>
-  <hr>
-  <br>
+  <div nz-col nzSpan="12">
+    <nz-form-label>Codigo Postal</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Altura" type="number" />
+  </div>
+</div>
 
-  <h1>Domicilio</h1>
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="24">
+    <nz-form-label>Observaciones</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Calle" type="text" />
+  </div>
+</div>
 
-  <div nz-row [nzGutter]="16">
-    <br>
-    <div nz-col nzSpan="12">
-      <nz-form-label>Pais </nz-form-label> <br>
-      <nz-select nz-input [(ngModel)]="Family.Pais">
-        <nz-option nzValue="Argentina" nzLabel="Argentina"></nz-option>
-        <nz-option nzValue="EE.UU." nzLabel="EE.UU."></nz-option>
-        <nz-option nzValue="Cordoba" nzLabel="Cordoba"></nz-option>
-      </nz-select>
-    </div>
+<br>
+<hr>
+<br>
 
-    <div nz-col nz-input nzSpan="12">
-      <nz-form-label>Provincia </nz-form-label> <br>
-      <nz-select [(ngModel)]="Family.Provincia">
-        <nz-option nzValue="Buenos Aires" nzLabel="Buenos Aires"></nz-option>
-        <nz-option nzValue="Catamarca" nzLabel="Catamarca"></nz-option>
-        <nz-option nzValue="Chaco" nzLabel="Chaco"></nz-option>
-        <nz-option nzValue="Chubut" nzLabel="Chubut"></nz-option>
-        <nz-option nzValue="Córdoba" nzLabel="Córdoba"></nz-option>
-        <nz-option nzValue="Corrientes" nzLabel="Corrientes"></nz-option>
-        <nz-option nzValue="Entre Ríos" nzLabel="Entre Ríos"></nz-option>
-        <nz-option nzValue="Formosa" nzLabel="Formosa"></nz-option>
-        <nz-option nzValue="Jujuy" nzLabel="Jujuy"></nz-option>
-        <nz-option nzValue="La Pampa" nzLabel="La Pampa"></nz-option>
-        <nz-option nzValue="La Rioja" nzLabel="La Rioja"></nz-option>
-        <nz-option nzValue="Mendoza" nzLabel="Mendoza"></nz-option>
-        <nz-option nzValue="Misiones" nzLabel="Misiones"></nz-option>
-        <nz-option nzValue="Neuquén" nzLabel="Neuquén"></nz-option>
-        <nz-option nzValue="Río Negro" nzLabel="Río Negro"></nz-option>
-        <nz-option nzValue="Salta" nzLabel="Salta"></nz-option>
-        <nz-option nzValue="San Juan" nzLabel="San Juan"></nz-option>
-        <nz-option nzValue="San Luis" nzLabel="San Luis"></nz-option>
-        <nz-option nzValue="Santa Cruz" nzLabel="Santa Cruz"></nz-option>
-        <nz-option nzValue="Santa Fe" nzLabel="Santa Fe"></nz-option>
-        <nz-option nzValue="Santiago del Estero" nzLabel="Santiago del Estero"></nz-option>
-        <nz-option nzValue="Tierra del Fuego, Antártida e Islas del Atlántico Sur"
-          nzLabel="Tierra del Fuego, Antártida e Islas del Atlántico Sur"></nz-option>
-        <nz-option nzValue="Tucumán" nzLabel="Tucumán"></nz-option>
-      </nz-select>
-    </div>
+<h1>Datos de seguro de vida</h1>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="24">
+    <nz-form-label>Beneficio seguro de vida obligatorio</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.BeneficioSeguroDeVida" type="text" />
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Persona a Cargo</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.PersonaACargo" type="text" />
   </div>
 
-  <div nz-row [nzGutter]="16">
-    <div nz-col nzSpan="12">
-      <nz-form-label>Localidad</nz-form-label>
-      <input nz-input placeholder="" [(ngModel)]="Family.Localidad" type="text" />
-    </div>
+  <div nz-col nzSpan="12">
+    <nz-form-label>Porcentaje deduccion ganancia</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.ProcentajeDeduccionGanancia" type="text" />
+  </div>
+</div>
 
-    <div nz-col nzSpan="12">
-      <nz-form-label>Barrio</nz-form-label>
-      <input nz-input placeholder="" [(ngModel)]="Family.Barrio" type="text" />
-    </div>
+<br>
+<hr>
+<br>
+
+<h1>Documentos Familiares</h1>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Empresa CUIT</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.CuitEmpresa" type="number" disabled>
   </div>
 
-  <div nz-row [nzGutter]="16">
-    <div nz-col nzSpan="12">
-      <nz-form-label>Municipio</nz-form-label>
-      <input nz-input placeholder="" [(ngModel)]="Family.Municipio" type="text" />
-    </div>
+  <div nz-col nzSpan="12">
+    <nz-form-label>N° Legajo</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Legajo" type="number" />
+  </div>
+</div>
 
-    <div nz-col nzSpan="12">
-      <nz-form-label>Departamento provincial</nz-form-label>
-      <input nz-input placeholder="" [(ngModel)]="Family.DepartamentoProvincial" type="text" />
-    </div>
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Apellido y Nombre</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.ApellidoNombre" type="text" />
   </div>
 
-  <div nz-row [nzGutter]="16">
-    <div nz-col nzSpan="12">
-      <nz-form-label>Calle</nz-form-label>
-      <input nz-input placeholder="" [(ngModel)]="Family.Calle" type="text" />
-    </div>
+  <div nz-col nzSpan="12">
+    <nz-form-label>Cuil / Cual</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.CuilCuit" type="text" />
+  </div>
+</div>
 
-    <div nz-col nzSpan="12">
-      <nz-form-label>Altura calle</nz-form-label>
-      <input nz-input placeholder="" [(ngModel)]="Family.Altura" type="number" />
-    </div>
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="24">
+    <nz-form-label>Parentezco</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Apellido" type="text" />
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Nombre</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Nombre" type="text" />
   </div>
 
-  <br>
-  <hr>
-  <br>
+  <div nz-col nzSpan="12">
+    <nz-form-label>Apellido</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Apellido" type="text" />
+  </div>
+</div>
 
-  <h1>Datos de seguro de vida</h1>
-
-  <div nz-row [nzGutter]="16">
-    <div nz-col nzSpan="24">
-      <nz-form-label>Beneficio seguro de vida obligatorio</nz-form-label>
-      <input nz-input placeholder="" [(ngModel)]="Family.BeneficioSeguroDeVida" type="text" />
-    </div>
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="6">
+    <nz-form-label>Tipo Doc.</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.TipoDocumento" type="text" />
   </div>
 
-  <div nz-row [nzGutter]="16">
-    <div nz-col nzSpan="12">
-      <nz-form-label>Persona a Cargo</nz-form-label>
-      <input nz-input placeholder="" [(ngModel)]="Family.PersonaACargo" type="text" />
-    </div>
-
-    <div nz-col nzSpan="12">
-      <nz-form-label>Porcentaje deduccion ganancia</nz-form-label>
-      <input nz-input placeholder="" [(ngModel)]="Family.ProcentajeDeduccionGanancia" type="text" />
-    </div>
+  <div nz-col nzSpan="18">
+    <nz-form-label>Numero de Documento</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.NumeroDocumento" type="text" />
   </div>
-</nz-list>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="6">
+    <nz-form-label>Doc. Familiares</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.TipoDocumento" type="text" />
+  </div>
+
+  <div nz-col nzSpan="18">
+    <nz-form-label>Observaciones</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.NumeroDocumento" type="text" />
+  </div>
+</div>

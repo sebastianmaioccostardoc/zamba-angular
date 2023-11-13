@@ -10,43 +10,12 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     margin: 0 8px 10px 0;
     width: 100%;
   }
-
     `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-// export class FamilyData {
-//   private _CuitEmpresa: number;
-//   private _Legajo: string;
-//   private _ApellidoNombre: string;
-//   private _CuilCuit: string;
-//   private _Nombre: string;
-//   private _Apellido: string;
-//   private _FechaNacimiento: Date;
-//   private _Nacionalidad: string;
-//   private _TipoDocumento: string;
-//   private _NumeroDocumento: string;
-//   private _Genero: string;
-//   private _EstadoCivil: string;
-//   private _Pais: string;
-//   private _Provincia: string;
-//   private _Localidad: string;
-//   private _Barrio: string;
-//   private _Municipio: string;
-//   private _DepartamentoProvincial: string;
-//   private _Calle: string;
-//   private _Altura: string;
-//   private _BeneficioSeguroDeVida: string;
-//   private _PersonaACargo: string;
-//   private _ProcentajeDeduccionGanancia: number;
-
-//   constructor() {
-//   }
-// }
-
 export class ProAccountSettingsSecurityComponent {
   constructor(public msg: NzMessageService) { }
-  // MyFamilyData = new FamilyData();
 
   Family: any = {
     CuitEmpresa: 0,
