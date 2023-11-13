@@ -1,63 +1,163 @@
 <nz-spin [nzSpinning]="userLoading">
   <div class="main" *ngIf="user">
-    <div class="left">
-      <form nz-form nzLayout="vertical" #f="ngForm" (submit)="save()" se-container="1">
-        <se label="邮箱" error="请输入您的邮箱!">
-          <input nz-input type="email" [(ngModel)]="user.email" name="email" required />
-        </se>
-        <se label="昵称" error="请输入您的昵称!">
-          <input nz-input [(ngModel)]="user.name" name="name" required />
-        </se>
-        <se label="个人简介">
-          <textarea
-            nz-input
-            [(ngModel)]="user.profile"
-            name="profile"
-            [nzAutosize]="{ minRows: 4, maxRows: 10 }"
-            placeholder="个人简介"
-          ></textarea>
-        </se>
-        <se label="国家/地区">
-          <nz-select [(ngModel)]="user.country" name="country" required>
-            <nz-option nzLabel="中国" nzValue="China" />
+    <form nz-form #f="ngForm" (submit)="save()" se-container="2">
+      <se label="Empresa CUIT" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Apellido y Nombre" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="CUIT | CUIL" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Nro Legajo" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Fecha de Egreso o Baja" error="requerido!">
+        <nz-date-picker />
+      </se>
+      <se label="Fotografia" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Sexo" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Fecha de Nacimiento" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Estado Civil" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Nacionalidad" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Tipo de Documento" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Nro de Documento" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Obra Social o Prepaga" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="ART" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Pais" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Provincia" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Departamento Provincial" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Municipio" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Localidad" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Barrio" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Calle" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Altura Calle" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Piso" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Unidad Funcional o Dpto" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Codigo Postal" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Codigo Pais Tel o Celular 1" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Codigo Area Tel o Celular 1" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Nro Telefonos 1" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Nro Celulares 1" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Codigo Pais Tel o Celular 2" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Codigo Area Tel o Celular 2" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Nro Telefono 2" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Nro Celular 2" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Mail Personal" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Observaciones" error="requerido!">
+        <input nz-input />
+      </se>
+
+      <se label="Nro Legajo" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Documentacion Personal" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="Observaciones" error="requerido!">
+        <input nz-input />
+      </se>
+      <se label="昵称" error="请输入您的昵称!">
+        <input nz-input [(ngModel)]="user.name" name="name" required />
+      </se>
+      <se label="个人简介">
+        <textarea
+          nz-input
+          [(ngModel)]="user.profile"
+          name="profile"
+          [nzAutosize]="{ minRows: 4, maxRows: 10 }"
+          placeholder="个人简介"
+        ></textarea>
+      </se>
+      <se label="国家/地区">
+        <nz-select [(ngModel)]="user.country" name="country" required>
+          <nz-option nzLabel="中国" nzValue="China" />
+        </nz-select>
+      </se>
+      <se label="所在省市">
+        <div class="d-flex justify-content-between">
+          <nz-select
+            [(ngModel)]="user.geographic.province.key"
+            (ngModelChange)="choProvince($event)"
+            name="geographic.province.key"
+            required
+            class="width-50 mr-sm"
+          >
+            <nz-option *ngFor="let p of provinces" [nzLabel]="p.name" [nzValue]="p.id" />
           </nz-select>
-        </se>
-        <se label="所在省市">
-          <div class="d-flex justify-content-between">
-            <nz-select
-              [(ngModel)]="user.geographic.province.key"
-              (ngModelChange)="choProvince($event)"
-              name="geographic.province.key"
-              required
-              class="width-50 mr-sm"
-            >
-              <nz-option *ngFor="let p of provinces" [nzLabel]="p.name" [nzValue]="p.id" />
-            </nz-select>
-            <nz-select [(ngModel)]="user.geographic.city.key" name="geographic.city.key" required class="width-50">
-              <nz-option *ngFor="let p of cities" [nzLabel]="p.name" [nzValue]="p.id" />
-            </nz-select>
-          </div>
-        </se>
-        <se label="街道地址" error="请输入您的街道地址!">
-          <input nz-input [(ngModel)]="user.address" name="address" required />
-        </se>
-        <se label="联系电话" error="请输入您的联系电话!">
-          <input nz-input [(ngModel)]="user.phone" name="phone" required />
-        </se>
-        <se>
-          <button nz-button nzType="primary" [disabled]="f.invalid">更新基本信息</button>
-        </se>
-      </form>
-    </div>
-    <div class="right">
-      <div class="avatar__title">Avatar</div>
-      <div class="avatar"><img src="{{ user.avatar }}" alt="Avatar" /></div>
-      <nz-upload nzAction="/user/avatar" [nzShowUploadList]="false">
-        <button nz-button class="avatar__btn">
-          <i nz-icon nzType="upload"></i>
-          <span>更换头像</span>
-        </button>
-      </nz-upload>
-    </div>
+          <nz-select [(ngModel)]="user.geographic.city.key" name="geographic.city.key" required class="width-50">
+            <nz-option *ngFor="let p of cities" [nzLabel]="p.name" [nzValue]="p.id" />
+          </nz-select>
+        </div>
+      </se>
+      <se label="街道地址" error="请输入您的街道地址!">
+        <input nz-input [(ngModel)]="user.address" name="address" required />
+      </se>
+      <se label="联系电话" error="请输入您的联系电话!">
+        <input nz-input [(ngModel)]="user.phone" name="phone" required />
+      </se>
+      <se>
+        <button nz-button nzType="primary" [disabled]="f.invalid">更新基本信息</button>
+      </se>
+    </form>
   </div>
 </nz-spin>

@@ -5,6 +5,7 @@ import { FooterToolbarModule } from '@delon/abc/footer-toolbar';
 import { TagSelectModule } from '@delon/abc/tag-select';
 import { CurrencyPipeModule } from '@delon/util/pipes/currency';
 import { SharedModule } from '@shared';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 
@@ -77,7 +78,8 @@ const COMPONENTS = [
     FooterToolbarModule,
     NzPaginationModule,
     NzStepsModule,
-    CurrencyPipeModule
+    CurrencyPipeModule,
+    NzDatePickerModule
   ],
   declarations: COMPONENTS
 })
