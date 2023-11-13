@@ -36,9 +36,7 @@
     "test-coverage": "ng test --code-coverage --watch=false",
     "color-less": "ng-alain-plugin-theme -t=colorLess",
     "theme": "ng-alain-plugin-theme -t=themeCss",
-    "icon": "ng g ng-alain:plugin icon",
-    "prepare": "husky install",
-    "husky": "node ./node_modules/husky/lib/bin.js"
+    "icon": "ng g ng-alain:plugin icon"
   },
   "dependencies": {
     "@angular/animations": "^16.2.0",
@@ -87,7 +85,6 @@
     "eslint-plugin-jsdoc": "~46.5.0",
     "eslint-plugin-prefer-arrow": "~1.2.3",
     "eslint-plugin-prettier": "~5.0.0",
-    "husky": "^8.0.3",
     "jasmine-core": "~4.6.0",
     "jasmine-spec-reporter": "^7.0.0",
     "karma": "~6.4.0",

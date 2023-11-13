@@ -1,32 +1,122 @@
-<nz-list nzItemLayout="horizontal">
-  <nz-list-item [nzActions]="[githubOp]">
-    <ng-template #githubOp>
-      <a (click)="msg.success('Edit')">修改</a>
-    </ng-template>
-    <nz-list-item-meta nzTitle="绑定Github" [nzAvatar]="githubAvatar" nzDescription="当前未绑定Github账号">
-      <ng-template #githubAvatar>
-        <i nz-icon nzType="github" class="icon-sm"></i>
-      </ng-template>
-    </nz-list-item-meta>
-  </nz-list-item>
-  <nz-list-item [nzActions]="[taobaoOp]">
-    <ng-template #taobaoOp>
-      <a (click)="msg.success('Edit')">修改</a>
-    </ng-template>
-    <nz-list-item-meta nzTitle="绑定Taobao" [nzAvatar]="taobaoAvatar" nzDescription="当前未绑定Taobao账号">
-      <ng-template #taobaoAvatar>
-        <i nz-icon nzType="taobao" class="icon-sm"></i>
-      </ng-template>
-    </nz-list-item-meta>
-  </nz-list-item>
-  <nz-list-item [nzActions]="[alipayOp]">
-    <ng-template #alipayOp>
-      <a (click)="msg.success('Edit')">修改</a>
-    </ng-template>
-    <nz-list-item-meta nzTitle="绑定Alipay" [nzAvatar]="alipayAvatar" nzDescription="当前未绑定Alipay账号">
-      <ng-template #alipayAvatar>
-        <i nz-icon nzType="alipay-circle" class="icon-sm"></i>
-      </ng-template>
-    </nz-list-item-meta>
-  </nz-list-item>
-</nz-list>
+<h1>Datos de Educacion</h1>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Empresa CUIT</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.CuitEmpresa" type="number" disabled>
+  </div>
+
+  <div nz-col nzSpan="12">
+    <nz-form-label>N° Legajo</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Legajo" type="number" />
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Apellido y Nomblabel</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.ApellidoNombre" type="text" />
+  </div>
+
+  <div nz-col nzSpan="12">
+    <nz-form-label>Cuil / Cual</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.CuilCuit" type="text" />
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Atributo</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.CuitEmpresa" type="number" disabled>
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Nivel de estudio</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.ApellidoNombre" type="text" />
+  </div>
+
+  <div nz-col nzSpan="12">
+    <nz-form-label>Estado del estudio</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.CuilCuit" type="text" />
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Institucion Educativa</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.ApellidoNombre" type="text" />
+  </div>
+
+  <div nz-col nzSpan="12">
+    <nz-form-label>Estado del Estudio</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.CuilCuit" type="text" />
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Otra institucion que no figura en la tabla</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.ApellidoNombre" type="text" />
+  </div>
+
+  <div nz-col nzSpan="12">
+    <nz-form-label>Titulo o Certificacion obtenida</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.CuilCuit" type="text" />
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Fecha de titulacion</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.ApellidoNombre" type="text" />
+  </div>
+
+  <div nz-col nzSpan="12">
+    <nz-form-label>observaciones</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.CuilCuit" type="text" />
+  </div>
+</div>
+
+<br>
+<hr>
+<br>
+
+<h1>Documentos Educacion</h1>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>Empresa CUIT</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Nombre" type="text" />
+  </div>
+
+  <div nz-col nzSpan="12">
+    <nz-form-label>N° de Legajo</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Apellido" type="text" />
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="12">
+    <nz-form-label>CUIL | CUIT</nz-form-label>
+    <nz-date-picker style="width: 100%"></nz-date-picker>
+  </div>
+
+  <div nz-col nzSpan="12">
+    <nz-form-label>Appelido y Nombre</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Nacionalidad" type="text" />
+  </div>
+</div>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col nzSpan="6">
+    <nz-form-label>Documentacion Educativa</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.TipoDocumento" type="text" />
+  </div>
+
+  <div nz-col nzSpan="18">
+    <nz-form-label>Observaciones</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.NumeroDocumento" type="text" />
+  </div>
+</div>
