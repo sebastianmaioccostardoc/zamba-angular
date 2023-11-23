@@ -17,7 +17,7 @@ import { finalize } from 'rxjs';
   providers: [SocialService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserLoginComponent implements OnDestroy {
+export class UserLoginV2Component implements OnDestroy {
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -35,8 +35,8 @@ export class UserLoginComponent implements OnDestroy {
   // #region fields
 
   form = this.fb.nonNullable.group({
-    userName: ['', [Validators.required, Validators.pattern(/^(admin|user)$/)]],
-    password: ['', [Validators.required, Validators.pattern(/^(ng\-alain\.com)$/)]],
+    userName: ['', [Validators.required]],
+    password: ['', [Validators.required]],
     mobile: ['', [Validators.required, Validators.pattern(/^1\d{10}$/)]],
     captcha: ['', [Validators.required]],
     remember: [true]
@@ -96,8 +96,7 @@ export class UserLoginComponent implements OnDestroy {
       }
     }
 
-    // 默认配置中对所有HTTP请求都会强制 [校验](https://ng-alain.com/auth/getting-started) 用户 Token
-    // 然一般来说登录请求不需要校验，因此加上 `ALLOW_ANONYMOUS` 表示不触发用户 Token 校验
+
     this.loading = true;
     this.cdr.detectChanges();
     this.http
@@ -105,8 +104,9 @@ export class UserLoginComponent implements OnDestroy {
         '/login/account',
         {
           type: this.type,
-          userName: this.form.value.userName,
-          password: this.form.value.password
+
+          userName: 'admin',//this.form.value.userName,
+          password: 'ng-alain.com'//this.form.value.password
         },
         null,
         {

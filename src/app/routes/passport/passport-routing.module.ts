@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { CallbackComponent } from './callback.component';
 import { UserLockComponent } from './lock/lock.component';
-import { UserLoginComponent } from './login/login.component';
+import { UserLoginV2Component } from './loginV2/login.component';
 import { UserRegisterComponent } from './register/register.component';
 import { UserRegisterResultComponent } from './register-result/register-result.component';
 import { LayoutPassportComponent } from '../../layout/passport/passport.component';
@@ -16,7 +16,7 @@ const routes: Routes = [
     children: [
       {
         path: 'login',
-        component: UserLoginComponent,
+        component: UserLoginV2Component,
         data: { title: '登录', titleI18n: 'app.login.login' }
       },
       {
@@ -44,4 +44,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PassportRoutingModule {}
+export class PassportRoutingModule { }

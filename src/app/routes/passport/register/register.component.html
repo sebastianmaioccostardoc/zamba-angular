@@ -2,9 +2,63 @@
 <form nz-form [formGroup]="form" (ngSubmit)="submit()" role="form">
   <nz-alert *ngIf="error" [nzType]="'error'" [nzMessage]="error" [nzShowIcon]="true" class="mb-lg" />
   <nz-form-item>
+    <nz-form-control [nzErrorTip]="companyNameErrorTip">
+      <nz-input-group nzSize="large" nzAddonBeforeIcon="user">
+        <input nz-input formControlName="companyName"
+          placeholder="{{ 'app.register.form-company-name-placeholder' | i18n }}" />
+      </nz-input-group>
+      <ng-template #companyNameErrorTip let-i>
+        <ng-container *ngIf="i.errors?.required">{{ 'validation.enterprise.required' | i18n }}</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzErrorTip]="nameErrorTip">
+      <nz-input-group nzSize="large" nzAddonBeforeIcon="user">
+        <input nz-input formControlName="name" placeholder="{{ 'app.register.form-name-placeholder' | i18n }}" />
+      </nz-input-group>
+      <ng-template #nameErrorTip let-i>
+        <ng-container *ngIf="i.errors?.required">{{ 'validation.name.required' | i18n }}</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzErrorTip]="lastnameErrorTip">
+      <nz-input-group nzSize="large" nzAddonBeforeIcon="user">
+        <input nz-input formControlName="lastname"
+          placeholder="{{ 'app.register.form-lastname-placeholder' | i18n }}" />
+      </nz-input-group>
+      <ng-template #lastnameErrorTip let-i>
+        <ng-container *ngIf="i.errors?.required">{{ 'validation.lastname.required' | i18n }}</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzErrorTip]="departmentErrorTip">
+      <nz-input-group nzSize="large" nzAddonBeforeIcon="user">
+        <input nz-input formControlName="department"
+          placeholder="{{ 'app.register.form-department-placeholder' | i18n }}" />
+      </nz-input-group>
+      <ng-template #departmentErrorTip let-i>
+        <ng-container *ngIf="i.errors?.required">{{ 'validation.department.required' | i18n }}</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzErrorTip]="rolErrorTip">
+      <nz-input-group nzSize="large" nzAddonBeforeIcon="user">
+        <input nz-input formControlName="rol" placeholder="{{ 'app.register.form-rol-placeholder' | i18n }}" />
+      </nz-input-group>
+      <ng-template #rolErrorTip let-i>
+        <ng-container *ngIf="i.errors?.required">{{ 'validation.rol.required' | i18n }}</ng-container>
+        <ng-container *ngIf="i.errors?.email">{{ 'validation.rol.wrong-format' | i18n }}</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
     <nz-form-control [nzErrorTip]="mailErrorTip">
       <nz-input-group nzSize="large" nzAddonBeforeIcon="user">
-        <input nz-input formControlName="mail" placeholder="Email" />
+        <input nz-input formControlName="mail" placeholder="{{ 'app.register.form-email-placeholder' | i18n }}" />
       </nz-input-group>
       <ng-template #mailErrorTip let-i>
         <ng-container *ngIf="i.errors?.required">{{ 'validation.email.required' | i18n }}</ng-container>
@@ -14,18 +68,11 @@
   </nz-form-item>
   <nz-form-item>
     <nz-form-control [nzErrorTip]="'validation.password.required' | i18n">
-      <nz-input-group
-        nzSize="large"
-        nzAddonBeforeIcon="lock"
-        nz-popover
-        nzPopoverPlacement="right"
-        nzPopoverTrigger="focus"
-        [(nzPopoverVisible)]="visible"
-        nzPopoverOverlayClassName="register-password-cdk"
-        [nzPopoverOverlayStyle]="{ 'width.px': 240 }"
-        [nzPopoverContent]="pwdCdkTpl"
-      >
-        <input nz-input type="password" formControlName="password" placeholder="Password" />
+      <nz-input-group nzSize="large" nzAddonBeforeIcon="lock" nz-popover nzPopoverPlacement="right"
+        nzPopoverTrigger="focus" [(nzPopoverVisible)]="visible" nzPopoverOverlayClassName="register-password-cdk"
+        [nzPopoverOverlayStyle]="{ 'width.px': 240 }" [nzPopoverContent]="pwdCdkTpl">
+        <input nz-input type="password" formControlName="password"
+          placeholder="{{ 'app.register.form-password-placeholder' | i18n }}" />
       </nz-input-group>
       <ng-template #pwdCdkTpl>
         <div style="padding: 4px 0">
@@ -35,7 +82,8 @@
             <div *ngSwitchDefault class="error">{{ 'validation.password.strength.short' | i18n }}</div>
           </ng-container>
           <div class="progress-{{ status }}">
-            <nz-progress [nzPercent]="progress" [nzStatus]="passwordProgressMap[status]" [nzStrokeWidth]="6" [nzShowInfo]="false" />
+            <nz-progress [nzPercent]="progress" [nzStatus]="passwordProgressMap[status]" [nzStrokeWidth]="6"
+              [nzShowInfo]="false" />
           </div>
           <p class="mt-sm">{{ 'validation.password.strength.msg' | i18n }}</p>
         </div>
@@ -45,7 +93,8 @@
   <nz-form-item>
     <nz-form-control [nzErrorTip]="confirmErrorTip">
       <nz-input-group nzSize="large" nzAddonBeforeIcon="lock">
-        <input nz-input type="password" formControlName="confirm" placeholder="Confirm Password" />
+        <input nz-input type="password" formControlName="confirm"
+          placeholder="{{ 'app.register.form-confirm-password-placeholder' | i18n }}" />
       </nz-input-group>
       <ng-template #confirmErrorTip let-i>
         <ng-container *ngIf="i.errors?.required">{{ 'validation.confirm-password.required' | i18n }}</ng-container>
@@ -62,7 +111,7 @@
             <nz-option [nzLabel]="'+87'" [nzValue]="'+87'" />
           </nz-select>
         </ng-template>
-        <input formControlName="mobile" nz-input placeholder="Phone number" />
+        <input formControlName="mobile" nz-input placeholder="{{ 'app.register.form-phone-placeholder' | i18n }}" />
       </nz-input-group>
       <ng-template #mobileErrorTip let-i>
         <ng-container *ngIf="i.errors?.required">{{ 'validation.phone-number.required' | i18n }}</ng-container>
@@ -79,7 +128,8 @@
           </nz-input-group>
         </nz-col>
         <nz-col [nzSpan]="8">
-          <button type="button" nz-button nzSize="large" (click)="getCaptcha()" [disabled]="count > 0" nzBlock [nzLoading]="loading">
+          <button type="button" nz-button nzSize="large" (click)="getCaptcha()" [disabled]="count > 0" nzBlock
+            [nzLoading]="loading">
             {{ count ? count + 's' : ('app.register.get-verification-code' | i18n) }}
           </button>
         </nz-col>

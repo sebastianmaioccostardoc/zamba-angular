@@ -20,17 +20,22 @@ export class UserRegisterComponent implements OnDestroy {
     private router: Router,
     private http: _HttpClient,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   // #region fields
 
   form = this.fb.nonNullable.group(
     {
+      companyName: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      department: ['', [Validators.required]],
+      rol: ['', [Validators.required]],
       mail: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), UserRegisterComponent.checkPassword.bind(this)]],
       confirm: ['', [Validators.required, Validators.minLength(6)]],
       mobilePrefix: ['+86'],
-      mobile: ['', [Validators.required, Validators.pattern(/^1\d{10}$/)]],
+      mobile: ['', [Validators.required]],
       captcha: ['', [Validators.required]]
     },
     {
