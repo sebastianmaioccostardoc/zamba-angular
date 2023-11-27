@@ -8,10 +8,12 @@ import { PassportRoutingModule } from './passport-routing.module';
 import { UserRegisterComponent } from './register/register.component';
 import { UserRegisterResultComponent } from './register-result/register-result.component';
 
+import { RecaptchaModule } from 'ng-recaptcha';
+
 const COMPONENTS = [UserLoginV2Component, UserRegisterResultComponent, UserRegisterComponent, UserLockComponent, CallbackComponent];
 
 @NgModule({
-  imports: [SharedModule, PassportRoutingModule],
+  imports: [SharedModule, PassportRoutingModule, RecaptchaModule],
   declarations: [...COMPONENTS]
 })
 export class PassportModule { }
