@@ -124,14 +124,15 @@
       <nz-row [nzGutter]="8">
         <nz-col [nzSpan]="24">
           <nz-form-item ngSize="large">
-            <re-captcha formControlName="captcha" siteKey="yourSiteKey"></re-captcha>
+            <re-captcha (resolved)="resolved($event)" siteKey="6Lejqh8pAAAAAE3-td7Z-_ME6Q9GdFkDpRkvoDsm"></re-captcha>
           </nz-form-item>
         </nz-col>
       </nz-row>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <button nz-button nzType="primary" nzSize="large" type="submit" [nzLoading]="loading" class="submit">
+    <button nz-button nzType="primary" nzSize="large" type="submit" [nzLoading]="loading" class="submit"
+      [disabled]="form.invalid || disableSubmitButton">
       {{ 'app.register.register' | i18n }}
     </button>
     <a class="login" routerLink="/passport/login">{{ 'app.register.sign-in' | i18n }}</a>
