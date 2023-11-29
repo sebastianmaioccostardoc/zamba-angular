@@ -1,5 +1,5 @@
 import { HttpContext } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ALLOW_ANONYMOUS } from '@delon/auth';
@@ -19,8 +19,9 @@ export class UserRegisterComponent implements OnDestroy {
     private fb: FormBuilder,
     private router: Router,
     private http: _HttpClient,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) { }
+
 
   // #region fields
 
@@ -36,12 +37,13 @@ export class UserRegisterComponent implements OnDestroy {
       confirm: ['', [Validators.required, Validators.minLength(6)]],
       mobilePrefix: ['+86'],
       mobile: ['', [Validators.required]],
-      captcha: ['', [Validators.required]]
     },
     {
       validators: MatchControl('password', 'confirm')
     }
   );
+
+  disableSubmitButton = true;
   error = '';
   type = 0;
   loading = false;
@@ -81,22 +83,10 @@ export class UserRegisterComponent implements OnDestroy {
     }
   }
 
-  getCaptcha(): void {
-    const { mobile } = this.form.controls;
-    if (mobile.invalid) {
-      mobile.markAsDirty({ onlySelf: true });
-      mobile.updateValueAndValidity({ onlySelf: true });
-      return;
-    }
-    this.count = 59;
-    this.cdr.detectChanges();
-    this.interval$ = setInterval(() => {
-      this.count -= 1;
-      this.cdr.detectChanges();
-      if (this.count <= 0) {
-        clearInterval(this.interval$);
-      }
-    }, 1000);
+
+  resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+    this.disableSubmitButton = false;
   }
 
   // #endregion
