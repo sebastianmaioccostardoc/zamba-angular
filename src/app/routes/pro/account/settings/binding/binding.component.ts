@@ -11,30 +11,28 @@ export class ProAccountSettingsBindingComponent {
   constructor(public msg: NzMessageService) { }
 
   Family: any = {
-    CuitEmpresa: 0,
+    CuitEmpresa: "",
     Legajo: "",
     ApellidoNombre: "",
     CuilCuit: "",
-    Nombre: "",
-    Apellido: "",
-    FechaNacimiento: Date.now(),
-    Nacionalidad: "",
-    TipoDocumento: "",
-    NumeroDocumento: "",
-    Genero: "Male",
-    EstadoCivil: "Single",
-    Pais: "Argentina",
-    Provincia: "Buenos Aires",
-    Localidad: "",
-    Barrio: "",
-    Municipio: "",
-    DepartamentoProvincial: "",
-    Calle: "",
-    Altura: 0,
-    BeneficioSeguroDeVida: "",
-    PersonaACargo: "",
-    ProcentajeDeduccionGanancia: 0,
-
+    Atributo: "",
+    NivelEstudio: "",
+    EstadoEstudioNivelEstudio: "",
+    InstitucionEducativa: "",
+    EstadoEstudioInstitucion: "",
+    OtraInstitucion: "",
+    TituloCertificacion: "",
+    FechaTitulacion: "",
+    Observaciones: "Aca va un comentario ... Escriba aqui... esto es un TEST.",
     piso: 1
   };
+
+  Educacion: any = {
+    Nombre: "",
+    Apellido: "",
+    CuilCuit: 0,
+    Nacionalidad: "",
+    TipoDocumento: "",
+    NumeroDocumento: 0
+  }
 }
