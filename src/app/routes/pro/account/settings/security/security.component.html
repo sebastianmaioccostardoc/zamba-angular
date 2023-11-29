@@ -1,3 +1,4 @@
+<h1>Datos Familiares</h1>
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="12">
     <nz-form-label>Empresa CUIT</nz-form-label>
@@ -12,7 +13,7 @@
 
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="12">
-    <nz-form-label>Apellido y Nomblabel</nz-form-label>
+    <nz-form-label>Apellido y Nombre</nz-form-label>
     <input nz-input placeholder="" [(ngModel)]="Family.ApellidoNombre" type="text" />
   </div>
 
@@ -26,7 +27,7 @@
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="24">
     <nz-form-label>Parentezco</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.Apellido" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="Family.Parentezco" type="text" />
   </div>
 </div>
 
@@ -147,14 +148,14 @@
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="24">
     <nz-form-label>Mail Personal</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.Calle" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="Family.Calle" type="email" />
   </div>
 </div>
 
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="24">
     <nz-form-label>Avisar x Emergencia</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.Altura" type="number" />
+    <input nz-input placeholder="" [(ngModel)]="Family.Altura" type="text" />
   </div>
 </div>
 
@@ -257,7 +258,9 @@
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="24">
     <nz-form-label>Observaciones</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.Calle" type="text" />
+    <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize
+      [(ngModel)]="Family.Observaciones"></textarea>
+
   </div>
 </div>
 
@@ -295,66 +298,67 @@
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="12">
     <nz-form-label>Empresa CUIT</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.CuitEmpresa" type="number" disabled>
+    <input nz-input placeholder="" [(ngModel)]="DocFamily.CuitEmpresa" type="number" disabled>
   </div>
 
   <div nz-col nzSpan="12">
     <nz-form-label>N° Legajo</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.Legajo" type="number" />
+    <input nz-input placeholder="" [(ngModel)]="DocFamily.Legajo" type="number" />
   </div>
 </div>
 
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="12">
     <nz-form-label>Apellido y Nombre</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.ApellidoNombre" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="DocFamily.ApellidoNombre" type="text" />
   </div>
 
   <div nz-col nzSpan="12">
     <nz-form-label>Cuil / Cual</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.CuilCuit" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="DocFamily.CuilCuit" type="number" />
   </div>
 </div>
 
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="24">
     <nz-form-label>Parentezco</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.Apellido" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="DocFamily.Parentezco" type="text" />
   </div>
 </div>
 
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="12">
     <nz-form-label>Nombre</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.Nombre" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="DocFamily.Nombre" type="text" />
   </div>
 
   <div nz-col nzSpan="12">
     <nz-form-label>Apellido</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.Apellido" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="DocFamily.Apellido" type="text" />
   </div>
 </div>
 
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="6">
     <nz-form-label>Tipo Doc.</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.TipoDocumento" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="DocFamily.TipoDocumento" type="text" />
   </div>
 
   <div nz-col nzSpan="18">
     <nz-form-label>Numero de Documento</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.NumeroDocumento" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="DocFamily.NumeroDocumento" type="text" />
   </div>
 </div>
 
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="6">
     <nz-form-label>Doc. Familiares</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.TipoDocumento" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="DocFamily.DocFamiliares" type="text" />
   </div>
 
   <div nz-col nzSpan="18">
     <nz-form-label>Observaciones</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.NumeroDocumento" type="text" />
+    <textarea nz-input placeholder="Autosize height based on content lines" nzAutosize
+      [(ngModel)]="DocFamily.Observaciones"></textarea>
   </div>
 </div>

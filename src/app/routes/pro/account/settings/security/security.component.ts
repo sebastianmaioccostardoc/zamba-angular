@@ -42,4 +42,19 @@ export class ProAccountSettingsSecurityComponent {
     PersonaACargo: "",
     ProcentajeDeduccionGanancia: 0
   };
+
+  DocFamily: any = {
+    CuitEmpresa: "",
+    Legajo: "",
+    ApellidoNombre: "",
+    CuilCuit: "",
+    Parentezco: "",
+    Apellido: "",
+    Nombre: "",
+    TipoDocumento: "",
+    NumeroDocumento: "",
+    DocFamiliares: "",
+    Observaciones: ""
+  }
+
 }
