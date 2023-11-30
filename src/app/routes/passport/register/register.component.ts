@@ -29,17 +29,17 @@ export class UserRegisterComponent implements OnDestroy {
 
   form = this.fb.nonNullable.group(
     {
-      companyName: ['', [Validators.required]],
-      name: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
+      companyName: ['', [Validators.required, Validators.maxLength(50)]],
+      name: ['', [Validators.required, Validators.maxLength(50)]],
+      lastname: ['', [Validators.required, Validators.maxLength(50)]],
       department: ['', [Validators.required]],
       rol: ['', [Validators.required]],
-      mail: ['', [Validators.required, Validators.email]],
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6), UserRegisterComponent.checkPassword.bind(this)]],
-      confirm: ['', [Validators.required, Validators.minLength(6)]],
+      mail: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
+      username: ['', [Validators.required, Validators.maxLength(50)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50), UserRegisterComponent.checkPassword.bind(this)]],
+      confirm: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
       mobilePrefix: ['+86'],
-      mobile: ['', [Validators.required]],
+      mobile: ['', [Validators.required, Validators.maxLength(50)]],
     },
     {
       validators: MatchControl('password', 'confirm')
