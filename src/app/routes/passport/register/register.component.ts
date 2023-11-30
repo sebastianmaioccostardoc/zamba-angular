@@ -8,6 +8,8 @@ import { MatchControl } from '@delon/util/form';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { finalize } from 'rxjs';
 
+import { environment } from '@env/environment';
+
 @Component({
   selector: 'passport-register',
   templateUrl: './register.component.html',
@@ -91,6 +93,36 @@ export class UserRegisterComponent implements OnDestroy {
 
   // #endregion
 
+  /*
+    submit(): void {
+      this.error = '';
+      Object.keys(this.form.controls).forEach(key => {
+        const control = (this.form.controls as NzSafeAny)[key] as AbstractControl;
+        control.markAsDirty();
+        control.updateValueAndValidity();
+      });
+      if (this.form.invalid) {
+        return;
+      }
+  
+      const data = this.form.value;
+      this.loading = true;
+      this.cdr.detectChanges();
+      this.http
+        .post('/register', data, null, {
+          context: new HttpContext().set(ALLOW_ANONYMOUS, true)
+        })
+        .pipe(
+          finalize(() => {
+            this.loading = false;
+            this.cdr.detectChanges();
+          })
+        )
+        .subscribe(() => {
+          this.router.navigate(['passport', 'register-result'], { queryParams: { email: data.mail } });
+        });
+    }
+  */
   submit(): void {
     this.error = '';
     Object.keys(this.form.controls).forEach(key => {
@@ -103,10 +135,15 @@ export class UserRegisterComponent implements OnDestroy {
     }
 
     const data = this.form.value;
+    const genericRequest = {
+      UserId: 0,
+      Params: data
+    };
+
     this.loading = true;
     this.cdr.detectChanges();
     this.http
-      .post('/register', data, null, {
+      .post(`${environment.apiRestBasePath}/register`, genericRequest, null, {
         context: new HttpContext().set(ALLOW_ANONYMOUS, true)
       })
       .pipe(
@@ -119,7 +156,6 @@ export class UserRegisterComponent implements OnDestroy {
         this.router.navigate(['passport', 'register-result'], { queryParams: { email: data.mail } });
       });
   }
-
   ngOnDestroy(): void {
     if (this.interval$) {
       clearInterval(this.interval$);
