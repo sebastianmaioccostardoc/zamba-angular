@@ -24,6 +24,11 @@ const routes: Routes = [
         data: { preload: true }
       },
       {
+        path: 'default',
+        loadChildren: () => import('./default/default.component').then(m => m.DefaultComponent),
+        data: { preload: true }
+      },
+      {
         path: 'widgets',
         loadChildren: () => import('./widgets/widgets.module').then(m => m.WidgetsModule)
       },
@@ -59,4 +64,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class RouteRoutingModule {}
+export class RouteRoutingModule { }

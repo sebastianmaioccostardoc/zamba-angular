@@ -5,9 +5,11 @@ import { DashboardAnalysisComponent } from './analysis/analysis.component';
 import { DashboardMonitorComponent } from './monitor/monitor.component';
 import { DashboardV1Component } from './v2/v2.component';
 import { DashboardWorkplaceComponent } from './workplace/workplace.component';
+import { DefaultComponent } from "../default/default.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'v2', pathMatch: 'full' },
+  { path: '', redirectTo: 'default', pathMatch: 'full' },
+  { path: 'default', component: DefaultComponent },
   { path: 'v2', component: DashboardV1Component },
   { path: 'analysis', component: DashboardAnalysisComponent },
   { path: 'monitor', component: DashboardMonitorComponent },
@@ -18,4 +20,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule {}
+export class DashboardRoutingModule { }

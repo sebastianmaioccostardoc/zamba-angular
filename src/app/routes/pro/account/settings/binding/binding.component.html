@@ -27,55 +27,55 @@
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="12">
     <nz-form-label>Atributo</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.CuitEmpresa" type="number" disabled>
+    <input nz-input placeholder="" [(ngModel)]="Family.Atributo" type="number" disabled>
   </div>
 </div>
 
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="12">
     <nz-form-label>Nivel de estudio</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.ApellidoNombre" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="Family.NivelEstudio" type="text" />
   </div>
 
   <div nz-col nzSpan="12">
     <nz-form-label>Estado del estudio</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.CuilCuit" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="Family.EstadoEstudioNivelEstudio" type="text" />
   </div>
 </div>
 
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="12">
     <nz-form-label>Institucion Educativa</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.ApellidoNombre" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="Family.InstitucionEducativa" type="text" />
   </div>
 
   <div nz-col nzSpan="12">
     <nz-form-label>Estado del Estudio</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.CuilCuit" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="Family.EstadoEstudioInstitucion" type="text" />
   </div>
 </div>
 
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="12">
     <nz-form-label>Otra institucion que no figura en la tabla</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.ApellidoNombre" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="Family.OtraInstitucion" type="text" />
   </div>
 
   <div nz-col nzSpan="12">
     <nz-form-label>Titulo o Certificacion obtenida</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.CuilCuit" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="Family.TituloCertificacion" type="text" />
   </div>
 </div>
 
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="12">
     <nz-form-label>Fecha de titulacion</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.ApellidoNombre" type="text" />
+    <nz-date-picker style="width: 100%" [(ngModel)]="Family.FechaTitulacion"></nz-date-picker>
   </div>
 
   <div nz-col nzSpan="12">
-    <nz-form-label>observaciones</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.CuilCuit" type="text" />
+    <nz-form-label>Observaciones</nz-form-label>
+    <input nz-input placeholder="" [(ngModel)]="Family.Observaciones" type="text" />
   </div>
 </div>
 
@@ -88,35 +88,35 @@
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="12">
     <nz-form-label>Empresa CUIT</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.Nombre" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="Educacion.Nombre" type="text" />
   </div>
 
   <div nz-col nzSpan="12">
     <nz-form-label>N° de Legajo</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.Apellido" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="Educacion.Apellido" type="text" />
   </div>
 </div>
 
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="12">
     <nz-form-label>CUIL | CUIT</nz-form-label>
-    <nz-date-picker style="width: 100%"></nz-date-picker>
+    <input nz-input placeholder="" [(ngModel)]="Educacion.CuilCuit" type="text" />
   </div>
 
   <div nz-col nzSpan="12">
     <nz-form-label>Appelido y Nombre</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.Nacionalidad" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="Educacion.Nacionalidad" type="text" />
   </div>
 </div>
 
 <div nz-row [nzGutter]="16">
   <div nz-col nzSpan="6">
     <nz-form-label>Documentacion Educativa</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.TipoDocumento" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="Educacion.TipoDocumento" type="text" />
   </div>
 
   <div nz-col nzSpan="18">
     <nz-form-label>Observaciones</nz-form-label>
-    <input nz-input placeholder="" [(ngModel)]="Family.NumeroDocumento" type="text" />
+    <input nz-input placeholder="" [(ngModel)]="Educacion.NumeroDocumento" type="text" />
   </div>
 </div>
