@@ -141,6 +141,7 @@
   "app.register.form-rol-placeholder": "Rol",
   "app.register.form-phone-placeholder": "Phone number",
   "app.register.form-email-placeholder": "Email",
+  "app.register.form-user-name-placeholder": "Username",
   "app.register.form-password-placeholder": "Password",
   "app.register.form-confirm-password-placeholder": "Confirm Password",
 
@@ -151,6 +152,7 @@
     "The activation email has been sent to your email address and is valid for 24 hours. Please log in to the email in time and click on the link in the email to activate the account.",
   "app.register-result.back-home": "Back to home",
   "app.register-result.view-mailbox": "View mailbox",
+  "validation.username.required": "Please enter your username!",
   "validation.email.required": "Please enter your email!",
   "validation.enterprise.required": "Please enter the enterprise name",
   "validation.name.required": "Please enter your name",
