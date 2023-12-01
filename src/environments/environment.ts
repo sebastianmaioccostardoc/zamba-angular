@@ -9,12 +9,12 @@ import { Environment } from '@delon/theme';
 export const environment = {
   production: false,
   useHash: true,
+  apiRestBasePath: "http://localhost:44301/ZambaWeb.RestApi/api/Dashboard",
   api: {
     baseUrl: './',
     refreshTokenEnabled: true,
     refreshTokenType: 'auth-refresh'
   },
-  apiRestBasePath: 'http://localhost:44301/ZambaWeb.RestApi/api/Dashboard',
   modules: [DelonMockModule.forRoot({ data: MOCKDATA })],
 
 
