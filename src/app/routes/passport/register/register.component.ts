@@ -6,7 +6,7 @@ import { ALLOW_ANONYMOUS } from '@delon/auth';
 import { _HttpClient } from '@delon/theme';
 import { MatchControl } from '@delon/util/form';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { finalize } from 'rxjs';
+import { catchError, finalize, throwError } from 'rxjs';
 
 import { environment } from '@env/environment';
 
@@ -121,12 +121,20 @@ export class UserRegisterComponent implements OnDestroy {
         context: new HttpContext().set(ALLOW_ANONYMOUS, true)
       })
       .pipe(
+        catchError((error) => {
+          // Aquí puedes realizar acciones específicas para manejar el error
+          console.error('Error en la solicitud:', error);
+
+          // Puedes lanzar un nuevo observable con el error para que el flujo continúe
+          return throwError(() => error);
+        }),
         finalize(() => {
           this.loading = false;
           this.cdr.detectChanges();
         })
       )
       .subscribe(() => {
+        // Lógica en caso de éxito
         this.router.navigate(['passport', 'register-result'], { queryParams: { email: data.mail } });
       });
   }
