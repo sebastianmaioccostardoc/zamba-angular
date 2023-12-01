@@ -10,6 +10,7 @@
       </nz-input-group>
       <ng-template #companyNameErrorTip let-i>
         <ng-container *ngIf="i.errors?.required">{{ 'validation.enterprise.required' | i18n }}</ng-container>
+        <ng-container *ngIf="i.errors?.maxlength">{{ 'validation.enterprise.maxLength' | i18n }}</ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
@@ -20,6 +21,7 @@
       </nz-input-group>
       <ng-template #nameErrorTip let-i>
         <ng-container *ngIf="i.errors?.required">{{ 'validation.name.required' | i18n }}</ng-container>
+        <ng-container *ngIf="i.errors?.maxlength">{{ 'validation.name.maxLength' | i18n }}</ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
@@ -31,6 +33,7 @@
       </nz-input-group>
       <ng-template #lastnameErrorTip let-i>
         <ng-container *ngIf="i.errors?.required">{{ 'validation.lastname.required' | i18n }}</ng-container>
+        <ng-container *ngIf="i.errors?.maxlength">{{ 'validation.lastname.maxLength' | i18n }}</ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
@@ -73,6 +76,19 @@
       <ng-template #mailErrorTip let-i>
         <ng-container *ngIf="i.errors?.required">{{ 'validation.email.required' | i18n }}</ng-container>
         <ng-container *ngIf="i.errors?.email">{{ 'validation.email.wrong-format' | i18n }}</ng-container>
+        <ng-container *ngIf="i.errors?.maxlength">{{ 'validation.email.maxLength' | i18n }}</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzErrorTip]="userNameErrorTip">
+      <nz-input-group nzSize="large" nzAddonBeforeIcon="user">
+        <input nz-input formControlName="username"
+          placeholder="{{ 'app.register.form-user-name-placeholder' | i18n }}" />
+      </nz-input-group>
+      <ng-template #userNameErrorTip let-i>
+        <ng-container *ngIf="i.errors?.required">{{ 'validation.username.required' | i18n }}</ng-container>
+        <ng-container *ngIf="i.errors?.maxlength">{{ 'validation.username.maxLength' | i18n }}</ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
@@ -81,7 +97,7 @@
       <nz-input-group nzSize="large" nzAddonBeforeIcon="lock" nz-popover nzPopoverPlacement="right"
         nzPopoverTrigger="focus" [(nzPopoverVisible)]="visible" nzPopoverOverlayClassName="register-password-cdk"
         [nzPopoverOverlayStyle]="{ 'width.px': 240 }" [nzPopoverContent]="pwdCdkTpl">
-        <input nz-input type="password" formControlName="password"
+        <input nz-input type="password" formControlName="password" maxlength="50"
           placeholder="{{ 'app.register.form-password-placeholder' | i18n }}" />
       </nz-input-group>
       <ng-template #pwdCdkTpl>
@@ -103,7 +119,7 @@
   <nz-form-item>
     <nz-form-control [nzErrorTip]="confirmErrorTip">
       <nz-input-group nzSize="large" nzAddonBeforeIcon="lock">
-        <input nz-input type="password" formControlName="confirm"
+        <input nz-input type="password" formControlName="confirm" maxlength="50"
           placeholder="{{ 'app.register.form-confirm-password-placeholder' | i18n }}" />
       </nz-input-group>
       <ng-template #confirmErrorTip let-i>
@@ -126,6 +142,7 @@
       <ng-template #mobileErrorTip let-i>
         <ng-container *ngIf="i.errors?.required">{{ 'validation.phone-number.required' | i18n }}</ng-container>
         <ng-container *ngIf="i.errors?.pattern">{{ 'validation.phone-number.wrong-format' | i18n }}</ng-container>
+        <ng-container *ngIf="i.errors?.maxlength">{{ 'validation.phone-number.maxlength' | i18n }}</ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>

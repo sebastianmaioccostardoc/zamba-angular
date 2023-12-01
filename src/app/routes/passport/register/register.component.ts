@@ -32,16 +32,17 @@ export class UserRegisterComponent implements OnDestroy {
 
   form = this.fb.nonNullable.group(
     {
-      companyName: ['', [Validators.required]],
-      name: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
+      companyName: ['', [Validators.required, Validators.maxLength(50)]],
+      name: ['', [Validators.required, Validators.maxLength(50)]],
+      lastname: ['', [Validators.required, Validators.maxLength(50)]],
       department: ['', [Validators.required]],
       rol: ['', [Validators.required]],
-      mail: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6), UserRegisterComponent.checkPassword.bind(this)]],
-      confirm: ['', [Validators.required, Validators.minLength(6)]],
+      mail: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
+      username: ['', [Validators.required, Validators.maxLength(50)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50), UserRegisterComponent.checkPassword.bind(this)]],
+      confirm: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
       mobilePrefix: ['+86'],
-      mobile: ['', [Validators.required]],
+      mobile: ['', [Validators.required, Validators.maxLength(50)]],
     },
     {
       validators: MatchControl('password', 'confirm')
@@ -95,40 +96,13 @@ export class UserRegisterComponent implements OnDestroy {
   resolved(captchaResponse: string) {
     console.log(`Resolved captcha with response: ${captchaResponse}`);
     this.disableSubmitButton = false;
+    console.log("disabledSubmitButton", this.disableSubmitButton);
+    console.log("form valid", this.form.invalid);
+    console.log(this.form.errors)
+    this.cdr.detectChanges();
   }
 
   // #endregion
-
-  /*
-    submit(): void {
-      this.error = '';
-      Object.keys(this.form.controls).forEach(key => {
-        const control = (this.form.controls as NzSafeAny)[key] as AbstractControl;
-        control.markAsDirty();
-        control.updateValueAndValidity();
-      });
-      if (this.form.invalid) {
-        return;
-      }
-  
-      const data = this.form.value;
-      this.loading = true;
-      this.cdr.detectChanges();
-      this.http
-        .post('/register', data, null, {
-          context: new HttpContext().set(ALLOW_ANONYMOUS, true)
-        })
-        .pipe(
-          finalize(() => {
-            this.loading = false;
-            this.cdr.detectChanges();
-          })
-        )
-        .subscribe(() => {
-          this.router.navigate(['passport', 'register-result'], { queryParams: { email: data.mail } });
-        });
-    }
-  */
   submit(): void {
     this.error = '';
     Object.keys(this.form.controls).forEach(key => {
