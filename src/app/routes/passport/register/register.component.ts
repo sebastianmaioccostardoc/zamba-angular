@@ -175,3 +175,18 @@ export class UserRegisterComponent implements OnDestroy {
         context: new HttpContext().set(ALLOW_ANONYMOUS, true)
       })
       .subscribe((data) => {
+        this.listRols = JSON.parse(data);
+      });
+  }
+
+  getDepartment() {
+    //Todo: obtener departamentos por medio de http.get teniendo en cuenta la configuracion 'AlainAuthConfig'
+    this.http
+      .post(`${environment.apiRestBasePath}/getDepartment`, null, null, {
+        context: new HttpContext().set(ALLOW_ANONYMOUS, true)
+      })
+      .subscribe((data) => {
+        this.listDepartments = JSON.parse(data);
+      });
+  }
+}
