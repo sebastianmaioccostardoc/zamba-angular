@@ -157,6 +157,7 @@
   "validation.name.maxLength": "¡El nombre no puede tener más de 50 caracteres!",
   "validation.username.required": "¡Por favor, introduzca su nombre de usuario!",
   "validation.username.maxLength": "¡El nombre de usuario no puede tener más de 50 caracteres!",
+  "validation.username.usernameExists": "El nombre de usuario ya existe",
   "validation.phone-number.maxlength": "¡El número de teléfono no puede tener más de 50 caracteres!",
   "validation.enterprise.maxLength": "¡El nombre de la empresa no puede tener más de 50 caracteres!",
   "validation.lastname.required": "¡Por favor, introduzca su apellido!",
@@ -164,6 +165,7 @@
   "validation.department.required": "¡Por favor, introduzca el departamento!",
   "validation.rol.required": "¡Por favor, seleccione un rol!",
   "validation.email.wrong-format": "¡La dirección de correo electrónico tiene un formato incorrecto.!",
+  "validation.email.emailExists": "Ya existe un usuario asociado a este correo",
   "validation.password.required": "¡Por favor, introduzca su contraseña!",
   "validation.password.twice": "¡Las contraseñas introducidas no coinciden!",
   "validation.password.strength.msg":

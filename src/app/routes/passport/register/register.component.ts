@@ -118,14 +118,14 @@ export class UserRegisterComponent implements OnDestroy {
     this.cdr.detectChanges();
     this.http
       .post(`${environment.apiRestBasePath}/register`, genericRequest, null, {
+        observe: 'response',
+        responseType: 'json',
         context: new HttpContext().set(ALLOW_ANONYMOUS, true)
       })
       .pipe(
         catchError((error) => {
-          // Aquí puedes realizar acciones específicas para manejar el error
           console.error('Error en la solicitud:', error);
 
-          // Puedes lanzar un nuevo observable con el error para que el flujo continúe
           return throwError(() => error);
         }),
         finalize(() => {
@@ -133,9 +133,26 @@ export class UserRegisterComponent implements OnDestroy {
           this.cdr.detectChanges();
         })
       )
-      .subscribe(() => {
-        // Lógica en caso de éxito
-        this.router.navigate(['passport', 'register-result'], { queryParams: { email: data.mail } });
+      .subscribe((response) => {
+        var dataResponse = JSON.parse(response.body);
+        if (dataResponse != null && dataResponse != undefined && dataResponse != "") {
+
+          if (dataResponse.usernameIsTaken) {
+            const usernameControl = this.form.get('username');
+            if (usernameControl) {
+              usernameControl.setErrors({ usernameExists: true });
+            }
+          }
+          if (dataResponse.emailIsTaken) {
+            const mailControl = this.form.get('mail');
+            if (mailControl) {
+              mailControl.setErrors({ emailExists: true });
+            }
+          }
+          if (!dataResponse.emailIsTaken && !dataResponse.usernameIsTaken) {
+            this.router.navigate(['passport', 'register-result'], { queryParams: { email: data.mail } });
+          }
+        }
       });
   }
   ngOnDestroy(): void {

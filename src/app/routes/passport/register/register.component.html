@@ -67,6 +67,7 @@
         <ng-container *ngIf="i.errors?.required">{{ 'validation.email.required' | i18n }}</ng-container>
         <ng-container *ngIf="i.errors?.email">{{ 'validation.email.wrong-format' | i18n }}</ng-container>
         <ng-container *ngIf="i.errors?.maxlength">{{ 'validation.email.maxLength' | i18n }}</ng-container>
+        <ng-container *ngIf="i.errors?.emailExists">{{ 'validation.email.emailExists' | i18n }}</ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
@@ -79,6 +80,7 @@
       <ng-template #userNameErrorTip let-i>
         <ng-container *ngIf="i.errors?.required">{{ 'validation.username.required' | i18n }}</ng-container>
         <ng-container *ngIf="i.errors?.maxlength">{{ 'validation.username.maxLength' | i18n }}</ng-container>
+        <ng-container *ngIf="i.errors?.usernameExists">{{ 'validation.username.usernameExists' | i18n }}</ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
