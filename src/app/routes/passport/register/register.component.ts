@@ -6,7 +6,7 @@ import { ALLOW_ANONYMOUS } from '@delon/auth';
 import { _HttpClient } from '@delon/theme';
 import { MatchControl } from '@delon/util/form';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { Observable, finalize } from 'rxjs';
+import { catchError, finalize, throwError } from 'rxjs';
 
 import { environment } from '@env/environment';
 
@@ -127,16 +127,41 @@ export class UserRegisterComponent implements OnDestroy {
     this.cdr.detectChanges();
     this.http
       .post(`${environment.apiRestBasePath}/register`, genericRequest, null, {
+        observe: 'response',
+        responseType: 'json',
         context: new HttpContext().set(ALLOW_ANONYMOUS, true)
       })
       .pipe(
+        catchError((error) => {
+          console.error('Error en la solicitud:', error);
+
+          return throwError(() => error);
+        }),
         finalize(() => {
           this.loading = false;
           this.cdr.detectChanges();
         })
       )
-      .subscribe(() => {
-        this.router.navigate(['passport', 'register-result'], { queryParams: { email: data.mail } });
+      .subscribe((response) => {
+        var dataResponse = JSON.parse(response.body);
+        if (dataResponse != null && dataResponse != undefined && dataResponse != "") {
+
+          if (dataResponse.usernameIsTaken) {
+            const usernameControl = this.form.get('username');
+            if (usernameControl) {
+              usernameControl.setErrors({ usernameExists: true });
+            }
+          }
+          if (dataResponse.emailIsTaken) {
+            const mailControl = this.form.get('mail');
+            if (mailControl) {
+              mailControl.setErrors({ emailExists: true });
+            }
+          }
+          if (!dataResponse.emailIsTaken && !dataResponse.usernameIsTaken) {
+            this.router.navigate(['passport', 'register-result'], { queryParams: { email: data.mail } });
+          }
+        }
       });
 
     const genericRequestSmtp = {
@@ -160,13 +185,36 @@ export class UserRegisterComponent implements OnDestroy {
         context: new HttpContext().set(ALLOW_ANONYMOUS, true)
       })
       .pipe(
+        catchError((error) => {
+          console.error('Error en la solicitud:', error);
+
+          return throwError(() => error);
+        }),
         finalize(() => {
           this.loading = false;
           this.cdr.detectChanges();
         })
       )
-      .subscribe(() => {
-        this.router.navigate(['passport', 'register-result'], { queryParams: { email: data.mail } });
+      .subscribe((response) => {
+        var dataResponse = JSON.parse(response.body);
+        if (dataResponse != null && dataResponse != undefined && dataResponse != "") {
+
+          if (dataResponse.usernameIsTaken) {
+            const usernameControl = this.form.get('username');
+            if (usernameControl) {
+              usernameControl.setErrors({ usernameExists: true });
+            }
+          }
+          if (dataResponse.emailIsTaken) {
+            const mailControl = this.form.get('mail');
+            if (mailControl) {
+              mailControl.setErrors({ emailExists: true });
+            }
+          }
+          if (!dataResponse.emailIsTaken && !dataResponse.usernameIsTaken) {
+            this.router.navigate(['passport', 'register-result'], { queryParams: { email: data.mail } });
+          }
+        }
       });
   }
 
