@@ -52,38 +52,28 @@ export class UserLoginV2Component implements OnDestroy {
 
   submit(): void {
     this.error = '';
-    if (this.type === 0) {
-      const { userName, password } = this.form.controls;
-      userName.markAsDirty();
-      userName.updateValueAndValidity();
-      password.markAsDirty();
-      password.updateValueAndValidity();
-      if (userName.invalid || password.invalid) {
-        return;
-      }
-    } else {
-      const { mobile, captcha } = this.form.controls;
-      mobile.markAsDirty();
-      mobile.updateValueAndValidity();
-      captcha.markAsDirty();
-      captcha.updateValueAndValidity();
-      if (mobile.invalid || captcha.invalid) {
-        return;
-      }
+
+    const { userName, password } = this.form.controls;
+    userName.markAsDirty();
+    userName.updateValueAndValidity();
+    password.markAsDirty();
+    password.updateValueAndValidity();
+    if (userName.invalid || password.invalid) {
+      return;
     }
 
+    const data = this.form.value;
+    const genericRequest = {
+      UserId: 0,
+      Params: data
+    };
 
     this.loading = true;
     this.cdr.detectChanges();
     this.http
       .post(
-        '/login/account',
-        {
-          type: this.type,
-
-          userName: this.form.value.userName,//'admin',
-          password: this.form.value.password//'ng-alain.com'
-        },
+        `${environment.apiRestBasePath}/login`,
+        genericRequest,
         null,
         {
           context: new HttpContext().set(ALLOW_ANONYMOUS, true)
@@ -96,6 +86,7 @@ export class UserLoginV2Component implements OnDestroy {
         })
       )
       .subscribe(res => {
+        res = JSON.parse(res);
         if (res.msg !== 'ok') {
           this.error = res.msg;
           this.cdr.detectChanges();
@@ -104,6 +95,7 @@ export class UserLoginV2Component implements OnDestroy {
         this.reuseTabService.clear();
         // 设置用户Token信息
         // TODO: Mock expired value
+        res.user.time = +new Date()
         res.user.expired = +new Date() + 1000 * 60 * 5;
         this.tokenService.set(res.user);
         // 重新获取 StartupService 内容，我们始终认为应用信息一般都会受当前用户授权范围而影响
