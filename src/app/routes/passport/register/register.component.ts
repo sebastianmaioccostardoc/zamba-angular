@@ -48,6 +48,7 @@ export class UserRegisterComponent implements OnDestroy {
 
   disableSubmitButton = true;
   error = '';
+  serverError = false;
   type = 0;
   loading = false;
   visible = false;
@@ -114,6 +115,7 @@ export class UserRegisterComponent implements OnDestroy {
       Params: data
     };
 
+    this.serverError = false;
     this.loading = true;
     this.cdr.detectChanges();
     this.http
@@ -125,7 +127,7 @@ export class UserRegisterComponent implements OnDestroy {
       .pipe(
         catchError((error) => {
           console.error('Error en la solicitud:', error);
-
+          this.serverError = true;
           return throwError(() => error);
         }),
         finalize(() => {

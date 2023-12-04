@@ -131,6 +131,8 @@
   "app.login.password": "password",
   "app.login.validate-password-pattern":"The password has characters not allowed",
   "app.login.validate-password":"Please enter password",
+
+  "app.server.error-message": "Server error, please try again later",
   "app.passport.welcome": "Welcome to Zamba",
   "app.register.register": "Register",
   
