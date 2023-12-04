@@ -36,7 +36,7 @@ export class UserRegisterComponent implements OnDestroy {
       rol: ['', [Validators.required]],
       mail: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
       username: ['', [Validators.required, Validators.maxLength(50)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50), UserRegisterComponent.checkPassword.bind(this)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/), UserRegisterComponent.checkPassword.bind(this)]],
       confirm: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
       mobilePrefix: ['+86'],
       mobile: ['', [Validators.required, Validators.maxLength(50)]],
