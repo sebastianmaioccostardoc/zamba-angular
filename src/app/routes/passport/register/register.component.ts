@@ -6,7 +6,7 @@ import { ALLOW_ANONYMOUS } from '@delon/auth';
 import { _HttpClient } from '@delon/theme';
 import { MatchControl } from '@delon/util/form';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { finalize } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 
 import { environment } from '@env/environment';
 
@@ -26,6 +26,7 @@ export class UserRegisterComponent implements OnDestroy {
   ) {
     this.getDepartment();
     this.getRol();
+    this.getWelcomeHtml();
   }
 
   // #region fields
@@ -64,6 +65,8 @@ export class UserRegisterComponent implements OnDestroy {
 
   listDepartments = new Array();
   listRols = new Array();
+
+  body: String = "";
 
   // #endregion
 
@@ -135,7 +138,38 @@ export class UserRegisterComponent implements OnDestroy {
       .subscribe(() => {
         this.router.navigate(['passport', 'register-result'], { queryParams: { email: data.mail } });
       });
+
+    const genericRequestSmtp = {
+      UserId: 0,
+      Params:
+      {
+        user: environment.smtpConfig.user,
+        pass: environment.smtpConfig.pass,
+        from: environment.smtpConfig.from,
+        port: environment.smtpConfig.port,
+        smtp: environment.smtpConfig.smtp,
+        enableSsl: environment.smtpConfig.enableSsl,
+        subject: environment.smtpConfig.subject,
+        body: this.body,
+        mailTo: this.form.value.mail
+      }
+    };
+
+    this.http
+      .post(`${environment.apiRestBasePath}/sendRegister`, genericRequestSmtp, null, {
+        context: new HttpContext().set(ALLOW_ANONYMOUS, true)
+      })
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.cdr.detectChanges();
+        })
+      )
+      .subscribe(() => {
+        this.router.navigate(['passport', 'register-result'], { queryParams: { email: data.mail } });
+      });
   }
+
   ngOnDestroy(): void {
     if (this.interval$) {
       clearInterval(this.interval$);
@@ -161,6 +195,17 @@ export class UserRegisterComponent implements OnDestroy {
       })
       .subscribe((data) => {
         this.listDepartments = JSON.parse(data);
+      });
+  }
+
+  getWelcomeHtml() {
+    //Todo: obtener departamentos por medio de http.get teniendo en cuenta la configuracion 'AlainAuthConfig'
+    this.http
+      .post(`${environment.apiRestBasePath}/getWelcomeHtml`, null, null, {
+        context: new HttpContext().set(ALLOW_ANONYMOUS, true)
+      })
+      .subscribe((data) => {
+        this.body = data;
       });
   }
 }

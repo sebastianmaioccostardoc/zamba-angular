@@ -6,6 +6,7 @@ import * as MOCKDATA from '@_mock';
 import { DelonMockModule } from '@delon/mock';
 import { Environment } from '@delon/theme';
 
+
 export const environment = {
   production: false,
   useHash: true,
@@ -15,10 +16,19 @@ export const environment = {
     refreshTokenEnabled: true,
     refreshTokenType: 'auth-refresh'
   },
+  smtpConfig: { //TODO: Cambiar al servidor oficial de SMTP.
+    user: 'emiliano.alvarez@stardoc.com.ar',
+    pass: 'K3YJFxd92Z4TOENv',
+    from: 'emiliano.alvarez@stardoc.com.ar',
+    port: 587,
+    smtp: 'smtp-relay.brevo.com',
+    enableSsl: false,
+    subject: "Te damos la bienvenida a Zamba RRHH 🥳🥳"
+  },
   modules: [DelonMockModule.forRoot({ data: MOCKDATA })],
 
-
 } as Environment;
+
 
 /*
  * In development mode, to ignore zone related error stack frames such as
