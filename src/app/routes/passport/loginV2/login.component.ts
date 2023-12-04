@@ -34,9 +34,12 @@ export class UserLoginV2Component implements OnDestroy {
 
   // #region fields
 
-  form = this.fb.nonNullable.group({
-    userName: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+
+  // ...
+
+  form = this.fb.group({
+    userName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]*$/)]],
+    password: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)]],
     mobile: ['', [Validators.required, Validators.pattern(/^1\d{10}$/)]],
     captcha: ['', [Validators.required]],
     remember: [true]

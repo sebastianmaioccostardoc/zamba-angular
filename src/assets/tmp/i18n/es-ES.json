@@ -116,7 +116,7 @@
   "app.monitor.resource-surplus": "Excedente de recursos",
   "app.monitor.fund-surplus": "Superávit del Fondo",
   "app.lock": "Bloqueo",
-  "app.login.message-invalid-credentials": "Nombre de usuario o contraseña no válidos（admin/ant.design）",
+  "app.login.message-invalid-credentials": "Nombre de usuario o contraseña no válidos",
   "app.login.message-invalid-verification-code": "Código de verificación inválido",
   "app.login.tab-login-credentials": "Credenciales",
   "app.login.tab-login-mobile": "Número de móvil",
@@ -127,7 +127,9 @@
   "app.login.login": "Iniciar de sesión",
   "app.login.username": "Nombre de usuario",
   "app.login.validate-username":"Ingrese un nombre de usuario válido",
+  "app.login.validate-username-pattern":"El nombre de usuario debe ser alfanumérico",
   "app.login.password": "Contraseña",
+  "app.login.validate-password-pattern":"La contraseña tiene caracteres no permitidos",
   "app.login.validate-password":"Ingrese una contraseña",
 
   "app.passport.welcome": "Bienvenido a Zamba",
