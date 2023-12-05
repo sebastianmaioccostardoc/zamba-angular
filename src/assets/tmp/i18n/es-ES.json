@@ -150,6 +150,8 @@
   "app.register.get-verification-code": "Obtener código",
   "app.register.sign-in": "¿Ya tiene una cuenta?",
   "app.register-result.msg": "Cuenta： registrada con {{email}}",
+  "app.register-result.activation-account": "Se ha activado tu cuenta exitosamente.",
+  "app.validate.account": "Activacion de la cuenta exitosa.",
   "app.register-result.activation-email":
     "El correo electrónico de activación se ha enviado a su dirección de correo electrónico y es válido durante 24 horas. Por favor, inicie sesión en el correo electrónico a tiempo y haga clic en el enlace del correo electrónico para activar la cuenta.",
   "app.register-result.back-home": "Volver a la página de inicio",
