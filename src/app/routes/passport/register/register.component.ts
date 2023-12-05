@@ -26,7 +26,6 @@ export class UserRegisterComponent implements OnDestroy {
   ) {
     this.getDepartment();
     this.getRol();
-    this.getWelcomeHtml();
   }
 
   // #region fields
@@ -163,59 +162,6 @@ export class UserRegisterComponent implements OnDestroy {
           }
         }
       });
-
-    const genericRequestSmtp = {
-      UserId: 0,
-      Params:
-      {
-        user: environment.smtpConfig.user,
-        pass: environment.smtpConfig.pass,
-        from: environment.smtpConfig.from,
-        port: environment.smtpConfig.port,
-        smtp: environment.smtpConfig.smtp,
-        enableSsl: environment.smtpConfig.enableSsl,
-        subject: environment.smtpConfig.subject,
-        body: this.body,
-        mailTo: this.form.value.mail
-      }
-    };
-
-    this.http
-      .post(`${environment.apiRestBasePath}/sendRegister`, genericRequestSmtp, null, {
-        context: new HttpContext().set(ALLOW_ANONYMOUS, true)
-      })
-      .pipe(
-        catchError((error) => {
-          console.error('Error en la solicitud:', error);
-
-          return throwError(() => error);
-        }),
-        finalize(() => {
-          this.loading = false;
-          this.cdr.detectChanges();
-        })
-      )
-      .subscribe((response) => {
-        var dataResponse = JSON.parse(response.body);
-        if (dataResponse != null && dataResponse != undefined && dataResponse != "") {
-
-          if (dataResponse.usernameIsTaken) {
-            const usernameControl = this.form.get('username');
-            if (usernameControl) {
-              usernameControl.setErrors({ usernameExists: true });
-            }
-          }
-          if (dataResponse.emailIsTaken) {
-            const mailControl = this.form.get('mail');
-            if (mailControl) {
-              mailControl.setErrors({ emailExists: true });
-            }
-          }
-          if (!dataResponse.emailIsTaken && !dataResponse.usernameIsTaken) {
-            this.router.navigate(['passport', 'register-result'], { queryParams: { email: data.mail } });
-          }
-        }
-      });
   }
 
   ngOnDestroy(): void {
@@ -243,17 +189,6 @@ export class UserRegisterComponent implements OnDestroy {
       })
       .subscribe((data) => {
         this.listDepartments = JSON.parse(data);
-      });
-  }
-
-  getWelcomeHtml() {
-    //Todo: obtener departamentos por medio de http.get teniendo en cuenta la configuracion 'AlainAuthConfig'
-    this.http
-      .post(`${environment.apiRestBasePath}/getWelcomeHtml`, null, null, {
-        context: new HttpContext().set(ALLOW_ANONYMOUS, true)
-      })
-      .subscribe((data) => {
-        this.body = data;
       });
   }
 }
