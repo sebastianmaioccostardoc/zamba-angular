@@ -95,7 +95,7 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-control [nzErrorTip]="'validation.password.required' | i18n">
+    <nz-form-control [nzErrorTip]="passwordErrorTip">
       <nz-input-group nzSize="large" nzAddonBeforeIcon="lock" nz-popover nzPopoverPlacement="right"
         nzPopoverTrigger="focus" [(nzPopoverVisible)]="visible" nzPopoverOverlayClassName="register-password-cdk"
         [nzPopoverOverlayStyle]="{ 'width.px': 240 }" [nzPopoverContent]="pwdCdkTpl">
@@ -115,6 +115,14 @@
           </div>
           <p class="mt-sm">{{ 'validation.password.strength.msg' | i18n }}</p>
         </div>
+      </ng-template>
+      <ng-template #passwordErrorTip let-i>
+        <ng-container *ngIf="i.errors.required">
+          {{ 'app.login.validate-password' | i18n }}
+        </ng-container>
+        <ng-container *ngIf="i.errors.pattern">
+          {{ 'app.login.validate-password-pattern' | i18n }}
+        </ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>

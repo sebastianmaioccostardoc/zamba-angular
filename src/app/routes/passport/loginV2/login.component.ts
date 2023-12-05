@@ -8,7 +8,7 @@ import { ALLOW_ANONYMOUS, DA_SERVICE_TOKEN, ITokenService, SocialOpenType, Socia
 import { SettingsService, _HttpClient } from '@delon/theme';
 import { environment } from '@env/environment';
 import { NzTabChangeEvent } from 'ng-zorro-antd/tabs';
-import { finalize } from 'rxjs';
+import { catchError, finalize, throwError } from 'rxjs';
 
 @Component({
   selector: 'passport-login',
@@ -45,6 +45,7 @@ export class UserLoginV2Component implements OnDestroy {
     remember: [true]
   });
   error = '';
+  serverError = false;
   type = 0;
   loading = false;
 
@@ -55,6 +56,7 @@ export class UserLoginV2Component implements OnDestroy {
 
   submit(): void {
     this.error = '';
+    this.serverError = false;
 
     const { userName, password } = this.form.controls;
     userName.markAsDirty();
@@ -83,6 +85,11 @@ export class UserLoginV2Component implements OnDestroy {
         }
       )
       .pipe(
+        catchError((error) => {
+          console.error('Error en la solicitud:', error);
+          this.serverError = true;
+          return throwError(() => error);
+        }),
         finalize(() => {
           this.loading = false;
           this.cdr.detectChanges();

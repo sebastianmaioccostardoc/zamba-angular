@@ -3,7 +3,10 @@
     <nz-tab [nzTitle]="'app.login.tab-login-credentials' | i18n">
       <nz-alert *ngIf="error" [nzType]="'error'" [nzMessage]="'app.login.message-invalid-credentials' | i18n"
         [nzShowIcon]="true" class="mb-lg" />
+      <nz-alert *ngIf="serverError" [nzType]="'error'" [nzMessage]="'app.server.error-message' | i18n"
+        [nzShowIcon]="true" class="mb-lg" />
       <nz-form-item>
+
         <nz-form-control [nzErrorTip]="usernameErrorTip">
           <nz-input-group nzSize="large" nzPrefixIcon="user">
             <input nz-input formControlName="userName" placeholder="{{ 'app.login.username' | i18n }}" />

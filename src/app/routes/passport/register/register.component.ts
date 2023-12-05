@@ -39,7 +39,7 @@ export class UserRegisterComponent implements OnDestroy {
       rol: ['', [Validators.required]],
       mail: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
       username: ['', [Validators.required, Validators.maxLength(50)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50), UserRegisterComponent.checkPassword.bind(this)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/), UserRegisterComponent.checkPassword.bind(this)]],
       confirm: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
       mobilePrefix: ['+86'],
       mobile: ['', [Validators.required, Validators.maxLength(50)]],
@@ -51,6 +51,7 @@ export class UserRegisterComponent implements OnDestroy {
 
   disableSubmitButton = true;
   error = '';
+  serverError = false;
   type = 0;
   loading = false;
   visible = false;
@@ -122,6 +123,7 @@ export class UserRegisterComponent implements OnDestroy {
       Params: data
     };
 
+    this.serverError = false;
     this.loading = true;
     this.cdr.detectChanges();
     this.http
@@ -133,7 +135,7 @@ export class UserRegisterComponent implements OnDestroy {
       .pipe(
         catchError((error) => {
           console.error('Error en la solicitud:', error);
-
+          this.serverError = true;
           return throwError(() => error);
         }),
         finalize(() => {
