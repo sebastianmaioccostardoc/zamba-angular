@@ -17,13 +17,16 @@ import { environment } from '@env/environment';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserRegisterComponent implements OnDestroy {
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private http: _HttpClient,
     private cdr: ChangeDetectorRef,
-  ) { }
-
+  ) {
+    this.getDepartment();
+    this.getRol();
+  }
 
   // #region fields
 
@@ -59,6 +62,11 @@ export class UserRegisterComponent implements OnDestroy {
     pass: 'normal',
     pool: 'exception'
   };
+
+  listDepartments = new Array();
+  listRols = new Array();
+
+  body: String = "";
 
   // #endregion
 
@@ -157,9 +165,32 @@ export class UserRegisterComponent implements OnDestroy {
         }
       });
   }
+
   ngOnDestroy(): void {
     if (this.interval$) {
       clearInterval(this.interval$);
     }
+  }
+
+  getRol() {
+    //Todo: obtener departamentos por medio de http.get teniendo en cuenta la configuracion 'AlainAuthConfig'
+    this.http
+      .post(`${environment.apiRestBasePath}/getRol`, null, null, {
+        context: new HttpContext().set(ALLOW_ANONYMOUS, true)
+      })
+      .subscribe((data) => {
+        this.listRols = JSON.parse(data);
+      });
+  }
+
+  getDepartment() {
+    //Todo: obtener departamentos por medio de http.get teniendo en cuenta la configuracion 'AlainAuthConfig'
+    this.http
+      .post(`${environment.apiRestBasePath}/getDepartment`, null, null, {
+        context: new HttpContext().set(ALLOW_ANONYMOUS, true)
+      })
+      .subscribe((data) => {
+        this.listDepartments = JSON.parse(data);
+      });
   }
 }

@@ -7,6 +7,7 @@ import { UserLoginV2Component } from './loginV2/login.component';
 import { UserRegisterComponent } from './register/register.component';
 import { UserRegisterResultComponent } from './register-result/register-result.component';
 import { LayoutPassportComponent } from '../../layout/passport/passport.component';
+import { ValidateComponent } from './validate.component';
 
 const routes: Routes = [
   // passport
@@ -18,6 +19,11 @@ const routes: Routes = [
         path: 'login',
         component: UserLoginV2Component,
         data: { title: '登录', titleI18n: 'app.login.login' }
+      },
+      {
+        path: 'validate',
+        component: ValidateComponent,
+        data: { title: '登录', titleI18n: 'app.validate.account' }
       },
       {
         path: 'register',

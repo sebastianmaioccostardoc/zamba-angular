@@ -1,4 +1,5 @@
 <h3>{{ 'app.register.register' | i18n }}</h3>
+
 <form nz-form [formGroup]="form" (ngSubmit)="submit()" role="form">
   <nz-alert *ngIf="error" [nzType]="'error'" [nzMessage]="error" [nzShowIcon]="true" class="mb-lg" />
   <nz-form-item>
@@ -36,21 +37,29 @@
       </ng-template>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item>
     <nz-form-control [nzErrorTip]="departmentErrorTip">
       <nz-input-group nzSize="large" nzAddonBeforeIcon="user">
-        <input nz-input formControlName="department"
-          placeholder="{{ 'app.register.form-department-placeholder' | i18n }}" />
+        <nz-select nz-input formControlName="department">
+          <nz-option *ngFor="let item of listDepartments" [nzValue]="item?.department_id"
+            [nzLabel]="item?.departmentname"> </nz-option>
+        </nz-select>
       </nz-input-group>
       <ng-template #departmentErrorTip let-i>
         <ng-container *ngIf="i.errors?.required">{{ 'validation.department.required' | i18n }}</ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item>
     <nz-form-control [nzErrorTip]="rolErrorTip">
       <nz-input-group nzSize="large" nzAddonBeforeIcon="user">
-        <input nz-input formControlName="rol" placeholder="{{ 'app.register.form-rol-placeholder' | i18n }}" />
+
+        <nz-select nz-input formControlName="rol">
+          <nz-option *ngFor="let item of listRols" [nzValue]="item?.rol_id" [nzLabel]="item?.rolname"></nz-option>
+        </nz-select>
+
       </nz-input-group>
       <ng-template #rolErrorTip let-i>
         <ng-container *ngIf="i.errors?.required">{{ 'validation.rol.required' | i18n }}</ng-container>
@@ -58,6 +67,7 @@
       </ng-template>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item>
     <nz-form-control [nzErrorTip]="mailErrorTip">
       <nz-input-group nzSize="large" nzAddonBeforeIcon="user">

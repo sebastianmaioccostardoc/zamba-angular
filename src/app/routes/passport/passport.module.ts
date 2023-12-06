@@ -9,8 +9,9 @@ import { UserRegisterComponent } from './register/register.component';
 import { UserRegisterResultComponent } from './register-result/register-result.component';
 
 import { RecaptchaModule } from 'ng-recaptcha';
+import { ValidateComponent } from "./validate.component";
 
-const COMPONENTS = [UserLoginV2Component, UserRegisterResultComponent, UserRegisterComponent, UserLockComponent, CallbackComponent];
+const COMPONENTS = [UserLoginV2Component, UserRegisterResultComponent, UserRegisterComponent, UserLockComponent, CallbackComponent, ValidateComponent];
 
 @NgModule({
   imports: [SharedModule, PassportRoutingModule, RecaptchaModule],
