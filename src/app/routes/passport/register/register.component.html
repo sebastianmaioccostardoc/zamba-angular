@@ -51,23 +51,6 @@
       </ng-template>
     </nz-form-control>
   </nz-form-item>
-
-  <nz-form-item>
-    <nz-form-control [nzErrorTip]="rolErrorTip">
-      <nz-input-group nzSize="large" nzAddonBeforeIcon="user">
-
-        <nz-select nz-input formControlName="rol">
-          <nz-option *ngFor="let item of listRols" [nzValue]="item?.rol_id" [nzLabel]="item?.rolname"></nz-option>
-        </nz-select>
-
-      </nz-input-group>
-      <ng-template #rolErrorTip let-i>
-        <ng-container *ngIf="i.errors?.required">{{ 'validation.rol.required' | i18n }}</ng-container>
-        <ng-container *ngIf="i.errors?.email">{{ 'validation.rol.wrong-format' | i18n }}</ng-container>
-      </ng-template>
-    </nz-form-control>
-  </nz-form-item>
-
   <nz-form-item>
     <nz-form-control [nzErrorTip]="mailErrorTip">
       <nz-input-group nzSize="large" nzAddonBeforeIcon="user">
@@ -78,19 +61,6 @@
         <ng-container *ngIf="i.errors?.email">{{ 'validation.email.wrong-format' | i18n }}</ng-container>
         <ng-container *ngIf="i.errors?.maxlength">{{ 'validation.email.maxLength' | i18n }}</ng-container>
         <ng-container *ngIf="i.errors?.emailExists">{{ 'validation.email.emailExists' | i18n }}</ng-container>
-      </ng-template>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-control [nzErrorTip]="userNameErrorTip">
-      <nz-input-group nzSize="large" nzAddonBeforeIcon="user">
-        <input nz-input formControlName="username"
-          placeholder="{{ 'app.register.form-user-name-placeholder' | i18n }}" />
-      </nz-input-group>
-      <ng-template #userNameErrorTip let-i>
-        <ng-container *ngIf="i.errors?.required">{{ 'validation.username.required' | i18n }}</ng-container>
-        <ng-container *ngIf="i.errors?.maxlength">{{ 'validation.username.maxLength' | i18n }}</ng-container>
-        <ng-container *ngIf="i.errors?.usernameExists">{{ 'validation.username.usernameExists' | i18n }}</ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>

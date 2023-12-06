@@ -38,7 +38,7 @@ export class UserLoginV2Component implements OnDestroy {
   // ...
 
   form = this.fb.group({
-    userName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]*$/)]],
+    email: ['', [Validators.required, Validators.maxLength(50)]],
     password: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)]],
     mobile: ['', [Validators.required, Validators.pattern(/^1\d{10}$/)]],
     captcha: ['', [Validators.required]],
@@ -58,12 +58,12 @@ export class UserLoginV2Component implements OnDestroy {
     this.error = '';
     this.serverError = false;
 
-    const { userName, password } = this.form.controls;
-    userName.markAsDirty();
-    userName.updateValueAndValidity();
+    const { email, password } = this.form.controls;
+    email.markAsDirty();
+    email.updateValueAndValidity();
     password.markAsDirty();
     password.updateValueAndValidity();
-    if (userName.invalid || password.invalid) {
+    if (email.invalid || password.invalid) {
       return;
     }
 

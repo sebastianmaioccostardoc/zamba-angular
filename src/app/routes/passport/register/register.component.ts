@@ -16,7 +16,7 @@ import { environment } from '@env/environment';
   styleUrls: ['./register.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserRegisterComponent implements OnDestroy {
+export class UserRegisterComponent implements OnDestroy, OnInit {
 
   constructor(
     private fb: FormBuilder,
@@ -24,8 +24,9 @@ export class UserRegisterComponent implements OnDestroy {
     private http: _HttpClient,
     private cdr: ChangeDetectorRef,
   ) {
+  }
+  ngOnInit(): void {
     this.getDepartment();
-    this.getRol();
   }
 
   // #region fields
@@ -38,7 +39,6 @@ export class UserRegisterComponent implements OnDestroy {
       department: ['', [Validators.required]],
       rol: ['', [Validators.required]],
       mail: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
-      username: ['', [Validators.required, Validators.maxLength(50)]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/), UserRegisterComponent.checkPassword.bind(this)]],
       confirm: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
       mobilePrefix: ['+86'],
@@ -147,19 +147,13 @@ export class UserRegisterComponent implements OnDestroy {
         var dataResponse = JSON.parse(response.body);
         if (dataResponse != null && dataResponse != undefined && dataResponse != "") {
 
-          if (dataResponse.usernameIsTaken) {
-            const usernameControl = this.form.get('username');
-            if (usernameControl) {
-              usernameControl.setErrors({ usernameExists: true });
-            }
-          }
           if (dataResponse.emailIsTaken) {
             const mailControl = this.form.get('mail');
             if (mailControl) {
               mailControl.setErrors({ emailExists: true });
             }
           }
-          if (!dataResponse.emailIsTaken && !dataResponse.usernameIsTaken) {
+          if (!dataResponse.emailIsTaken) {
             this.router.navigate(['passport', 'register-result'], { queryParams: { email: data.mail } });
           }
         }

@@ -25,11 +25,8 @@ export const environment = {
     enableSsl: false,
     subject: "Te damos la bienvenida a Zamba RRHH 🥳🥳"
   },
-  modules: [DelonMockModule.forRoot({ data: MOCKDATA })],
-
-  apiRestBasePath: 'http://localhost:44301/ZambaWeb.RestApi/api/Dashboard',
   cliente: 'zamba',
-  modules: [DelonMockModule.forRoot({ data: MOCKDATA })]
+  modules: [DelonMockModule.forRoot({ data: MOCKDATA })],
 } as Environment;
 
 

@@ -116,7 +116,7 @@
   "app.monitor.resource-surplus": "Excedente de recursos",
   "app.monitor.fund-surplus": "Superávit del Fondo",
   "app.lock": "Bloqueo",
-  "app.login.message-invalid-credentials": "Nombre de usuario o contraseña no válidos",
+  "app.login.message-invalid-credentials": "Correo o contraseña no válidos",
   "app.login.message-invalid-verification-code": "Código de verificación inválido",
   "app.login.tab-login-credentials": "Credenciales",
   "app.login.tab-login-mobile": "Número de móvil",
