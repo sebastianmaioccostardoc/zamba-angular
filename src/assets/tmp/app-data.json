@@ -26,7 +26,8 @@
           "link": "/init",
           "children": [
             {
-              "text": "Empleado",
+              "text": "样式",
+              "icon": "anticon-profile",
               "link": "/ges/empleado",
               "i18n": "menu.dashboard.v1"
             }

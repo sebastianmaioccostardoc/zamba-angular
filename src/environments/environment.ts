@@ -15,9 +15,8 @@ export const environment = {
     refreshTokenType: 'auth-refresh'
   },
   apiRestBasePath: 'http://localhost:44301/ZambaWeb.RestApi/api/Dashboard',
-  modules: [DelonMockModule.forRoot({ data: MOCKDATA })],
-
-
+  cliente: 'zamba',
+  modules: [DelonMockModule.forRoot({ data: MOCKDATA })]
 } as Environment;
 
 /*
