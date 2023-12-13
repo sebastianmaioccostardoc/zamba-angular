@@ -26,10 +26,6 @@ export const environment = {
     enableSsl: false,
     subject: "Te damos la bienvenida a Zamba RRHH 🥳🥳"
   },
-<<<<<<< Updated upstream
-  cliente: 'zamba',
-=======
->>>>>>> Stashed changes
   modules: [DelonMockModule.forRoot({ data: MOCKDATA })],
 } as Environment;
 
