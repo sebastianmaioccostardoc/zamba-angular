@@ -37,7 +37,6 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
       name: ['', [Validators.required, Validators.maxLength(50)]],
       lastname: ['', [Validators.required, Validators.maxLength(50)]],
       department: ['', [Validators.required]],
-      rol: ['', [Validators.required]],
       mail: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/), UserRegisterComponent.checkPassword.bind(this)]],
       confirm: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
@@ -100,7 +99,7 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
     console.log(`Resolved captcha with response: ${captchaResponse}`);
     this.disableSubmitButton = false;
     console.log("disabledSubmitButton", this.disableSubmitButton);
-    console.log("form valid", this.form.invalid);
+    console.log("invalid form: ", this.form.invalid);
     console.log(this.form.errors)
     this.cdr.detectChanges();
   }
