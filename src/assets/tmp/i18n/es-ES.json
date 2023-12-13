@@ -136,6 +136,10 @@
 
   "app.passport.welcome": "Bienvenido a Zamba",
   "app.register.register": "Registro",
+  "app.register.resend-verification": "Reenviar correo de verificación",
+  "app.register.back-to-login": "Volver a inicio de sesión",
+  "app.register.resend-verification-email": "Reenviar",
+  "app.register.question-resend-verification": "¿No recibió el correo de verificación?",
   "app.register.form-company-name-placeholder": "Empresa",
   "app.register.form-name-placeholder": "Nombre",
   "app.register.form-lastname-placeholder": "Apellido",

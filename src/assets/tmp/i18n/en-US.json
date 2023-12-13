@@ -135,8 +135,9 @@
   "app.server.error-message": "Server error, please try again later",
   "app.passport.welcome": "Welcome to Zamba",
   "app.register.register": "Register",
-  
-
+  "app.register.resend-verification": "Resend verification email",
+  "app.register.question-resend-verification": "Didn't receive the verification email?",
+ 
 
   "app.register.form-company-name-placeholder": "Company Name",
   "app.register.form-name-placeholder": "Name",
@@ -151,6 +152,8 @@
 
   "app.register.get-verification-code": "Get code",
   "app.register.sign-in": "Already have an account?",
+  "app.register.back-to-login": "Back to login",
+  "app.register.resend-verification-email": "Resend",
   "app.register-result.msg": "Account：registered at {{email}}",
   "app.register-result.activation-account": "Your account has been activated successfully.",
   "app.register-result.activation-email":

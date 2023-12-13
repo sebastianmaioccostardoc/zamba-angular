@@ -8,6 +8,7 @@ import { UserRegisterComponent } from './register/register.component';
 import { UserRegisterResultComponent } from './register-result/register-result.component';
 import { LayoutPassportComponent } from '../../layout/passport/passport.component';
 import { ValidateComponent } from './validate.component';
+import { ResendVerificationEmailComponent } from './resend-verification-email/resend-verificationemail.component';
 
 const routes: Routes = [
   // passport
@@ -39,6 +40,11 @@ const routes: Routes = [
         path: 'lock',
         component: UserLockComponent,
         data: { title: '锁屏', titleI18n: 'app.lock' }
+      },
+      {
+        path: 'resendverificationemail',
+        component: ResendVerificationEmailComponent,
+        data: { title: 'Registrarse', titleI18n: 'app.register.register' }
       }
     ]
   },
