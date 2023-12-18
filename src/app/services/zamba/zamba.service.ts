@@ -124,8 +124,8 @@ export class ZambaService {
 
         const defaultLang = this.i18n.defaultLang;
 
-        // return zip(this.i18n.loadLangData(defaultLang), this.httpClient.post(this.LOGIN_URL + '/getinfoSideBar', genericRequest)).pipe(
-        return zip(this.i18n.loadLangData(defaultLang), this.httpClient.get('assets/tmp/app-data.json')).pipe(
+        return zip(this.i18n.loadLangData(defaultLang), this.httpClient.post(this.LOGIN_URL + '/getinfoSideBar', genericRequest)).pipe(
+            // return zip(this.i18n.loadLangData(defaultLang), this.httpClient.get('assets/tmp/app-data.json')).pipe(
             catchError(res => {
                 console.warn(`StartupService.load: Network request failed`, res);
                 setTimeout(() => this.router.navigateByUrl(`/exception/500`));
@@ -133,17 +133,23 @@ export class ZambaService {
             }),
             map(([langData, appData]: [Record<string, string>, NzSafeAny]) => {
                 // setting language data
+                appData = JSON.parse(appData);
                 this.i18n.use(defaultLang, langData);
 
 
                 this.settingService.setApp(appData.app);
                 this.settingService.setUser(appData.user);
                 this.aclService.setFull(true);
-                this.menuService.add(appData.menu);
+                this.menuService.add(appData.menu.items);
                 this.titleService.default = '';
                 this.titleService.suffix = appData.app.name;
             })
         );
+    }
+
+    executeRule(): Observable<any> {
+        // Aquí realizas la lógica de tu llamada HTTP
+        return this.http.get('https://api.example.com/data');
     }
 
 }
