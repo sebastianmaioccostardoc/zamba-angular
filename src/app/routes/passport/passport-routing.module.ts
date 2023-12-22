@@ -9,6 +9,7 @@ import { UserRegisterResultComponent } from './register-result/register-result.c
 import { LayoutPassportComponent } from '../../layout/passport/passport.component';
 import { ValidateComponent } from './validate.component';
 import { ResendVerificationEmailComponent } from './resend-verification-email/resend-verificationemail.component';
+import { ResendResultComponent } from './resend-result/resend-result.component';
 
 const routes: Routes = [
   // passport
@@ -34,6 +35,11 @@ const routes: Routes = [
       {
         path: 'register-result',
         component: UserRegisterResultComponent,
+        data: { title: 'resultados de registro', titleI18n: 'app.register.register' }
+      },
+      {
+        path: 'resend-result',
+        component: ResendResultComponent,
         data: { title: 'resultados de registro', titleI18n: 'app.register.register' }
       },
       {

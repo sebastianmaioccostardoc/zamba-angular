@@ -6,7 +6,8 @@
       <nz-alert *ngIf="serverError" [nzType]="'error'" [nzMessage]="'app.server.error-message' | i18n"
         [nzShowIcon]="true" class="mb-lg" />
       <nz-form-item>
-
+      <nz-alert *ngIf="errorUserIsNotActive" [nzType]="'error'" [nzMessage]="'app.server.error-user-isnot-active' | i18n"
+        [nzShowIcon]="true" class="mb-lg" />
         <nz-form-control [nzErrorTip]="mailErrorTip">
           <nz-input-group nzSize="large" nzPrefixIcon="mail">
             <input nz-input formControlName="email" placeholder="{{ 'app.register.form-email-placeholder' | i18n }}" />

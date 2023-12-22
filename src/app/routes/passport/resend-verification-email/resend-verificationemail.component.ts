@@ -109,7 +109,7 @@ export class ResendVerificationEmailComponent implements OnDestroy {
     this.loading = true;
     this.cdr.detectChanges();
     this.http
-      .post(`${environment.apiRestBasePath}/register`, genericRequest, null, {
+      .post(`${environment.apiRestBasePath}/ResendVerificationEmail`, genericRequest, null, {
         observe: 'response',
         responseType: 'json',
         context: new HttpContext().set(ALLOW_ANONYMOUS, true)
@@ -126,19 +126,7 @@ export class ResendVerificationEmailComponent implements OnDestroy {
         })
       )
       .subscribe((response) => {
-        var dataResponse = JSON.parse(response.body);
-        if (dataResponse != null && dataResponse != undefined && dataResponse != "") {
-
-          if (dataResponse.emailIsTaken) {
-            const mailControl = this.form.get('mail');
-            if (mailControl) {
-              mailControl.setErrors({ emailExists: true });
-            }
-          }
-          if (!dataResponse.emailIsTaken) {
-            this.router.navigate(['passport', 'register-result'], { queryParams: { email: data.mail } });
-          }
-        }
+        this.router.navigate(['passport', 'resend-result'], { queryParams: { email: data.mail } });
       });
   }
 
