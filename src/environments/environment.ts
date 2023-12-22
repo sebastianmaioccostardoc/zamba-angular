@@ -27,9 +27,7 @@ export const environment = {
   },
   modules: [DelonMockModule.forRoot({ data: MOCKDATA })],
 
-  apiRestBasePath: 'http://localhost:44301/ZambaWeb.RestApi/api/Dashboard',
   cliente: 'zamba',
-  modules: [DelonMockModule.forRoot({ data: MOCKDATA })]
 } as Environment;
 
 
