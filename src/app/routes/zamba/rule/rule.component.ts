@@ -20,7 +20,6 @@ export class RuleComponent {
   ngOnInit(): void {
     this.ZambaService.executeRule().subscribe(
       (data) => {
-        debugger
         console.log('Datos recibidos:', data);
 
         let result = JSON.parse(data);

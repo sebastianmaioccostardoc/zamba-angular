@@ -25,7 +25,7 @@ const routes: Routes = [
       {
         path: 'validate',
         component: ValidateComponent,
-        data: { title: '登录', titleI18n: 'app.validate.account' }
+        data: { title: 'Validacion de cuenta', titleI18n: 'app.validate.account' }
       },
       {
         path: 'register',
