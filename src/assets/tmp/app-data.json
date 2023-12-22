@@ -14,6 +14,7 @@
       "i18n": "menu.main",
       "group": true,
       "hideInBreadcrumb": true, 
+      
       "children": [
         {
           "text": "Escritorio",
