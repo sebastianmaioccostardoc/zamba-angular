@@ -24,7 +24,7 @@ export class RuleComponent {
         console.log('Datos recibidos:', data);
 
         let result = JSON.parse(data);
-        let urlTask = result.Vars.scripttoexecute.split("'")[3].replaplace("..", "");
+        let urlTask = result.Vars.scripttoexecute.split("'")[3].replace("..", "");
 
         const nuevaUrl = `${this.WebUrl}${urlTask}`
 
