@@ -11,12 +11,12 @@ import { catchError, finalize, throwError } from 'rxjs';
 import { environment } from '@env/environment';
 
 @Component({
-  selector: 'passport-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.less'],
+  selector: 'resend-verificationemail',
+  templateUrl: './resend-verificationemail.component.html',
+  styleUrls: ['./resend-verificationemail.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserRegisterComponent implements OnDestroy, OnInit {
+export class ResendVerificationEmailComponent implements OnDestroy {
 
   constructor(
     private fb: FormBuilder,
@@ -25,26 +25,12 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
     private cdr: ChangeDetectorRef,
   ) {
   }
-  ngOnInit(): void {
-    this.getDepartment();
-  }
 
   // #region fields
 
   form = this.fb.nonNullable.group(
     {
-      companyName: ['', [Validators.required, Validators.maxLength(50)]],
-      name: ['', [Validators.required, Validators.maxLength(50)]],
-      lastname: ['', [Validators.required, Validators.maxLength(50)]],
-      department: ['', [Validators.required]],
       mail: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/), UserRegisterComponent.checkPassword.bind(this)]],
-      confirm: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
-      mobilePrefix: ['+86'],
-      mobile: ['', [Validators.required, Validators.maxLength(50)]],
-    },
-    {
-      validators: MatchControl('password', 'confirm')
     }
   );
 
@@ -61,9 +47,6 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
     pass: 'normal',
     pool: 'exception'
   };
-
-  listDepartments = new Array();
-  listRols = new Array();
 
   body: String = "";
 
@@ -99,7 +82,7 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
     console.log(`Resolved captcha with response: ${captchaResponse}`);
     this.disableSubmitButton = false;
     console.log("disabledSubmitButton", this.disableSubmitButton);
-    console.log("invalid form: ", this.form.invalid);
+    console.log("form valid", this.form.invalid);
     console.log(this.form.errors)
     this.cdr.detectChanges();
   }
@@ -126,7 +109,7 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
     this.loading = true;
     this.cdr.detectChanges();
     this.http
-      .post(`${environment.apiRestBasePath}/register`, genericRequest, null, {
+      .post(`${environment.apiRestBasePath}/ResendVerificationEmail`, genericRequest, null, {
         observe: 'response',
         responseType: 'json',
         context: new HttpContext().set(ALLOW_ANONYMOUS, true)
@@ -143,19 +126,7 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
         })
       )
       .subscribe((response) => {
-        var dataResponse = JSON.parse(response.body);
-        if (dataResponse != null && dataResponse != undefined && dataResponse != "") {
-
-          if (dataResponse.emailIsTaken) {
-            const mailControl = this.form.get('mail');
-            if (mailControl) {
-              mailControl.setErrors({ emailExists: true });
-            }
-          }
-          if (!dataResponse.emailIsTaken) {
-            this.router.navigate(['passport', 'register-result'], { queryParams: { email: data.mail } });
-          }
-        }
+        this.router.navigate(['passport', 'resend-result'], { queryParams: { email: data.mail } });
       });
   }
 
@@ -163,27 +134,5 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
     if (this.interval$) {
       clearInterval(this.interval$);
     }
-  }
-
-  getRol() {
-    //Todo: obtener departamentos por medio de http.get teniendo en cuenta la configuracion 'AlainAuthConfig'
-    this.http
-      .post(`${environment.apiRestBasePath}/getRol`, null, null, {
-        context: new HttpContext().set(ALLOW_ANONYMOUS, true)
-      })
-      .subscribe((data) => {
-        this.listRols = JSON.parse(data);
-      });
-  }
-
-  getDepartment() {
-    //Todo: obtener departamentos por medio de http.get teniendo en cuenta la configuracion 'AlainAuthConfig'
-    this.http
-      .post(`${environment.apiRestBasePath}/getDepartment`, null, null, {
-        context: new HttpContext().set(ALLOW_ANONYMOUS, true)
-      })
-      .subscribe((data) => {
-        this.listDepartments = JSON.parse(data);
-      });
   }
 }

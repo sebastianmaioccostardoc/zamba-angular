@@ -11,6 +11,9 @@ export const environment = {
   production: false,
   useHash: true,
   apiRestBasePath: "http://localhost:44301/ZambaWeb.RestApi/api/Dashboard",
+  apiWebBase: "http://localhost:44301/Zamba.Web",
+  apiWebViews: "http://localhost:44301/Zamba.Web/Views",
+  cliente: 'zamba',
   api: {
     baseUrl: './',
     refreshTokenEnabled: true,
@@ -26,8 +29,6 @@ export const environment = {
     subject: "Te damos la bienvenida a Zamba RRHH 🥳🥳"
   },
   modules: [DelonMockModule.forRoot({ data: MOCKDATA })],
-
-  cliente: 'zamba',
 } as Environment;
 
 

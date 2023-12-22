@@ -116,7 +116,7 @@
   "app.monitor.resource-surplus": "Resource Surplus",
   "app.monitor.fund-surplus": "Fund Surplus",
   "app.lock": "Lock",
-  "app.login.message-invalid-credentials": "Invalid username or password",
+  "app.login.message-invalid-credentials": "Invalid email or password",
   "app.login.message-invalid-verification-code": "Invalid verification code",
   "app.login.tab-login-credentials": "Credentials",
   "app.login.tab-login-mobile": "Mobile number",
@@ -133,10 +133,12 @@
   "app.login.validate-password":"Please enter password",
 
   "app.server.error-message": "Server error, please try again later",
+  "app.server.error-user-isnot-active": "The user is not active. Please check your email to activate your account",
   "app.passport.welcome": "Welcome to Zamba",
   "app.register.register": "Register",
-  
-
+  "app.register.resend-verification": "Resend verification email",
+  "app.register.question-resend-verification": "Didn't receive the verification email?",
+ 
 
   "app.register.form-company-name-placeholder": "Company Name",
   "app.register.form-name-placeholder": "Name",
@@ -151,10 +153,15 @@
 
   "app.register.get-verification-code": "Get code",
   "app.register.sign-in": "Already have an account?",
+  "app.register.do-click-here": "Click here",
+  "app.register.back-to-login": "Back to login",
+  "app.register.resend-verification-email": "Resend",
   "app.register-result.msg": "Account：registered at {{email}}",
+  "app.resend-result.msg": "The verification email has been sent to: {{email}}",
   "app.register-result.activation-account": "Your account has been activated successfully.",
   "app.register-result.activation-email":
-    "The activation email has been sent to your email address and is valid for 24 hours. Please log in to the email in time and click on the link in the email to activate the account.",
+    "The activation email has been sent to your email address. Please log in to the email and click on the link in the email to activate the account.",
+  "app.register-result.resend-email-result": "Please log in to the email and click on the link in the email to activate the account.",
   "app.validate.account": "Account activation successful.",
   "app.register-result.back-home": "Back to home",
   "app.register-result.view-mailbox": "View mailbox",
