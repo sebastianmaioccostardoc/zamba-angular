@@ -12,6 +12,7 @@ export const environment = {
   useHash: true,
   apiRestBasePath: "http://localhost:44301/ZambaWeb.RestApi/api/Dashboard",
   apiWebBase: "http://localhost:44301/Zamba.Web",
+  apiWebViews: "http://localhost:44301/Zamba.Web/Views",
   cliente: 'zamba',
   api: {
     baseUrl: './',
