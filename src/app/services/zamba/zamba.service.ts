@@ -17,6 +17,7 @@ import { ICONS_AUTO } from '../../../style-icons-auto';
 import { I18NService } from '../../core/i18n/i18n.service';
 import { SharedService } from './shared.service';
 import { esEs } from '../../../assets/tmp/i18n/es-Es'
+import { enUS } from '../../../assets/tmp/i18n/en-US'
 
 
 
@@ -132,10 +133,14 @@ export class ZambaService {
                 if (res.status === 401) {
                     // Hacer algo en caso de error 401
                     console.log('Error 401');
-                    if (defaultLang == 'es-Es') {
+                    if (defaultLang == 'es-ES') {
                         let defaultLangData: Record<string, string> = esEs
                         this.i18n.use(defaultLang, defaultLangData);
-                    } else {
+                    } else if (defaultLang == 'en-US') {
+                        let defaultLangData: Record<string, string> = enUS
+                        this.i18n.use(defaultLang, defaultLangData);
+                    }
+                    else {
                         let defaultLangData: Record<string, string> = {}
                         this.i18n.use(defaultLang, defaultLangData);
                     }
