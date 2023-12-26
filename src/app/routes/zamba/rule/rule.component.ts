@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { SharedService } from '../../../services/zamba/shared.service';
+
 import { ZambaService } from '../../../services/zamba/zamba.service'
 
 import { environment } from '../../../../environments/environment';
@@ -14,28 +17,54 @@ export class RuleComponent {
 
   WebUrl = environment["apiWebViews"];
 
-  constructor(private ZambaService: ZambaService) { }
+  constructor(
+    private ZambaService: ZambaService,
+    private route: ActivatedRoute,
+    public sharedService: SharedService) {
+
+  }
+
 
 
   ngOnInit(): void {
-    this.ZambaService.executeRule().subscribe(
-      (data) => {
-        console.log('Datos recibidos:', data);
+    this.route.queryParams.subscribe(params => {
 
-        let result = JSON.parse(data);
-        let urlTask = result.Vars.scripttoexecute.split("'")[3].replace("..", "");
+      console.log("los parametros son", params);
 
-        const nuevaUrl = `${this.WebUrl}${urlTask}`
+      //convertir el objeto params en un array de objetos
+      const genericRequest = {
+        UserId: this.sharedService.userid,
+        Params: params
+      };
 
-        // Abre una nueva ventana o pestaña con la URL especificada
-        window.open(nuevaUrl, '_blank');
+      this.ZambaService.executeRule(genericRequest).subscribe(
+        (data) => {
 
-        // Puedes hacer más cosas con los datos si es necesario
-      },
-      (error) => {
+          debugger;
+          switch (params["typeRule"]) {
+            case "executeViewTask":
+              console.log('Datos recibidos:', data);
 
-        console.error('Error al obtener datos:', error);
-      }
-    );
+              let result = JSON.parse(data);
+              let urlTask = result.Vars.scripttoexecute.split("'")[3].replace("..", "");
+
+              const nuevaUrl = `${this.WebUrl}${urlTask}`
+
+              // Abre una nueva ventana o pestaña con la URL especificada
+              window.open(nuevaUrl, '_blank');
+
+              break;
+
+          }
+
+
+        },
+        (error) => {
+
+          console.error('Error al obtener datos:', error);
+        }
+      );
+    }
+    )
   }
 }

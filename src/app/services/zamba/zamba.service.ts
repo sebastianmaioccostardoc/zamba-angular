@@ -167,14 +167,7 @@ export class ZambaService {
         );
     }
 
-    executeRule(): Observable<any> {
-
-        const genericRequest = {
-            UserId: this.sharedService.userid,
-            Params: {
-                "ruleId": 101,
-            }
-        };
+    executeRule(genericRequest: any): Observable<any> {
         // Aquí realizas la lógica de tu llamada HTTP
         return this.http.post(this.LOGIN_URL + '/executeRuleDashboard', genericRequest);
     }
