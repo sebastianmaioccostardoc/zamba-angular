@@ -16,6 +16,7 @@ import { ICONS } from '../../../style-icons';
 import { ICONS_AUTO } from '../../../style-icons-auto';
 import { I18NService } from '../../core/i18n/i18n.service';
 import { SharedService } from './shared.service';
+import { esEs } from '../../../assets/tmp/i18n/es-Es'
 
 
 
@@ -127,6 +128,20 @@ export class ZambaService {
         return zip(this.i18n.loadLangData(defaultLang), this.httpClient.post(this.LOGIN_URL + '/getinfoSideBar', genericRequest)).pipe(
             // return zip(this.i18n.loadLangData(defaultLang), this.httpClient.get('assets/tmp/app-data.json')).pipe(
             catchError(res => {
+                debugger
+                if (res.status === 401) {
+                    // Hacer algo en caso de error 401
+                    console.log('Error 401');
+                    if (defaultLang == 'es-Es') {
+                        let defaultLangData: Record<string, string> = esEs
+                        this.i18n.use(defaultLang, defaultLangData);
+                    } else {
+                        let defaultLangData: Record<string, string> = {}
+                        this.i18n.use(defaultLang, defaultLangData);
+                    }
+
+                    return [];
+                }
                 console.warn(`StartupService.load: Network request failed`, res);
                 setTimeout(() => this.router.navigateByUrl(`/exception/500`));
                 return [];
