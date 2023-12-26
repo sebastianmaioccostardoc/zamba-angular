@@ -12,7 +12,7 @@ import { environment } from '../../../../environments/environment';
 
 export class RuleComponent {
 
-  WebUrl = environment.apiWebViews
+  WebUrl = environment["apiWebViews"];
 
   constructor(private ZambaService: ZambaService) { }
 
