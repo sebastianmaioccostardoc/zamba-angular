@@ -40,7 +40,6 @@ export class RuleComponent {
       this.ZambaService.executeRule(genericRequest).subscribe(
         (data) => {
 
-          debugger;
           switch (params["typeRule"]) {
             case "executeViewTask":
               console.log('Datos recibidos:', data);

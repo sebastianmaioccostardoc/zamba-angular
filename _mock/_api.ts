@@ -249,7 +249,6 @@ export const APIS = {
   '/api/list': (req: MockRequest) => getFakeList(req.queryString.count),
   '/api/notice': () => getNotice(),
   '/api/activities': () => getActivities(),
-  'POST /api/auth/refresh': { msg: 'ok', token: 'new-token-by-refresh' },
   '/api/401': () => {
     throw new MockStatusError(401);
   },

@@ -111,7 +111,8 @@ export class UserLoginV2Component implements OnDestroy {
         }
         this.reuseTabService.clear();
         res.user.time = +new Date()
-        res.user.expired = +new Date() + 1000 * 60 * 5;
+        //res.user.expired = +new Date() + 1000 * 60 * 5;
+        res.user.expired = -1;
         this.tokenService.set(res.user);
         this.startupSrv.load().subscribe(() => {
           let url = this.tokenService.referrer!.url || '/';

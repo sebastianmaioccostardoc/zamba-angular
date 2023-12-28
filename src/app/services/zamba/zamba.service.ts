@@ -129,7 +129,6 @@ export class ZambaService {
         return zip(this.i18n.loadLangData(defaultLang), this.httpClient.post(this.LOGIN_URL + '/getinfoSideBar', genericRequest)).pipe(
             // return zip(this.i18n.loadLangData(defaultLang), this.httpClient.get('assets/tmp/app-data.json')).pipe(
             catchError(res => {
-                debugger
                 if (res.status === 401) {
                     // Hacer algo en caso de error 401
                     console.log('Error 401');
