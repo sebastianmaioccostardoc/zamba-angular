@@ -139,17 +139,18 @@ export class ZambaService {
 
 
         if (tokenData != null) {
-            debugger
-            tokenData["groups"].forEach(function (values: any) {
-                groupsid.push(values["ID"])
-            })
+            if (tokenData["groups"] != null) {
+                tokenData["groups"].forEach(function (values: any) {
+                    groupsid.push(values["ID"])
+                })
 
-            genericRequest = {
-                UserId: tokenData["userid"],
-                Params: {
-                    "groups": groupsid.toString()
-                }
-            };
+                genericRequest = {
+                    UserId: tokenData["userid"],
+                    Params: {
+                        "groups": groupsid.toString()
+                    }
+                };
+            }
         }
 
         const defaultLang = this.i18n.defaultLang;

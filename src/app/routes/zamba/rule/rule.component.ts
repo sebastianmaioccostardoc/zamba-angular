@@ -5,10 +5,12 @@ import { Inject, Injectable } from '@angular/core';
 import { ZambaService } from '../../../services/zamba/zamba.service'
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { environment } from '../../../../environments/environment';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 
 
 @Component({
-  selector: 'app-empleado',
+  selector: 'app-rule',
   templateUrl: './rule.component.html',
 })
 
@@ -16,13 +18,14 @@ import { environment } from '../../../../environments/environment';
 export class RuleComponent {
 
   WebUrl = environment["apiWebViews"];
-
+  navigateUrl: SafeResourceUrl;
   constructor(
     private ZambaService: ZambaService,
     private route: ActivatedRoute,
     public sharedService: SharedService,
-    @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService) {
-
+    @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
+    private sanitizer: DomSanitizer) {
+    this.navigateUrl = "";
   }
 
 
@@ -52,11 +55,12 @@ export class RuleComponent {
               let result = JSON.parse(data);
               let urlTask = result.Vars.scripttoexecute.split("'")[3].replace("..", "");
 
-              let nuevaUrl = `${this.WebUrl}${urlTask}`
-              nuevaUrl = nuevaUrl + "&t=" + tokenData?.token
+              let newUrl = `${this.WebUrl}${urlTask}`
+              newUrl = newUrl + "&t=" + tokenData?.token
 
+              this.navigateUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newUrl);
               // Abre una nueva ventana o pestaña con la URL especificada
-              window.open(nuevaUrl, '_blank');
+              //window.open(newUrl, '_blank');
 
               break;
 
