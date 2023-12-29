@@ -12,6 +12,12 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-rule',
   templateUrl: './rule.component.html',
+  styles: [`    
+  #ruleComponentIframe {
+      width: 100%;
+      height: 100%;
+  }`
+  ],
 })
 
 
