@@ -27,7 +27,7 @@ export class StartupService {
 
   load(): Observable<void> {
 
-    if (environment.cliente == "zamba") {
+    if (environment['cliente'] == "zamba") {
       return this.ZambaService.GetinfoSideBar()
     } else {
       // TODO: CUANDO NO SEA ZAMBA

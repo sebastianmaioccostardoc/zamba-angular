@@ -1,12 +1,9 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-
 import * as MOCKDATA from '@_mock';
 import { DelonMockModule } from '@delon/mock';
 import { Environment } from '@delon/theme';
-
-
 export const environment = {
   production: false,
   useHash: true,
@@ -26,12 +23,10 @@ export const environment = {
     port: 587,
     smtp: 'smtp-relay.brevo.com',
     enableSsl: false,
-    subject: "Te damos la bienvenida a Zamba RRHH 🥳🥳"
+    subject: "Te damos la bienvenida a Zamba RRHH :cara_de_fiesta::cara_de_fiesta:"
   },
   modules: [DelonMockModule.forRoot({ data: MOCKDATA })],
 } as Environment;
-
-
 /*
  * In development mode, to ignore zone related error stack frames such as
  * `zone.run`, `zoneDelegate.invokeTask` for easier debugging, you can

@@ -28,7 +28,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class ZambaService {
 
-    LOGIN_URL = environment.apiRestBasePath
+    LOGIN_URL = environment['apiRestBasePath'];
 
     serverError = false;
     type = 0;

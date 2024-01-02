@@ -18,7 +18,7 @@ export class LayoutBasicComponent {
   options: LayoutDefaultOptions = {
     logoExpanded: `./assets/logo-full.svg`,
     logoCollapsed: `./assets/logo.svg`,
-    hideAside: environment.cliente == `zamba` ? this.ZambaService.GetConfigUserSidbar() : false,
+    hideAside: environment['cliente'] == `zamba` ? this.ZambaService.GetConfigUserSidbar() : false,
   };
   searchToggleStatus = false;
   showSettingDrawer = !environment.production;

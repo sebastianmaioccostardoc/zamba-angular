@@ -37,21 +37,21 @@ export class ValidateComponent implements OnInit {
                     Params: params
                 };
                 this.http
-                    .post(`${environment.apiRestBasePath}/ActivateUser`, genericRequest, null, {
+                    .post(`${environment['apiRestBasePath']}/ActivateUser`, genericRequest, null, {
                         observe: 'response',
                         responseType: 'json',
                         context: new HttpContext().set(ALLOW_ANONYMOUS, true)
                     })
                     .pipe(
                         catchError((error) => {
-                          console.error('Error en la solicitud:', error);
-                          this.serverError = true;
-                          return throwError(() => error);
+                            console.error('Error en la solicitud:', error);
+                            this.serverError = true;
+                            return throwError(() => error);
                         }),
                         finalize(() => {
-                          this.cdr.detectChanges();
+                            this.cdr.detectChanges();
                         })
-                      )
+                    )
                     .subscribe((response) => {
                         this.showSuccessMessage = true;
                     });
