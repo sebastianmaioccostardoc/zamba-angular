@@ -19,6 +19,7 @@ import { I18NService } from '../../core/i18n/i18n.service';
 import { SharedService } from './shared.service';
 import { esEs } from '../../../assets/tmp/i18n/es-Es'
 import { enUS } from '../../../assets/tmp/i18n/en-US'
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 
@@ -44,7 +45,8 @@ export class ZambaService {
         private http: _HttpClient,
         private router: Router,
         public sharedService: SharedService,
-        @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService
+        @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
+        private sanitizer: DomSanitizer
 
     ) {
         iconSrv.addIcon(...ICONS_AUTO, ...ICONS);
@@ -79,7 +81,6 @@ export class ZambaService {
 
 
         if (tokenData != null) {
-            debugger
             tokenData["groups"].forEach(function (values: any) {
                 groupsid.push(values["ID"])
             })
@@ -197,7 +198,16 @@ export class ZambaService {
 
     executeRule(genericRequest: any): Observable<any> {
         // Aquí realizas la lógica de tu llamada HTTP
-        return this.http.post(this.LOGIN_URL + '/executeRuleDashboard', genericRequest);
+        return this.http
+            .post(
+                `${environment.apiRestBasePath}/executeRuleDashboard`,
+                genericRequest,
+                null,
+                {
+                    context: new HttpContext().set(ALLOW_ANONYMOUS, true)
+                }
+            )
+        //return this.http.post(this.LOGIN_URL + '/executeRuleDashboard', genericRequest);
     }
 
 }

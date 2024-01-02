@@ -37,11 +37,11 @@ export class RuleComponent {
 
 
   ngOnInit(): void {
+    this.navigateUrl = "";
     this.route.queryParams.subscribe(params => {
 
       const tokenData = this.tokenService.get();
       let genericRequest = {}
-      debugger
       if (tokenData != null) {
         console.log("Imprimo los valores en tokenService en el service", tokenData);
 
@@ -64,15 +64,12 @@ export class RuleComponent {
               let newUrl = `${this.WebUrl}${urlTask}`
               newUrl = newUrl + "&t=" + tokenData?.token
 
-              this.navigateUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newUrl);
+              //this.navigateUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newUrl);
               // Abre una nueva ventana o pestaña con la URL especificada
-              //window.open(newUrl, '_blank');
+              window.open(newUrl, '_blank');
 
               break;
-
           }
-
-
         },
         (error) => {
 
