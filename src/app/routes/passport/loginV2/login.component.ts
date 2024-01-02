@@ -78,7 +78,7 @@ export class UserLoginV2Component implements OnDestroy {
     this.cdr.detectChanges();
     this.http
       .post(
-        `${environment.apiRestBasePath}/login`,
+        `${environment['apiRestBasePath']}/login`,
         genericRequest,
         null,
         {

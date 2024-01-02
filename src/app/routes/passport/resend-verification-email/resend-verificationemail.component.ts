@@ -109,7 +109,7 @@ export class ResendVerificationEmailComponent implements OnDestroy {
     this.loading = true;
     this.cdr.detectChanges();
     this.http
-      .post(`${environment.apiRestBasePath}/ResendVerificationEmail`, genericRequest, null, {
+      .post(`${environment['apiRestBasePath']}/ResendVerificationEmail`, genericRequest, null, {
         observe: 'response',
         responseType: 'json',
         context: new HttpContext().set(ALLOW_ANONYMOUS, true)

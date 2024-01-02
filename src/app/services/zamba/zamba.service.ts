@@ -26,7 +26,7 @@ import { enUS } from '../../../assets/tmp/i18n/en-US'
 })
 export class ZambaService {
 
-    LOGIN_URL = environment.apiRestBasePath
+    LOGIN_URL = environment['apiRestBasePath'];
 
     serverError = false;
     type = 0;
