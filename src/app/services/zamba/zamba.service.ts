@@ -1,6 +1,7 @@
 
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpContext } from '@angular/common/http';
+import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { environment } from '../../../environments/environment';
 import { NgLocalization } from '@angular/common';
 import { ALAIN_I18N_TOKEN, MenuService, SettingsService, TitleService } from '@delon/theme';
@@ -42,7 +43,8 @@ export class ZambaService {
         private httpClient: HttpClient,
         private http: _HttpClient,
         private router: Router,
-        public sharedService: SharedService
+        public sharedService: SharedService,
+        @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService
 
     ) {
         iconSrv.addIcon(...ICONS_AUTO, ...ICONS);
@@ -71,12 +73,24 @@ export class ZambaService {
 
     public GetConfigUserSidbar() {
 
+        const tokenData = this.tokenService.get();
+        let genericRequest = {}
+        let groupsid: any[] = []
 
-        const genericRequest = {
-            UserId: this.sharedService.userid,
-            Params: ""
-        };
 
+        if (tokenData != null) {
+            debugger
+            tokenData["groups"].forEach(function (values: any) {
+                groupsid.push(values["ID"])
+            })
+
+            genericRequest = {
+                UserId: tokenData["userid"],
+                Params: {
+                    "groups": groupsid.toString()
+                }
+            };
+        }
         //TODO: este codigo carga la visualizacion de la sidbar pensar mas adelante en ponerlo asyncronico
         //actualmente no funciona de esa manera ya que recarga 2 veces la  interfaz
         const xhr = new XMLHttpRequest();
@@ -119,17 +133,31 @@ export class ZambaService {
     public GetinfoSideBar() {
 
 
-        const genericRequest = {
-            UserId: this.sharedService.userid,
-            Params: ""
-        };
+        const tokenData = this.tokenService.get();
+        let genericRequest = {}
+        let groupsid: any[] = []
+
+
+        if (tokenData != null) {
+            if (tokenData["groups"] != null) {
+                tokenData["groups"].forEach(function (values: any) {
+                    groupsid.push(values["ID"])
+                })
+
+                genericRequest = {
+                    UserId: tokenData["userid"],
+                    Params: {
+                        "groups": groupsid.toString()
+                    }
+                };
+            }
+        }
 
         const defaultLang = this.i18n.defaultLang;
 
         return zip(this.i18n.loadLangData(defaultLang), this.httpClient.post(this.LOGIN_URL + '/getinfoSideBar', genericRequest)).pipe(
             // return zip(this.i18n.loadLangData(defaultLang), this.httpClient.get('assets/tmp/app-data.json')).pipe(
             catchError(res => {
-                debugger
                 if (res.status === 401) {
                     // Hacer algo en caso de error 401
                     console.log('Error 401');

@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { _HttpClient } from '@delon/theme';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
@@ -8,9 +9,13 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   styleUrls: ['default.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefaultComponent {
-  constructor(public msg: NzMessageService) {
+export class DefaultComponent implements OnInit {
+  constructor(public msg: NzMessageService, @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,) {
 
   }
-
+  ngOnInit(): void {
+    const tokenData = this.tokenService.get();
+    if (tokenData != null)
+      console.log("Imprimo los valores en tokenService", tokenData);
+  }
 }

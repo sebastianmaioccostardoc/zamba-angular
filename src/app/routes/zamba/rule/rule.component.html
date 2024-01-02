@@ -1,1 +1,2 @@
-<span>ejecutando la regla</span>
+<span *ngIf="!navigateUrl">ejecutando la regla</span>
+<iframe id="ruleComponentIframe" *ngIf="navigateUrl" [src]="navigateUrl" frameborder="0"></iframe>
