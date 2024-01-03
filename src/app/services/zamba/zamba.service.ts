@@ -132,13 +132,9 @@ export class ZambaService {
 
 
     public GetinfoSideBar() {
-
-
         const tokenData = this.tokenService.get();
         let genericRequest = {}
         let groupsid: any[] = []
-
-
         if (tokenData != null) {
             if (tokenData["groups"] != null) {
                 tokenData["groups"].forEach(function (values: any) {
@@ -154,46 +150,32 @@ export class ZambaService {
             }
         }
 
-        const defaultLang = this.i18n.defaultLang;
-
-        return zip(this.i18n.loadLangData(defaultLang), this.httpClient.post(this.LOGIN_URL + '/getinfoSideBar', genericRequest)).pipe(
-            // return zip(this.i18n.loadLangData(defaultLang), this.httpClient.get('assets/tmp/app-data.json')).pipe(
-            catchError(res => {
-                if (res.status === 401) {
-                    // Hacer algo en caso de error 401
-                    console.log('Error 401');
-                    if (defaultLang == 'es-ES') {
-                        let defaultLangData: Record<string, string> = esEs
-                        this.i18n.use(defaultLang, defaultLangData);
-                    } else if (defaultLang == 'en-US') {
-                        let defaultLangData: Record<string, string> = enUS
-                        this.i18n.use(defaultLang, defaultLangData);
-                    }
-                    else {
-                        let defaultLangData: Record<string, string> = {}
-                        this.i18n.use(defaultLang, defaultLangData);
-                    }
-
-                    return [];
+        this.http
+            .post(
+                `${environment['apiRestBasePath']}/getinfoSideBar`,
+                genericRequest,
+                null,
+                {
+                    context: new HttpContext().set(ALLOW_ANONYMOUS, true)
                 }
-                console.warn(`StartupService.load: Network request failed`, res);
-                setTimeout(() => this.router.navigateByUrl(`/exception/500`));
-                return [];
-            }),
-            map(([langData, appData]: [Record<string, string>, NzSafeAny]) => {
-                // setting language data
-                appData = JSON.parse(appData);
-                this.i18n.use(defaultLang, langData);
-
-
-                this.settingService.setApp(appData.app);
-                this.settingService.setUser(appData.user);
-                this.aclService.setFull(true);
-                this.menuService.add(appData.menu.items);
-                this.titleService.default = '';
-                this.titleService.suffix = appData.app.name;
-            })
-        );
+            ).pipe(
+                catchError(res => {
+                    console.warn(`StartupService.load: Network request failed`, res);
+                    setTimeout(() => this.router.navigateByUrl(`/exception/500`));
+                    return of(null);
+                }),
+                map((appData: NzSafeAny) => {
+                    appData = JSON.parse(appData);
+                    if (appData) {
+                        this.settingService.setApp(appData.app);
+                        this.settingService.setUser(appData.user);
+                        this.aclService.setFull(true);
+                        this.menuService.add(appData.menu.items);
+                        this.titleService.default = '';
+                        this.titleService.suffix = appData.app.name;
+                    }
+                })
+            ).subscribe();
     }
 
     executeRule(genericRequest: any): Observable<any> {

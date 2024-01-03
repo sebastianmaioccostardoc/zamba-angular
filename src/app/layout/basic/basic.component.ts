@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SettingsService, User } from '@delon/theme';
 import { LayoutDefaultOptions } from '@delon/theme/layout-default';
 import { environment } from '@env/environment';
@@ -8,11 +8,14 @@ import { ZambaService } from '../../services/zamba/zamba.service'
   selector: 'layout-basic',
   templateUrl: './basic.component.html'
 })
-export class LayoutBasicComponent {
+export class LayoutBasicComponent implements OnInit {
 
   constructor(
     private settings: SettingsService,
     private ZambaService: ZambaService) { }
+  ngOnInit(): void {
+    this.ZambaService.GetinfoSideBar();
+  }
 
 
   options: LayoutDefaultOptions = {

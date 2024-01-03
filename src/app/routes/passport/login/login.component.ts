@@ -96,8 +96,6 @@ export class UserLoginComponent implements OnDestroy {
       }
     }
 
-    // 默认配置中对所有HTTP请求都会强制 [校验](https://ng-alain.com/auth/getting-started) 用户 Token
-    // 然一般来说登录请求不需要校验，因此加上 `ALLOW_ANONYMOUS` 表示不触发用户 Token 校验
     this.loading = true;
     this.cdr.detectChanges();
     this.http
