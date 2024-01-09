@@ -6,11 +6,12 @@ import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 
 import { WidgetsComponent } from './widgets/widgets.component';
 import { WidgetsRoutingModule } from './widgets-routing.module';
+import { CalendarComponent } from './calendar/calendar.component';
 
-const COMPONENTS: Array<Type<void>> = [WidgetsComponent];
+const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent];
 
 @NgModule({
   imports: [SharedModule, WidgetsRoutingModule, NzCarouselModule, G2MiniBarModule, G2MiniAreaModule],
   declarations: COMPONENTS
 })
-export class WidgetsModule {}
+export class WidgetsModule { }

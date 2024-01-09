@@ -86,6 +86,7 @@ import { RoutesModule } from './routes/routes.module';
 import { SharedModule } from './shared/shared.module';
 import { STWidgetModule } from './shared/st-widget/st-widget.module';
 import { Observable } from 'rxjs';
+import { WidgetsModule } from './routes/widgets/widgets.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -100,10 +101,11 @@ import { Observable } from 'rxjs';
     RoutesModule,
     STWidgetModule,
     NzNotificationModule,
+    WidgetsModule,
     ...GLOBAL_THIRD_MODULES,
     ...FORM_MODULES
   ],
   providers: [...LANG_PROVIDES, ...INTERCEPTOR_PROVIDES, ...I18NSERVICE_PROVIDES, ...APPINIT_PROVIDES],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
