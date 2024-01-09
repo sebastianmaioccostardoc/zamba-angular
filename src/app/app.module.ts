@@ -88,11 +88,13 @@ import { STWidgetModule } from './shared/st-widget/st-widget.module';
 import { Observable } from 'rxjs';
 import { WidgetsModule } from './routes/widgets/widgets.module';
 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+
     HttpClientModule,
     GlobalConfigModule.forRoot(),
     CoreModule,
