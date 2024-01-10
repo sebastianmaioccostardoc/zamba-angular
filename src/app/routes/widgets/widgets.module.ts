@@ -9,8 +9,9 @@ import { WidgetsRoutingModule } from './widgets-routing.module';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CarouselComponent } from './carousel/carousel.component';
 
-const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent];
+const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent, CarouselComponent];
 
 @NgModule({
   imports: [SharedModule, WidgetsRoutingModule, NzCarouselModule, G2MiniBarModule, G2MiniAreaModule,
