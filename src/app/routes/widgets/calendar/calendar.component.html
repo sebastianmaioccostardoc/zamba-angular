@@ -1,12 +1,36 @@
+<nz-header class="header-flex">
+    <nz-button-group nzSize="large">
+        <button nz-button nzType="primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+            <span nz-icon nzType="left"></span>
+            Anterior
+        </button>
+        <button nz-button nzType="primary" mwlCalendarToday [(viewDate)]="viewDate">
+            Hoy
+        </button>
+        <button nz-button nzType="primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+            Siguiente
+            <span nz-icon nzType="right"></span>
+        </button>
+    </nz-button-group>
+    <div class="col-md-4 ">
+        <h3 class="calendar-date-title">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+    </div>
+    <nz-radio-group>
+        <label nz-radio-button nzValue="large" (click)="setView(CalendarView.Month)">Mes</label>
+        <label nz-radio-button nzValue="default" (click)="setView(CalendarView.Week)">Semana</label>
+        <label nz-radio-button nzValue="small" (click)="setView(CalendarView.Day)">Día</label>
+    </nz-radio-group>
+</nz-header>
 <div [ngSwitch]="view">
 
-    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events">
+    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
+        [locale]="locale">
     </mwl-calendar-month-view>
 
-    <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events">
+    <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [locale]="locale">
     </mwl-calendar-week-view>
 
-    <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events">
+    <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [locale]="locale">
     </mwl-calendar-day-view>
 
 </div>
