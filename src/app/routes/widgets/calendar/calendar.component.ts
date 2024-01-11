@@ -44,7 +44,7 @@ export class CalendarComponent implements OnInit {
   viewDate: Date = new Date();
   events: CalendarEvent[] = [];
 
-  view: CalendarView = CalendarView.Week;
+  view: CalendarView = CalendarView.Month;
 
   CalendarView = CalendarView;
 
@@ -79,6 +79,7 @@ export class CalendarComponent implements OnInit {
   }
 
 
+  /*
   addEvent(): void {
     this.events = [
       ...this.events,
@@ -95,5 +96,16 @@ export class CalendarComponent implements OnInit {
       },
     ];
   }
+  */
+  addEvent(date: Date): void {
+    console.log("valor de date: ", date);
+    this.events.push({
+      start: date,
+      title: 'New event',
+      color: colors["red"],
+    });
+    this.refresh.next();
+  }
+
 
 }

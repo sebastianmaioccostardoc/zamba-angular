@@ -1,3 +1,37 @@
+<context-menu #basicMenu menuClass="custom-style">
+    <ng-template contextMenuItem let-item>
+        <div nz-row>
+            <div nz-col nzSpan="12">col-12</div>
+            <div nz-col nzSpan="12">col-12</div>
+        </div>
+        <div nz-row>
+            <div nz-col nzSpan="24">
+                <button nz-button nzType="primary" (click)="addEvent(item)">
+                    Add Event
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</context-menu>
+<ng-template #monthCellTemplate let-day="day" let-openDay="openDay" let-locale="locale"
+    let-tooltipPlacement="tooltipPlacement" let-highlightDay="highlightDay" let-unhighlightDay="unhighlightDay"
+    let-eventClicked="eventClicked">
+    <div class="month-cell-fill-height" [contextMenu]="basicMenu" [contextMenuValue]="day.date">
+        <div class="cal-cell-top">
+            <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+            <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+        </div>
+        <div class="cal-events">
+            <div class="cal-event" *ngFor="let event of day.events" [style.backgroundColor]="event.color.primary"
+                [ngClass]="event?.cssClass" (mouseenter)="highlightDay.emit({event: event})"
+                (mouseleave)="unhighlightDay.emit({event: event})"
+                [mwlCalendarTooltip]="event.title | calendarEventTitle:'monthTooltip':event"
+                [tooltipPlacement]="tooltipPlacement"
+                (click)="$event.stopPropagation(); eventClicked.emit({event: event})"></div>
+        </div>
+    </div>
+</ng-template>
+
 <nz-header class="header-flex">
     <nz-button-group nzSize="large">
         <button nz-button nzType="primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
@@ -24,7 +58,7 @@
 <div [ngSwitch]="view">
 
     <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
-        [locale]="locale">
+        [locale]="locale" [refresh]="refresh" [cellTemplate]="monthCellTemplate">
     </mwl-calendar-month-view>
 
     <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [locale]="locale">

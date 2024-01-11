@@ -10,6 +10,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { ContextMenuModule } from '@perfectmemory/ngx-contextmenu';
 
 const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent];
 
@@ -19,7 +20,9 @@ const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent];
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-    NzLayoutModule],
+    NzLayoutModule,
+    ContextMenuModule
+  ],
   declarations: COMPONENTS
 })
 export class WidgetsModule { }
