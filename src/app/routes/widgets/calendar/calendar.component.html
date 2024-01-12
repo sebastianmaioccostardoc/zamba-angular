@@ -1,22 +1,55 @@
-<context-menu #basicMenu menuClass="custom-style">
-    <ng-template contextMenuItem let-item>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Nuevo Evento" (nzOnCancel)="handleCancel()" (nzOnOk)="addEvent()">
+    <ng-container *nzModalContent>
+        <nz-form-label>Título</nz-form-label>
+        <input nz-input type="text" [(ngModel)]="eventTitle" />
+        <br />
+
+        <nz-form-label>Inicia</nz-form-label>
+        <nz-input-group nzAddOnAfterIcon="calendar">
+            <input mwlFlatpickr nz-input type="text" [enableTime]="true" [(ngModel)]="start" dateFormat="d/m/Y H:i"
+                altFormat="d/m/Y H:i" />
+        </nz-input-group>
+        <br />
+
+        <nz-form-label>Finaliza</nz-form-label>
+        <nz-input-group nzAddOnAfterIcon="calendar">
+            <input mwlFlatpickr nz-input type="text" [enableTime]="true" dateFormat="d/m/Y H:i" altFormat="d/m/Y H:i"
+                [(ngModel)]="end" />
+        </nz-input-group>
+        <!--  dateFormat="Y-m-dTH:i" altFormat="F j, Y H:i" -->
+        <br />
+        <br />
+        <nz-form-label>Colores</nz-form-label>
+        <br />
         <div nz-row>
-            <div nz-col nzSpan="12">col-12</div>
-            <div nz-col nzSpan="12">col-12</div>
-        </div>
-        <div nz-row>
-            <div nz-col nzSpan="24">
-                <button nz-button nzType="primary" (click)="addEvent(item)">
-                    Add Event
-                </button>
+            <div nz-col nzSpan="8">
+                Bordes
+            </div>
+            <div nz-col nzSpan="8">
+                Fondo
+            </div>
+            <div nz-col nzSpan="8">
+                Texto
             </div>
         </div>
-    </ng-template>
-</context-menu>
+        <div nz-row>
+            <div nz-col nzSpan="8">
+                <input nz-input type="color" [(ngModel)]="eventPrimaryColor" />
+            </div>
+            <div nz-col nzSpan="8">
+                <input nz-input type="color" [(ngModel)]="eventSecondaryColor" />
+            </div>
+            <div nz-col nzSpan="8">
+                <input nz-input type="color" [(ngModel)]="eventTextColor" />
+            </div>
+        </div>
+        <br />
+    </ng-container>
+</nz-modal>
 <ng-template #monthCellTemplate let-day="day" let-openDay="openDay" let-locale="locale"
     let-tooltipPlacement="tooltipPlacement" let-highlightDay="highlightDay" let-unhighlightDay="unhighlightDay"
     let-eventClicked="eventClicked">
-    <div class="month-cell-fill-height" [contextMenu]="basicMenu" [contextMenuValue]="day.date">
+    <div class="month-cell-fill-height" (contextmenu)="showModal($event,day.date)">
         <div class="cal-cell-top">
             <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
             <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
@@ -28,6 +61,38 @@
                 [mwlCalendarTooltip]="event.title | calendarEventTitle:'monthTooltip':event"
                 [tooltipPlacement]="tooltipPlacement"
                 (click)="$event.stopPropagation(); eventClicked.emit({event: event})"></div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #weekHeaderTemplate let-days="days" let-locale="locale" let-dayHeaderClicked="dayHeaderClicked">
+    <div class="cal-day-headers">
+        <div class="cal-header" *ngFor="let day of days" [class.cal-past]="day.isPast" [class.cal-today]="day.isToday"
+            [class.cal-future]="day.isFuture" [class.cal-weekend]="day.isWeekend"
+            (click)="dayHeaderClicked.emit({day: day})">
+            <b>{{ day.date | calendarDate:'weekViewColumnHeader':locale }}</b><br />
+            <span>{{ day.date | calendarDate:'weekViewColumnSubHeader':locale }}</span>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #weekViewHourSegment let-segment="segment" let-locale="locale" let-segmentHeight="segmentHeight"
+    let-isTimeLabel="isTimeLabel">
+    <div class="cal-hour-segment" [style.height.px]="segmentHeight" [class.cal-hour-start]="segment.isStart"
+        [class.cal-after-hour-start]="!segment.isStart" [ngClass]="segment.cssClass"
+        (contextmenu)="showModal($event,segment.date)">
+        <div class="cal-time" *ngIf="isTimeLabel">
+            {{ segment.date | calendarDate: 'weekViewHour':locale }}
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #dayHourSegmentTemplate let-segment="segment" let-locale="locale" let-segmentHeight="segmentHeight">
+    <div class="cal-hour-segment" [style.height.px]="segmentHeight" [class.cal-hour-start]="segment.isStart"
+        [class.cal-after-hour-start]="!segment.isStart" [ngClass]="segment.cssClass"
+        (contextmenu)="showModal($event,segment.date)">
+        <div class="cal-time">
+            {{ segment.date | calendarDate: 'dayViewHour':locale }}
         </div>
     </div>
 </ng-template>
@@ -61,10 +126,12 @@
         [locale]="locale" [refresh]="refresh" [cellTemplate]="monthCellTemplate">
     </mwl-calendar-month-view>
 
-    <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [locale]="locale">
+    <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [locale]="locale"
+        [refresh]="refresh" [headerTemplate]="weekHeaderTemplate" [hourSegmentTemplate]="weekViewHourSegment">
     </mwl-calendar-week-view>
 
-    <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [locale]="locale">
+    <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [locale]="locale"
+        [refresh]="refresh" [hourSegmentTemplate]="dayHourSegmentTemplate">
     </mwl-calendar-day-view>
 
 </div>
