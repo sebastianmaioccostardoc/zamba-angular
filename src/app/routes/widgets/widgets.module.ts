@@ -15,8 +15,10 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { CarouselComponent } from './carousel/carousel.component';
 
-const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent];
+
+const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent, CarouselComponent];
 
 @NgModule({
   imports: [SharedModule, WidgetsRoutingModule, NzCarouselModule, G2MiniBarModule, G2MiniAreaModule,
