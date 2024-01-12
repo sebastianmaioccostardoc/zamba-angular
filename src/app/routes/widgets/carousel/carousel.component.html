@@ -1,9 +1,9 @@
-<nz-carousel [nzDotPosition]="dotPosition">
+<nz-carousel class="carousel-container" [nzDotPosition]="dotPosition" [nzEnableSwipe]="EnableSwipe"
+    [nzAutoPlaySpeed]="AutoPlaySpeed" [nzAutoPlay]="AutoPlay" [nzLoop]="Loop">
 
     <div nz-carousel-content *ngFor="let item of listContent">
-        <img *ngIf="images" [src]="item" alt="" style="width: 100%; height: 100%;">
+        <img draggable="false" *ngIf="images" [src]="item" alt="" style="width: 100%; height: 100%;">
 
         <h1 *ngIf="!images">{{item}}</h1>
     </div>
-
 </nz-carousel>

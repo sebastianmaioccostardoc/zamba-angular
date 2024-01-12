@@ -17,4 +17,10 @@ export class CarouselService {
     })
   }
 
+  _getCarouselConfig(genericRequest: any) {
+    return this.http.post(`${environment['apiRestBasePath']}/getCarouselConfig`, genericRequest, null, {
+      context: new HttpContext().set(ALLOW_ANONYMOUS, true)
+    })
+  }
+
 }
