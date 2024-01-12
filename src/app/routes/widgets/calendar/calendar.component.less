@@ -2,8 +2,38 @@
 
 :host {
   display: block;
-  width: 368px;
-  margin: 0 auto;
+  padding-bottom: 10px;
+
+  .month-cell-fill-height {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  nz-button {
+    margin-right: 8px;
+    margin-bottom: 12px;
+
+  }
+
+  .calendar-date-title {
+    color: white;
+  }
+
+  .header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .ant-layout-header {
+    height: 64px;
+    padding: 0 50px;
+    color: rgb(255, 255, 255);
+    line-height: 64px;
+    background: #001529;
+  }
 
   ::ng-deep {
     .ant-tabs .ant-tabs-bar {

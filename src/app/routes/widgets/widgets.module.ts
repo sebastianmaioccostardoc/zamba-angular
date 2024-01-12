@@ -9,6 +9,8 @@ import { WidgetsRoutingModule } from './widgets-routing.module';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { ContextMenuModule } from '@perfectmemory/ngx-contextmenu';
 import { CarouselComponent } from './carousel/carousel.component';
 
 const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent, CarouselComponent];
@@ -18,7 +20,10 @@ const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent, Caro
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
-    })],
+    }),
+    NzLayoutModule,
+    ContextMenuModule
+  ],
   declarations: COMPONENTS
 })
 export class WidgetsModule { }

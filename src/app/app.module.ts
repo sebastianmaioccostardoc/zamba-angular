@@ -1,30 +1,33 @@
 /* eslint-disable import/order */
 /* eslint-disable import/no-duplicates */
 import { HttpClientModule } from '@angular/common/http';
-import { default as ngLang } from '@angular/common/locales/zh';
+import { default as ngLang, } from '@angular/common/locales/zh';
+import localeEs from '@angular/common/locales/es';
 import { APP_INITIALIZER, LOCALE_ID, NgModule, Type } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleInterceptor } from '@delon/auth';
-import { DELON_LOCALE, zh_CN as delonLang, ALAIN_I18N_TOKEN } from '@delon/theme';
-import { NZ_DATE_LOCALE, provideNzI18n, zh_CN as zorroLang } from 'ng-zorro-antd/i18n';
+import { DELON_LOCALE, es_ES as delonLang, ALAIN_I18N_TOKEN } from '@delon/theme';
+import { NZ_DATE_LOCALE, provideNzI18n, es_ES as zorroLang } from 'ng-zorro-antd/i18n';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { es } from 'date-fns/locale';
+import { registerLocaleData } from '@angular/common';
 
+
+registerLocaleData(localeEs, 'es');
 // #region default language
 // 参考：https://ng-alain.com/docs/i18n
 import { I18NService } from '@core';
 import { zhCN as dateLang } from 'date-fns/locale';
 
 const LANG = {
-  abbr: 'zh',
-  ng: ngLang,
+  abbr: 'es',
+  ng: localeEs,
   zorro: zorroLang,
-  date: dateLang,
+  date: es,
   delon: delonLang
 };
-// register angular
-import { registerLocaleData } from '@angular/common';
-registerLocaleData(LANG.ng, LANG.abbr);
+
 const LANG_PROVIDES = [
   { provide: LOCALE_ID, useValue: LANG.abbr },
   provideNzI18n(LANG.zorro),
@@ -87,7 +90,8 @@ import { SharedModule } from './shared/shared.module';
 import { STWidgetModule } from './shared/st-widget/st-widget.module';
 import { Observable } from 'rxjs';
 import { WidgetsModule } from './routes/widgets/widgets.module';
-
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
   declarations: [AppComponent],
