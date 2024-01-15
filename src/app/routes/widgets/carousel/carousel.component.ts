@@ -27,6 +27,7 @@ export class CarouselComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getCarouselConfig();
     this.getCarouselContent();
   }
 
@@ -48,12 +49,6 @@ export class CarouselComponent implements OnInit {
 
         if (this.listContent.length == 0) {
           this.EnableSwipe = false;
-
-          //TEST:
-          // this.listContent = ["SIN RESULTADOS"];
-          // this.listContent.push("SIN RESULTADOS 2");
-          // this.listContent.push("SIN RESULTADOS 3");
-          // this.listContent.push("SIN RESULTADOS 4");
         }
 
       });
@@ -75,11 +70,10 @@ export class CarouselComponent implements OnInit {
         UserId: tokenData["userid"],
         Params: ""
       };
-
       this.carouselService._getCarouselConfig(genericRequest).subscribe((data) => {
         var dataJson = JSON.parse(data);
 
-        this.dotPosition = dataJson.dotPosition;
+        this.dotPosition = dataJson.DotPosition;
         this.AutoPlaySpeed = dataJson.AutoPlaySpeed;
         this.AutoPlay = dataJson.AutoPlay;
         this.EnableSwipe = dataJson.EnableSwipe;
