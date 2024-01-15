@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@angular/animations": "^16.2.0",
+    "@angular/cdk": "^16.2.12",
     "@angular/common": "^16.2.0",
     "@angular/compiler": "^16.2.0",
     "@angular/core": "^16.2.0",
@@ -58,7 +59,9 @@
     "@delon/util": "^16.4.2",
     "@perfectmemory/ngx-contextmenu": "^16.0.2",
     "angular-calendar": "^0.31.0",
+    "angularx-flatpickr": "^7.3.0",
     "date-fns": "^3.2.0",
+    "flatpickr": "^4.6.13",
     "ng-recaptcha": "^12.0.2",
     "ng-zorro-antd": "^16.2.2",
     "ngx-tinymce": "^16.0.0",
