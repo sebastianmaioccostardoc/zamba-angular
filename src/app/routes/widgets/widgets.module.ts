@@ -16,6 +16,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { CarouselComponent } from './carousel/carousel.component';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 
 const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent, CarouselComponent];
@@ -25,6 +26,7 @@ const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent, Caro
     FlatpickrModule.forRoot(),
     NzModalModule,
     NzInputModule,
+    NzIconModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,

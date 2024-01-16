@@ -1,4 +1,5 @@
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Nuevo Evento" (nzOnCancel)="handleCancel()" (nzOnOk)="addEvent()">
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalHeaderTitle" (nzOnCancel)="handleCancel()"
+    (nzOnOk)="isEditMode ? editEvent() : addEvent()">
     <ng-container *nzModalContent>
         <nz-form-label>Título</nz-form-label>
         <input nz-input type="text" [(ngModel)]="eventTitle" />
@@ -123,15 +124,18 @@
 <div [ngSwitch]="view">
 
     <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
-        [locale]="locale" [refresh]="refresh" [cellTemplate]="monthCellTemplate">
+        [locale]="locale" [refresh]="refresh" [cellTemplate]="monthCellTemplate" (dayClicked)="dayClicked($event.day)"
+        (eventTimesChanged)="eventTimesChanged($event)" [activeDayIsOpen]="true">
     </mwl-calendar-month-view>
 
     <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [locale]="locale"
-        [refresh]="refresh" [headerTemplate]="weekHeaderTemplate" [hourSegmentTemplate]="weekViewHourSegment">
+        [refresh]="refresh" [headerTemplate]="weekHeaderTemplate" [hourSegmentTemplate]="weekViewHourSegment"
+        (eventTimesChanged)="eventTimesChanged($event)">
     </mwl-calendar-week-view>
 
     <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [locale]="locale"
-        [refresh]="refresh" [hourSegmentTemplate]="dayHourSegmentTemplate">
+        [refresh]="refresh" [hourSegmentTemplate]="dayHourSegmentTemplate"
+        (eventTimesChanged)="eventTimesChanged($event)">
     </mwl-calendar-day-view>
 
 </div>
