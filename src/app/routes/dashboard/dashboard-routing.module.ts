@@ -6,6 +6,7 @@ import { DashboardMonitorComponent } from './monitor/monitor.component';
 import { DashboardV1Component } from './v2/v2.component';
 import { DashboardWorkplaceComponent } from './workplace/workplace.component';
 import { DefaultComponent } from "../default/default.component";
+import { WidgetsContainerComponent } from '../widgets-container/widgets-container.compoenent';
 
 const routes: Routes = [
   { path: '', redirectTo: 'default', pathMatch: 'full' },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'v2', component: DashboardV1Component },
   { path: 'analysis', component: DashboardAnalysisComponent },
   { path: 'monitor', component: DashboardMonitorComponent },
-  { path: 'workplace', component: DashboardWorkplaceComponent }
+  { path: 'workplace', component: DashboardWorkplaceComponent },
+  { path: 'widgets', component: WidgetsContainerComponent }
 ];
 
 @NgModule({

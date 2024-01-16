@@ -24,8 +24,12 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardMonitorComponent } from './monitor/monitor.component';
 import { DashboardV1Component } from './v2/v2.component';
 import { DashboardWorkplaceComponent } from './workplace/workplace.component';
+import { WidgetsContainerComponent } from '../widgets-container/widgets-container.compoenent';
 
-const COMPONENTS = [DashboardV1Component, DashboardAnalysisComponent, DashboardMonitorComponent, DashboardWorkplaceComponent];
+import { NgForOf } from '@angular/common';
+import { GridsterComponent, GridsterItemComponent } from 'angular-gridster2';
+
+const COMPONENTS = [DashboardV1Component, DashboardAnalysisComponent, DashboardMonitorComponent, DashboardWorkplaceComponent, WidgetsContainerComponent];
 
 @NgModule({
   imports: [
@@ -48,8 +52,11 @@ const COMPONENTS = [DashboardV1Component, DashboardAnalysisComponent, DashboardM
     NumberInfoModule,
     TrendModule,
     QuickMenuModule,
-    OnboardingModule
+    OnboardingModule,
+    NgForOf,
+    GridsterComponent,
+    GridsterItemComponent
   ],
   declarations: [...COMPONENTS]
 })
-export class DashboardModule {}
+export class DashboardModule { }

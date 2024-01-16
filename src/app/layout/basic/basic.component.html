@@ -3,12 +3,19 @@
         <a layout-default-header-item-trigger routerLink="/passport/lock">
             <i nz-icon nzType="lock"></i>
         </a>
+
     </layout-default-header-item>
 
     <layout-default-header-item direction="left" hidden="pc">
         <div layout-default-header-item-trigger (click)="searchToggleStatus = !searchToggleStatus">
             <i nz-icon nzType="search"></i>
         </div>
+    </layout-default-header-item>
+
+    <layout-default-header-item direction="left" hidden="mobile">
+        <a layout-default-header-item-trigger routerLink="/dashboard/widgets">
+            <i nz-icon nzType="dashboard"></i>
+        </a>
     </layout-default-header-item>
 
     <layout-default-header-item direction="middle" />
