@@ -1,7 +1,8 @@
 
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { CarouselService } from "./service/carousel.service";
+import { GridsterItem } from 'angular-gridster2';
 
 
 @Component({
@@ -11,6 +12,20 @@ import { CarouselService } from "./service/carousel.service";
   styleUrls: ['./carousel.component.less']
 })
 export class CarouselComponent implements OnInit {
+
+  @Input()
+  widget: GridsterItem = {
+    type: '',
+    title: '',
+    cols: 0,
+    rows: 0,
+    x: 0,
+    y: 0,
+    resizeEvent: new EventEmitter<GridsterItem>()
+  };
+  @Input()
+  resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
+
   config: any = [];
   listContent = new Array();
   images: boolean = true;
@@ -22,11 +37,12 @@ export class CarouselComponent implements OnInit {
   EnableSwipe = true;
   Loop = true;
 
-  constructor(@Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private carouselService: CarouselService) {
+  constructor(@Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private carouselService: CarouselService, private cdr: ChangeDetectorRef) {
 
   }
 
   ngOnInit(): void {
+    console.log("Inicio el componente", this.widget["type"]);
     this.getCarouselConfig();
     this.getCarouselContent();
   }
@@ -50,7 +66,7 @@ export class CarouselComponent implements OnInit {
         if (this.listContent.length == 0) {
           this.EnableSwipe = false;
         }
-
+        this.cdr.detectChanges();
       });
     }
   }
@@ -78,7 +94,7 @@ export class CarouselComponent implements OnInit {
         this.AutoPlay = dataJson.AutoPlay;
         this.EnableSwipe = dataJson.EnableSwipe;
         this.Loop = dataJson.Loop;
-
+        this.cdr.detectChanges();
       });
     }
   }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { _HttpClient } from '@delon/theme';
@@ -18,6 +18,7 @@ export class WidgetsContainerComponent implements OnInit {
     { cols: 0, rows: 0, y: 0, x: 0 },
     { cols: 0, rows: 0, y: 0, x: 0 }
   ];
+  resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
   constructor(public msg: NzMessageService, @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private router: Router) {
 
   }
@@ -30,9 +31,13 @@ export class WidgetsContainerComponent implements OnInit {
 
     this.options = {
       itemChangeCallback: WidgetsContainerComponent.itemChange,
-      itemResizeCallback: WidgetsContainerComponent.itemResize,
+      itemResizeCallback: item => {
+        // update DB with new size
+        // send the update to widgets
+        this.resizeEvent.emit(item);
+      },
       //probando configuraciones
-      displayGrid: 'always',
+      displayGrid: 'none',
       draggable: {
         enabled: true
       },
@@ -44,9 +49,10 @@ export class WidgetsContainerComponent implements OnInit {
     };
 
     this.dashboard = [
-      { cols: 1, rows: 1, y: 0, x: 0 },
-      { cols: 1, rows: 1, y: 1, x: 1 }
+      { cols: 1, rows: 1, y: 0, x: 0, type: 'carousel' },
+      { cols: 1, rows: 1, y: 1, x: 1, type: 'carousel' }
     ];
+
   }
 
 

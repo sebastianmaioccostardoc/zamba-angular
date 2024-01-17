@@ -4,9 +4,11 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   ViewEncapsulation
 } from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
+import { WidgetsModule } from '../widgets.module';
 /* Agregar los otros widgets
 import { WidgetAComponent } from './widgetA.component';
 import { WidgetBComponent } from './widgetB.component';
@@ -18,14 +20,26 @@ import { WidgetCComponent } from './widgetC.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   standalone: true,
-  //imports: [NgIf, WidgetAComponent, WidgetBComponent, WidgetCComponent]
+  imports: [NgIf, WidgetsModule]
 })
-export class WidgetSelectorComponent {
+export class WidgetSelectorComponent implements OnInit {
+
   @Input()
-  widget: BaseWidgetComponent = {};
+  widget: GridsterItem = {
+    type: '',
+    title: '',
+    cols: 0,
+    rows: 0,
+    x: 0,
+    y: 0,
+    resizeEvent: new EventEmitter<GridsterItem>()
+  };
   @Input()
   resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
+
+  ngOnInit(): void {
+    console.log("widget-selector: tengo un widget del tipo:", this.widget["type"])
+  }
+
 }
 
-export interface BaseWidgetComponent {
-}
