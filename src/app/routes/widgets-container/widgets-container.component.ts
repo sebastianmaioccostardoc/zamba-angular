@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter, Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { _HttpClient } from '@delon/theme';
@@ -20,6 +20,7 @@ export class WidgetsContainerComponent implements OnInit {
     { cols: 0, rows: 0, y: 0, x: 0 },
     { cols: 0, rows: 0, y: 0, x: 0 }
   ];
+  resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
   constructor(public msg: NzMessageService, @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private router: Router, private WCService: WidgetsContainerService, private cdr: ChangeDetectorRef) {
 
   }
@@ -34,15 +35,22 @@ export class WidgetsContainerComponent implements OnInit {
 
     this.options = {
       itemChangeCallback: WidgetsContainerComponent.itemChange,
-      itemResizeCallback: WidgetsContainerComponent.itemResize
+      itemResizeCallback: item => {
+        // update DB with new size
+        // send the update to widgets
+        this.resizeEvent.emit(item);
+      }
     };
 
-    this.dashboard = [];
-
-
+    this.dashboard = [
+      { cols: 1, rows: 1, y: 0, x: 0, type: 'carousel' },
+      { cols: 1, rows: 1, y: 1, x: 1, type: 'carousel' }
+    ];
 
     this.setWidgetsContainer();
   }
+
+
   getWidgetsContainer() {
     const tokenData = this.tokenService.get();
     let genericRequest = {}
@@ -108,7 +116,6 @@ export class WidgetsContainerComponent implements OnInit {
 
     }
   }
-
 
 
   static itemChange(item: any, itemComponent: any) {

@@ -34,6 +34,7 @@ const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent, Caro
     NzLayoutModule,
     ContextMenuModule
   ],
-  declarations: COMPONENTS
+  declarations: COMPONENTS,
+  exports: COMPONENTS,
 })
 export class WidgetsModule { }
