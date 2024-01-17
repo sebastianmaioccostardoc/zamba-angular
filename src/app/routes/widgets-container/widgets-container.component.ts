@@ -15,8 +15,8 @@ export class WidgetsContainerComponent implements OnInit {
 
   options: GridsterConfig = {};
   dashboard: Array<GridsterItem> = [
-    { cols: 2, rows: 1, y: 0, x: 0 },
-    { cols: 2, rows: 2, y: 0, x: 2 }
+    { cols: 0, rows: 0, y: 0, x: 0 },
+    { cols: 0, rows: 0, y: 0, x: 0 }
   ];
   constructor(public msg: NzMessageService, @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private router: Router) {
 
@@ -31,11 +31,21 @@ export class WidgetsContainerComponent implements OnInit {
     this.options = {
       itemChangeCallback: WidgetsContainerComponent.itemChange,
       itemResizeCallback: WidgetsContainerComponent.itemResize,
+      //probando configuraciones
+      displayGrid: 'always',
+      draggable: {
+        enabled: true
+      },
+      resizable: {
+        enabled: true
+      },
+      minCols: 6,
+      minRows: 6,
     };
 
     this.dashboard = [
-      { cols: 2, rows: 1, y: 0, x: 0 },
-      { cols: 2, rows: 2, y: 0, x: 2 }
+      { cols: 1, rows: 1, y: 0, x: 0 },
+      { cols: 1, rows: 1, y: 1, x: 1 }
     ];
   }
 

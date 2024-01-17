@@ -6,7 +6,7 @@ import { DashboardMonitorComponent } from './monitor/monitor.component';
 import { DashboardV1Component } from './v2/v2.component';
 import { DashboardWorkplaceComponent } from './workplace/workplace.component';
 import { DefaultComponent } from "../default/default.component";
-import { WidgetsContainerComponent } from '../widgets-container/widgets-container.compoenent';
+import { WidgetsContainerComponent } from '../widgets-container/widgets-container.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'default', pathMatch: 'full' },
