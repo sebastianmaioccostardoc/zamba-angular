@@ -10,7 +10,7 @@ import { WidgetsContainerOptions } from "./entities/WidgetsContainerOptions";
 @Component({
   selector: 'widgets-container',
   templateUrl: './widgets-container.component.html',
-  styleUrls: ['widgets-container.component.css'],
+  styleUrls: ['widgets-container.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WidgetsContainerComponent implements OnInit {
@@ -47,7 +47,6 @@ export class WidgetsContainerComponent implements OnInit {
       { cols: 1, rows: 1, y: 1, x: 1, type: 'calendar' }
     ];
 
-    this.setWidgetsContainer();
   }
 
 
