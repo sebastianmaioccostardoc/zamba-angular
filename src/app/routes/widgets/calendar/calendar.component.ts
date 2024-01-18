@@ -1,5 +1,5 @@
 import { HttpContext } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, Optional, ViewChild, TemplateRef, OnInit, LOCALE_ID, Directive, ElementRef, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, Optional, ViewChild, TemplateRef, OnInit, LOCALE_ID, Directive, ElementRef, Renderer2, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StartupService } from '@core';
@@ -8,13 +8,14 @@ import { ALLOW_ANONYMOUS, DA_SERVICE_TOKEN, ITokenService, SocialOpenType, Socia
 import { SettingsService, _HttpClient } from '@delon/theme';
 import { environment } from '@env/environment';
 import { NzTabChangeEvent } from 'ng-zorro-antd/tabs';
-import { catchError, finalize, throwError, Subject } from 'rxjs';
+import { catchError, finalize, throwError, Subject, Subscription } from 'rxjs';
 import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, parse } from 'date-fns';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
 import { enUS, es } from 'date-fns/locale';
 import ngEn from '@angular/common/locales/en';
 import ngEs from '@angular/common/locales/es-AR';
 import { EventColor } from 'calendar-utils';
+import { GridsterItem } from 'angular-gridster2';
 
 
 
@@ -43,6 +44,26 @@ const colors: Record<string, EventColor> = {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarComponent implements OnInit {
+
+  @Input()
+  widget: GridsterItem = {
+    type: '',
+    title: '',
+    cols: 0,
+    rows: 0,
+    x: 0,
+    y: 0,
+    resizeEvent: new EventEmitter<GridsterItem>()
+  };
+  @Input()
+  resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
+
+  @Input()
+  gridItem: ElementRef | undefined;
+
+  private resizeSubscription: Subscription | undefined;
+
+
   viewDate: Date = new Date();
   events: CalendarEvent[] = [];
 
@@ -108,7 +129,9 @@ export class CalendarComponent implements OnInit {
     },
   ];
 
-
+  setView(view: CalendarView) {
+    this.view = view;
+  }
 
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -153,12 +176,17 @@ export class CalendarComponent implements OnInit {
   ) {
 
   }
-  ngOnInit(): void {
+
+  ngOnInit() {
+    this.resizeSubscription = this.resizeEvent.subscribe((item: GridsterItem) => {
+      console.log('El gridster-item ha sido redimensionado:', item);
+      this.cdr.detectChanges();
+    });
   }
-
-
-  setView(view: CalendarView) {
-    this.view = view;
+  ngOnDestroy() {
+    if (this.resizeSubscription) {
+      this.resizeSubscription.unsubscribe();
+    }
   }
 
 

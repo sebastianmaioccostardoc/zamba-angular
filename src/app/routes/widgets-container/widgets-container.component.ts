@@ -50,7 +50,7 @@ export class WidgetsContainerComponent implements OnInit {
 
     this.dashboard = [
       { cols: 1, rows: 1, y: 0, x: 0, type: 'carousel' },
-      { cols: 1, rows: 1, y: 1, x: 1, type: 'carousel' }
+      { cols: 1, rows: 1, y: 1, x: 1, type: 'calendar' }
     ];
 
   }

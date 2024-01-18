@@ -102,13 +102,13 @@
     <nz-button-group nzSize="large">
         <button nz-button nzType="primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
             <span nz-icon nzType="left"></span>
-            Anterior
+            <span class="hide-when-xs">Anterior</span>
         </button>
         <button nz-button nzType="primary" mwlCalendarToday [(viewDate)]="viewDate">
-            Hoy
+            <span class="hide-when-xs">Hoy</span>
         </button>
         <button nz-button nzType="primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
-            Siguiente
+            <span class="hide-when-xs">Siguiente</span>
             <span nz-icon nzType="right"></span>
         </button>
     </nz-button-group>
