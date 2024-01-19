@@ -11,7 +11,7 @@ import { WidgetsContainerOptions } from "./entities/WidgetsContainerOptions";
 @Component({
   selector: 'widgets-container',
   templateUrl: './widgets-container.component.html',
-  styleUrls: ['widgets-container.component.css'],
+  styleUrls: ['widgets-container.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WidgetsContainerComponent implements OnInit {
