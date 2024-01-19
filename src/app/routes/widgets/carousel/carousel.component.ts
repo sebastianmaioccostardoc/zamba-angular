@@ -1,9 +1,9 @@
 
-import { Component, OnInit, Inject, Input, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Inject, Input, EventEmitter, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { CarouselService } from "./service/carousel.service";
 import { GridsterItem, GridsterItemComponent } from 'angular-gridster2';
-import { RTLService } from '@delon/theme';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -24,9 +24,18 @@ export class CarouselComponent implements OnInit {
     y: 0,
     resizeEvent: new EventEmitter<GridsterItem>()
   };
+
   @Input()
   resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
 
+  @Input()
+  changeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
+
+  @Input()
+  gridItem: ElementRef | undefined;
+
+  private resizeSubscription: Subscription | undefined;
+  private changeSubscription: Subscription | undefined;
   config: any = [];
   listContent = new Array();
   images: boolean = true;
@@ -37,7 +46,6 @@ export class CarouselComponent implements OnInit {
   AutoPlay = true;
   EnableSwipe = true;
   Loop = true;
-
   style = "max-height: 100%;"
 
   constructor(@Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private carouselService: CarouselService, private cdr: ChangeDetectorRef) {
@@ -49,10 +57,28 @@ export class CarouselComponent implements OnInit {
     this.getCarouselConfig();
     this.getCarouselContent();
 
+    this.resizeSubscription = this.resizeEvent.subscribe((item: GridsterItem) => {
+      console.log('El gridster-item ha sido redimensionado:', item);
+      this.cdr.detectChanges();
+    });
+
+    this.changeSubscription = this.changeEvent.subscribe((item: GridsterItem) => {
+      console.log('El gridster-item ha sido cambiado:', item);
+      this.getItemChangeEvent(item);
+      this.cdr.detectChanges();
+    });
   }
+
+  ngOnDestroy() {
+    if (this.resizeSubscription) {
+      this.resizeSubscription.unsubscribe();
+    }
+  }
+
   getCarouselContent() {
     this.EnableSwipe = true;
     const tokenData = this.tokenService.get();
+
     let genericRequest = {}
 
     if (tokenData != null) {
@@ -69,18 +95,28 @@ export class CarouselComponent implements OnInit {
         if (this.listContent.length == 0)
           this.EnableSwipe = false;
 
-        if (this.widget.cols > this.widget.rows)
-          this.style = "max-width: 100%;"
-        else
-          this.style = "max-height: 100%;"
+        this.setMaxHeight();
 
         this.cdr.detectChanges();
       });
     }
   }
-  changeDotPosition(pos: string) {
-    this.dotPosition = pos;
+  private setMaxHeight() {
+    if (this.widget.cols > this.widget.rows)
+      this.style = "max-width: 100%;";
+
+    else
+      this.style = "max-height: 100%;";
   }
+
+  private getItemChangeEvent(item: GridsterItem) {
+    if (item.cols > item.rows)
+      this.style = "max-width: 100%;";
+
+    else
+      this.style = "max-height: 100%;";
+  }
+
   getCarouselConfig() {
 
     const tokenData = this.tokenService.get();
