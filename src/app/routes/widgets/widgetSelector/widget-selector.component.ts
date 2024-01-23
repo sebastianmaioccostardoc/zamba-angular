@@ -36,6 +36,8 @@ export class WidgetSelectorComponent implements OnInit {
   };
   @Input()
   resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
+  @Input()
+  changeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
 
   ngOnInit(): void {
     console.log("widget-selector: tengo un widget del tipo:", this.widget["type"])

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter, Component, Inject, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { _HttpClient } from '@delon/theme';
@@ -7,6 +7,7 @@ import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 import { WidgetsContainerService } from "./service/widgets-container.service";
 import { WidgetsContainerOptions } from "./entities/WidgetsContainerOptions";
 
+
 @Component({
   selector: 'widgets-container',
   templateUrl: './widgets-container.component.html',
@@ -14,18 +15,16 @@ import { WidgetsContainerOptions } from "./entities/WidgetsContainerOptions";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WidgetsContainerComponent implements OnInit {
-
   options: GridsterConfig = {};
-  dashboard: Array<GridsterItem> = [
-    { cols: 0, rows: 0, y: 0, x: 0 },
-    { cols: 0, rows: 0, y: 0, x: 0 }
-  ];
+  dashboard: Array<GridsterItem> = [];
   resizeEvent: EventEmitter<any> = new EventEmitter<any>();
+  changeEvent: EventEmitter<any> = new EventEmitter<any>();
   constructor(public msg: NzMessageService, @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private router: Router, private WCService: WidgetsContainerService, private cdr: ChangeDetectorRef) {
-
   }
+
   ngOnInit(): void {
     const tokenData = this.tokenService.get();
+
     if (tokenData != null)
       console.log("Imprimo los valores en tokenService", tokenData);
 
@@ -34,18 +33,15 @@ export class WidgetsContainerComponent implements OnInit {
     this.getWidgetsContainer();
 
     this.options = {
-      //itemChangeCallback: WidgetsContainerComponent.itemChange,
+      itemChangeCallback: (item, itemComponent) => {
+        this.changeEvent.emit(item);
+      },
       itemResizeCallback: (item, itemComponent) => {
-        // update DB with new size
-        // send the update to widgets
         this.resizeEvent.emit({ item, itemComponent });
       }
     };
 
-    this.dashboard = [
-      { cols: 1, rows: 1, y: 0, x: 0, type: 'carousel' },
-      { cols: 1, rows: 1, y: 1, x: 1, type: 'calendar' }
-    ];
+    this.dashboard = [];
 
   }
 
@@ -116,7 +112,6 @@ export class WidgetsContainerComponent implements OnInit {
     }
   }
 
-
   static itemChange(item: any, itemComponent: any) {
     console.info('itemChanged', item, itemComponent);
   }
@@ -125,19 +120,7 @@ export class WidgetsContainerComponent implements OnInit {
     console.info('itemResized', item, itemComponent);
   }
 
-
-  // changedOptions() {
-  //   this.options.api.optionsChanged();
-  // }
-
-
   removeItem(item: any) {
     this.dashboard.splice(this.dashboard.indexOf(item), 1);
   }
-
-  /*
-  addItem() {
-    this.dashboard.push({});
-  }
-  */
 }

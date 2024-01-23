@@ -8,22 +8,12 @@ export const environment = {
   production: false,
   useHash: true,
   apiRestBasePath: "http://localhost:44301/ZambaWeb.RestApi/api/Dashboard",
-  apiWebBase: "http://localhost:44301/Zamba.Web",
   apiWebViews: "http://localhost:44301/Zamba.Web/Views",
   cliente: 'zamba',
   api: {
     baseUrl: './',
     refreshTokenEnabled: true,
     refreshTokenType: 'auth-refresh'
-  },
-  smtpConfig: { //TODO: Cambiar al servidor oficial de SMTP.
-    user: 'emiliano.alvarez@stardoc.com.ar',
-    pass: 'K3YJFxd92Z4TOENv',
-    from: 'emiliano.alvarez@stardoc.com.ar',
-    port: 587,
-    smtp: 'smtp-relay.brevo.com',
-    enableSsl: false,
-    subject: "Te damos la bienvenida a Zamba RRHH :cara_de_fiesta::cara_de_fiesta:"
   },
   modules: [DelonMockModule.forRoot({ data: MOCKDATA })],
 } as Environment;

@@ -1,2 +1,3 @@
-<app-carousel *ngIf="widget['type'] === 'carousel'" [resizeEvent]="resizeEvent" [widget]="widget"></app-carousel>
+<app-carousel *ngIf="widget['type'] === 'carousel'" [resizeEvent]="resizeEvent" [changeEvent]="changeEvent"
+    [widget]="widget"></app-carousel>
 <calendar-widget *ngIf="widget['type'] === 'calendar'" [resizeEvent]="resizeEvent" [widget]="widget"></calendar-widget>
