@@ -1,11 +1,4 @@
 <layout-default [options]="options" [asideUser]="asideUserTpl" [content]="contentTpl" [customError]="null">
-    <layout-default-header-item direction="left" hidden="mobile">
-        <a layout-default-header-item-trigger routerLink="/passport/lock">
-            <i nz-icon nzType="lock"></i>
-        </a>
-
-    </layout-default-header-item>
-
     <layout-default-header-item direction="left" hidden="pc">
         <div layout-default-header-item-trigger (click)="searchToggleStatus = !searchToggleStatus">
             <i nz-icon nzType="search"></i>

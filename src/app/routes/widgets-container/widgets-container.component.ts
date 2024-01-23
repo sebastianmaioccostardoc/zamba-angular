@@ -20,7 +20,7 @@ export class WidgetsContainerComponent implements OnInit {
     { cols: 0, rows: 0, y: 0, x: 0 },
     { cols: 0, rows: 0, y: 0, x: 0 }
   ];
-  resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
+  resizeEvent: EventEmitter<any> = new EventEmitter<any>();
   constructor(public msg: NzMessageService, @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private router: Router, private WCService: WidgetsContainerService, private cdr: ChangeDetectorRef) {
 
   }
@@ -34,11 +34,11 @@ export class WidgetsContainerComponent implements OnInit {
     this.getWidgetsContainer();
 
     this.options = {
-      itemChangeCallback: WidgetsContainerComponent.itemChange,
-      itemResizeCallback: item => {
+      //itemChangeCallback: WidgetsContainerComponent.itemChange,
+      itemResizeCallback: (item, itemComponent) => {
         // update DB with new size
         // send the update to widgets
-        this.resizeEvent.emit(item);
+        this.resizeEvent.emit({ item, itemComponent });
       }
     };
 

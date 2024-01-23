@@ -15,7 +15,7 @@ import { enUS, es } from 'date-fns/locale';
 import ngEn from '@angular/common/locales/en';
 import ngEs from '@angular/common/locales/es-AR';
 import { EventColor } from 'calendar-utils';
-import { GridsterItem } from 'angular-gridster2';
+import { GridsterItem, GridsterItemComponent, GridsterItemComponentInterface } from 'angular-gridster2';
 
 
 
@@ -178,8 +178,11 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.resizeSubscription = this.resizeEvent.subscribe((item: GridsterItem) => {
-      console.log('El gridster-item ha sido redimensionado:', item);
+    this.resizeSubscription = this.resizeEvent.subscribe((event: any) => {
+      let itemComponent: GridsterItemComponent = event['itemComponent'];
+      let item: GridsterItemComponent = event['item'];
+      console.log('El gridster-item ha sido redimensionado, el itemComponent:', itemComponent);
+      console.log('El gridster-item ha sido redimensionado, el item:', item);
       this.cdr.detectChanges();
     });
   }
