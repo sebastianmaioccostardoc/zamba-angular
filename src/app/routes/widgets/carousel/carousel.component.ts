@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Inject, Input, EventEmitter, ChangeDetectorRef, ElementRef } from '@angular/core';
+import { Component, OnInit, Inject, Input, EventEmitter, ChangeDetectorRef, ElementRef, Renderer2, QueryList, SimpleChanges } from '@angular/core';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { CarouselService } from "./service/carousel.service";
 import { GridsterItem, GridsterItemComponent } from 'angular-gridster2';
@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./carousel.component.less']
 })
 export class CarouselComponent implements OnInit {
+  @Input() showImages: boolean = false;
 
   @Input()
   widget: GridsterItem = {
@@ -46,27 +47,43 @@ export class CarouselComponent implements OnInit {
   AutoPlay = true;
   EnableSwipe = true;
   Loop = true;
-  style = "max-height: 100%;"
+  style = "max-width: 100%;";
 
-  constructor(@Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private carouselService: CarouselService, private cdr: ChangeDetectorRef) {
+  constructor(@Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private carouselService: CarouselService, private cdr: ChangeDetectorRef, private renderer: Renderer2) {
+  }
 
+  ChangeFlag() {
+    this.showImages = !this.showImages;
   }
 
   ngOnInit(): void {
-    console.log("Inicio el componente", this.widget["type"]);
+    if (this.widget != undefined) {
+      console.log("Inicio el componente", this.widget["type"]);
+    }
+
     this.getCarouselConfig();
     this.getCarouselContent();
 
     this.resizeSubscription = this.resizeEvent.subscribe((item: GridsterItem) => {
-      console.log('El gridster-item ha sido redimensionado:', item);
-      this.cdr.detectChanges();
+
+      if (this.widget["name"] == item["name"]) {
+        this.showImages = false;
+        this.cdr.detectChanges();
+
+        this.showImages = true;
+        this.cdr.detectChanges();
+      }
+
     });
 
     this.changeSubscription = this.changeEvent.subscribe((item: GridsterItem) => {
-      console.log('El gridster-item ha sido cambiado:', item);
-      this.getItemChangeEvent(item);
-      this.cdr.detectChanges();
+
     });
+
+  }
+
+  ngAfterViewInit() {
+    console.log('console ngAfterViewInit');
   }
 
   ngOnDestroy() {
@@ -92,33 +109,16 @@ export class CarouselComponent implements OnInit {
       this.carouselService._getCarouselContent(genericRequest).subscribe((data) => {
         this.listContent = JSON.parse(data);
 
-        if (this.listContent.length == 0)
+        if (this.listContent.length == 0) {
           this.EnableSwipe = false;
-
-        this.setMaxHeight();
+        }
 
         this.cdr.detectChanges();
       });
     }
   }
-  private setMaxHeight() {
-    if (this.widget.cols > this.widget.rows)
-      this.style = "max-width: 100%;";
-
-    else
-      this.style = "max-height: 100%;";
-  }
-
-  private getItemChangeEvent(item: GridsterItem) {
-    if (item.cols > item.rows)
-      this.style = "max-width: 100%;";
-
-    else
-      this.style = "max-height: 100%;";
-  }
 
   getCarouselConfig() {
-
     const tokenData = this.tokenService.get();
     let genericRequest = {}
 
@@ -142,10 +142,4 @@ export class CarouselComponent implements OnInit {
       });
     }
   }
-
-  onResizeEvent(item: any) {
-
-
-  }
-
 }
