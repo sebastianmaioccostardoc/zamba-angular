@@ -1,10 +1,8 @@
-<!-- <button (click)="ChangeFlag()">NEPE</button> -->
-
 <nz-carousel *ngIf="showImages" class="carousel-container" [nzDotPosition]="dotPosition" [nzEnableSwipe]="EnableSwipe"
     [nzAutoPlaySpeed]="AutoPlaySpeed" [nzAutoPlay]="AutoPlay" [nzLoop]="Loop">
 
     <div nz-carousel-content *ngFor="let item of listContent">
-        <img class="centerImage" draggable="false" *ngIf="images" [src]="item" alt="" [style]="style">
-        <h1 *ngIf="!images"></h1>
+        <img draggable="false" *ngIf="images" [src]="item" alt="">
+        <h1 *ngIf="!images">NO HAY RESULTADOS</h1>
     </div>
 </nz-carousel>

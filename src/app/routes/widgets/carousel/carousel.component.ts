@@ -3,7 +3,7 @@ import { Component, OnInit, Inject, Input, EventEmitter, ChangeDetectorRef, Elem
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { CarouselService } from "./service/carousel.service";
 import { GridsterItem, GridsterItemComponent } from 'angular-gridster2';
-import { Subscription } from 'rxjs';
+import { Subscription, catchError } from 'rxjs';
 
 
 @Component({
@@ -47,7 +47,6 @@ export class CarouselComponent implements OnInit {
   AutoPlay = true;
   EnableSwipe = true;
   Loop = true;
-  style = "max-width: 100%;";
 
   constructor(@Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private carouselService: CarouselService, private cdr: ChangeDetectorRef, private renderer: Renderer2) {
   }
@@ -106,7 +105,17 @@ export class CarouselComponent implements OnInit {
         Params: ""
       };
 
-      this.carouselService._getCarouselContent(genericRequest).subscribe((data) => {
+      this.carouselService._getCarouselContent(genericRequest).pipe(
+        catchError((error) => {
+          // Manejo de errores
+          this.images = false;
+          this.cdr.detectChanges();
+          console.error('Error al obtener datos:', error);
+          throw error; // Puedes relanzar el error o retornar un valor por defecto
+        })
+      ).subscribe((data) => {
+        this.images = true;
+        this.cdr.detectChanges();
         this.listContent = JSON.parse(data);
 
         if (this.listContent.length == 0) {
@@ -114,7 +123,12 @@ export class CarouselComponent implements OnInit {
         }
 
         this.cdr.detectChanges();
-      });
+      },
+        (error) => {
+          this.images = false;
+          this.cdr.detectChanges();
+          console.error('Error al obtener datos:', error);
+        });
     }
   }
 
@@ -129,7 +143,17 @@ export class CarouselComponent implements OnInit {
         UserId: tokenData["userid"],
         Params: ""
       };
-      this.carouselService._getCarouselConfig(genericRequest).subscribe((data) => {
+      this.carouselService._getCarouselConfig(genericRequest).pipe(
+        catchError((error) => {
+          // Manejo de errores
+          this.images = false;
+          this.cdr.detectChanges();
+          console.error('Error al obtener datos:', error);
+          throw error; // Puedes relanzar el error o retornar un valor por defecto
+        })
+      ).subscribe((data) => {
+        this.images = true;
+        this.cdr.detectChanges();
         var dataJson = JSON.parse(data);
 
         this.dotPosition = dataJson.DotPosition;
@@ -138,8 +162,12 @@ export class CarouselComponent implements OnInit {
         this.EnableSwipe = dataJson.EnableSwipe;
         this.Loop = dataJson.Loop;
         this.cdr.detectChanges();
-
-      });
+      },
+        (error) => {
+          this.images = false;
+          this.cdr.detectChanges();
+          console.error('Error al obtener datos:', error);
+        });
     }
   }
 }
