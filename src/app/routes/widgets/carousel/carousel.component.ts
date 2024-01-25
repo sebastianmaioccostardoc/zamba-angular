@@ -63,9 +63,9 @@ export class CarouselComponent implements OnInit {
     this.getCarouselConfig();
     this.getCarouselContent();
 
-    this.resizeSubscription = this.resizeEvent.subscribe((item: GridsterItem) => {
+    this.resizeSubscription = this.resizeEvent.subscribe((event: any) => {
 
-      if (this.widget["name"] == item["name"]) {
+      if (this.widget["name"] == event.item["name"]) {
         this.showImages = false;
         this.cdr.detectChanges();
 
@@ -75,7 +75,7 @@ export class CarouselComponent implements OnInit {
 
     });
 
-    this.changeSubscription = this.changeEvent.subscribe((item: GridsterItem) => {
+    this.changeSubscription = this.changeEvent.subscribe((item: any) => {
 
     });
 
