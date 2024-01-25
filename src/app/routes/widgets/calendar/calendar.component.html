@@ -99,16 +99,17 @@
 </ng-template>
 
 <nz-header class="header-flex">
-    <nz-button-group nzSize="large">
-        <button nz-button nzType="primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+    <nz-button-group nzSize="small">
+        <button nz-button nzType="primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+            [nzBlock]="true">
             <span nz-icon nzType="left"></span>
-            <span class="hide-when-xs">Anterior</span>
+            <span class="hide-when-xs"></span>
         </button>
-        <button nz-button nzType="primary" mwlCalendarToday [(viewDate)]="viewDate">
-            <span class="hide-when-xs">Hoy</span>
+        <button nz-button nzType="primary" mwlCalendarToday [(viewDate)]="viewDate" [nzBlock]="true">
+            <span class="hide-when-xs"></span>
         </button>
-        <button nz-button nzType="primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
-            <span class="hide-when-xs">Siguiente</span>
+        <button nz-button nzType="primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" [nzBlock]="true">
+            <span class="hide-when-xs"></span>
             <span nz-icon nzType="right"></span>
         </button>
     </nz-button-group>

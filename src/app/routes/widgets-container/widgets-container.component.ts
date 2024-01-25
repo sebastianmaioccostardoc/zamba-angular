@@ -18,10 +18,8 @@ export class WidgetsContainerComponent implements OnInit {
 
   options: GridsterConfig = {};
   dashboard: Array<GridsterItem> = [];
-
-  resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
-  changeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
-
+  resizeEvent: EventEmitter<any> = new EventEmitter<any>();
+  changeEvent: EventEmitter<any> = new EventEmitter<any>();
   constructor(public msg: NzMessageService, @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private router: Router, private WCService: WidgetsContainerService, private cdr: ChangeDetectorRef) {
   }
 
@@ -40,7 +38,7 @@ export class WidgetsContainerComponent implements OnInit {
         this.changeEvent.emit(item);
       },
       itemResizeCallback: (item, itemComponent) => {
-        this.resizeEvent.emit(item);
+        this.resizeEvent.emit({ item, itemComponent });
       }
     };
 
