@@ -16,9 +16,5 @@ export class DefaultComponent implements OnInit {
   }
   ngOnInit(): void {
     const tokenData = this.tokenService.get();
-    if (tokenData != null)
-      console.log("Imprimo los valores en tokenService", tokenData);
-
-    console.log('Routes: ', this.router.config);
   }
 }

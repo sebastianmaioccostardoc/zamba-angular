@@ -17,6 +17,9 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { CarouselComponent } from './carousel/carousel.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
 const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent, CarouselComponent];
@@ -27,6 +30,9 @@ const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent, Caro
     NzModalModule,
     NzInputModule,
     NzIconModule,
+    NzGridModule,
+    NzTypographyModule,
+    NzSelectModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,

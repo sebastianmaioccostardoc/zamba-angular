@@ -53,17 +53,14 @@ export class CarouselComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("Inicio el componente", this.widget["type"]);
     this.getCarouselConfig();
     this.getCarouselContent();
 
     this.resizeSubscription = this.resizeEvent.subscribe((item: GridsterItem) => {
-      console.log('El gridster-item ha sido redimensionado:', item);
       this.cdr.detectChanges();
     });
 
     this.changeSubscription = this.changeEvent.subscribe((item: GridsterItem) => {
-      console.log('El gridster-item ha sido cambiado:', item);
       this.getItemChangeEvent(item);
       this.cdr.detectChanges();
     });
@@ -82,8 +79,6 @@ export class CarouselComponent implements OnInit {
     let genericRequest = {}
 
     if (tokenData != null) {
-      console.log("Imprimo los valores en tokenService en el service", tokenData);
-
       genericRequest = {
         UserId: tokenData["userid"],
         Params: ""
@@ -123,7 +118,6 @@ export class CarouselComponent implements OnInit {
     let genericRequest = {}
 
     if (tokenData != null) {
-      console.log("Imprimo los valores en tokenService en el service", tokenData);
 
       genericRequest = {
         UserId: tokenData["userid"],

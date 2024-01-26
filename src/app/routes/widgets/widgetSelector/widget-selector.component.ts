@@ -40,7 +40,6 @@ export class WidgetSelectorComponent implements OnInit {
   changeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
 
   ngOnInit(): void {
-    console.log("widget-selector: tengo un widget del tipo:", this.widget["type"])
   }
 
 }

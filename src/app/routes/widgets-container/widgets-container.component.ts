@@ -23,13 +23,6 @@ export class WidgetsContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const tokenData = this.tokenService.get();
-
-    if (tokenData != null)
-      console.log("Imprimo los valores en tokenService", tokenData);
-
-    console.log('Routes: ', this.router.config);
-
     this.getWidgetsContainer();
 
     this.options = {
@@ -51,8 +44,6 @@ export class WidgetsContainerComponent implements OnInit {
     let genericRequest = {}
 
     if (tokenData != null) {
-      console.log("Imprimo los valores en tokenService en el service", tokenData);
-
       genericRequest = {
         UserId: tokenData["userid"],
         Params: ""

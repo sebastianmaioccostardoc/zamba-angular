@@ -1,8 +1,36 @@
 @import '@delon/theme/index';
 
+nz-select {
+  width: 100% !important;
+}
+
+
 :host {
   display: block;
   padding-bottom: 10px;
+
+
+  .column-divider {
+    border: 1px solid #ff0606;
+  }
+
+  .center-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-weight: bold;
+  }
+
+  .calendar-navigation-button {
+    margin-left: 0px;
+    border: 1px solid #ffffff;
+  }
+
+  .calendar-button-container {
+    width: 100%;
+    min-width: 0px !important;
+  }
 
   .month-cell-fill-height {
     flex: 1;

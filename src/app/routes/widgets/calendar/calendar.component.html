@@ -20,6 +20,11 @@
         <!--  dateFormat="Y-m-dTH:i" altFormat="F j, Y H:i" -->
         <br />
         <br />
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Seleccione un grupo" [(ngModel)]="selectedValue">
+            <nz-option *ngFor="let group of groups" [nzLabel]="group.Name" [nzValue]="group.ID"></nz-option>
+        </nz-select>
+        <br />
+        <br />
         <nz-form-label>Colores</nz-form-label>
         <br />
         <div nz-row>
@@ -97,31 +102,58 @@
         </div>
     </div>
 </ng-template>
-
-<nz-header class="header-flex">
-    <nz-button-group nzSize="small">
-        <button nz-button nzType="primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
-            [nzBlock]="true">
-            <span nz-icon nzType="left"></span>
-            <span class="hide-when-xs"></span>
-        </button>
-        <button nz-button nzType="primary" mwlCalendarToday [(viewDate)]="viewDate" [nzBlock]="true">
-            <span class="hide-when-xs"></span>
-        </button>
-        <button nz-button nzType="primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" [nzBlock]="true">
-            <span class="hide-when-xs"></span>
-            <span nz-icon nzType="right"></span>
-        </button>
-    </nz-button-group>
-    <div class="col-md-4 ">
-        <h3 class="calendar-date-title">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+<div nz-row>
+    <div nz-col [nzSpan]="8" class="calendar-button-container">
+        <div nz-row>
+            <div nz-col [nzSpan]="8">
+                <button nz-button nzType="primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+                    [nzBlock]="true" class="calendar-navigation-button">
+                    <span nz-icon nzType="left"></span>
+                    <span class="hide-when-xs"></span>
+                </button>
+            </div>
+            <div nz-col [nzSpan]="8">
+                <button nz-button nzType="primary" mwlCalendarToday [(viewDate)]="viewDate" [nzBlock]="true"
+                    class="calendar-navigation-button">
+                    <span class="hide-when-xs">Hoy</span>
+                </button>
+            </div>
+            <div nz-col [nzSpan]="8">
+                <button nz-button nzType="primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+                    [nzBlock]="true" class="calendar-navigation-button">
+                    <span class="hide-when-xs"></span>
+                    <span nz-icon nzType="right"></span>
+                </button>
+            </div>
+        </div>
     </div>
-    <nz-radio-group>
-        <label nz-radio-button nzValue="large" (click)="setView(CalendarView.Month)">Mes</label>
-        <label nz-radio-button nzValue="default" (click)="setView(CalendarView.Week)">Semana</label>
-        <label nz-radio-button nzValue="small" (click)="setView(CalendarView.Day)">Día</label>
-    </nz-radio-group>
-</nz-header>
+    <div nz-col [nzSpan]="8" class="center-text">
+        <span>
+            {{ viewDate | calendarDate:(view + 'ViewTitle'):'es' }}
+        </span>
+
+    </div>
+    <div nz-col [nzSpan]="8">
+        <div nz-row>
+            <div nz-col [nzSpan]="8" class="">
+                <button nz-button nzType="primary" (click)="setView(CalendarView.Month)" [nzBlock]="true"
+                    class="calendar-navigation-button">Mes
+                </button>
+            </div>
+            <div nz-col [nzSpan]="8" class="">
+                <button nz-button nzType="primary" (click)="setView(CalendarView.Week)" [nzBlock]="true"
+                    class="calendar-navigation-button">Semana
+                </button>
+            </div>
+            <div nz-col [nzSpan]="8" class=" ">
+                <button nz-button nzType="primary" (click)="setView(CalendarView.Day)" [nzBlock]="true"
+                    class="calendar-navigation-button">Día
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div [ngSwitch]="view">
 
     <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
