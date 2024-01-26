@@ -15,6 +15,7 @@ import { WidgetsContainerOptions } from "./entities/WidgetsContainerOptions";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WidgetsContainerComponent implements OnInit {
+
   options: GridsterConfig = {};
   dashboard: Array<GridsterItem> = [];
   resizeEvent: EventEmitter<any> = new EventEmitter<any>();

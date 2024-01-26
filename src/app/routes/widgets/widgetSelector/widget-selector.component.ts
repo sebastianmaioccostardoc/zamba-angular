@@ -41,6 +41,5 @@ export class WidgetSelectorComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
 
