@@ -1,9 +1,10 @@
 
-import { Component, OnInit, Inject, Input, EventEmitter, ChangeDetectorRef, ElementRef, Renderer2, QueryList, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Inject, Input, EventEmitter, ChangeDetectorRef, ElementRef, Renderer2, QueryList, SimpleChanges, ViewChild } from '@angular/core';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { CarouselService } from "./service/carousel.service";
 import { GridsterItem, GridsterItemComponent } from 'angular-gridster2';
 import { Subscription, catchError } from 'rxjs';
+import { NzCarouselComponent, NzCarouselModule } from 'ng-zorro-antd/carousel';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { Subscription, catchError } from 'rxjs';
 })
 export class CarouselComponent implements OnInit {
   @Input() showImages: boolean = false;
+  @ViewChild('myCarousel') myCarousel!: NzCarouselComponent;
 
   @Input()
   widget: GridsterItem = {
@@ -48,7 +50,16 @@ export class CarouselComponent implements OnInit {
   EnableSwipe = true;
   Loop = true;
 
-  constructor(@Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private carouselService: CarouselService, private cdr: ChangeDetectorRef, private renderer: Renderer2) {
+
+  carouselItems = [
+    { image: 'path/to/image1.jpg', caption: 'Caption 1' },
+    { image: 'path/to/image2.jpg', caption: 'Caption 2' },
+    { image: 'path/to/image3.jpg', caption: 'Caption 3' }
+    // Agrega más elementos según sea necesario
+  ];
+
+  constructor(@Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private carouselService: CarouselService,
+    private cdr: ChangeDetectorRef, private renderer: Renderer2) {
   }
 
   ChangeFlag() {
@@ -169,5 +180,13 @@ export class CarouselComponent implements OnInit {
           console.error('Error al obtener datos:', error);
         });
     }
+  }
+
+  nextSlide() {
+    this.myCarousel.next();
+  }
+
+  prevSlide() {
+    this.myCarousel.pre();
   }
 }

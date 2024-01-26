@@ -1,8 +1,14 @@
 <nz-carousel *ngIf="showImages" class="carousel-container" [nzDotPosition]="dotPosition" [nzEnableSwipe]="EnableSwipe"
-    [nzAutoPlaySpeed]="AutoPlaySpeed" [nzAutoPlay]="AutoPlay" [nzLoop]="Loop">
+    [nzAutoPlaySpeed]="AutoPlaySpeed" [nzAutoPlay]="AutoPlay" [nzLoop]="Loop" #myCarousel>
 
     <div nz-carousel-content *ngFor="let item of listContent">
         <img draggable="false" *ngIf="images" [src]="item" alt="">
         <h1 *ngIf="!images">NO HAY RESULTADOS</h1>
     </div>
 </nz-carousel>
+
+<!-- Flecha izquierda para retroceder -->
+<button nz-button class="carousel-arrow left" (click)="prevSlide()" nzShape="circle">🡸</button>
+
+<!-- Flecha derecha para avanzar -->
+<button nz-button class="carousel-arrow right" (click)="nextSlide()" nzShape="circle">🡺</button>
