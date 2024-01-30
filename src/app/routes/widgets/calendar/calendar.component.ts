@@ -108,10 +108,10 @@ export class CalendarComponent implements OnInit {
     end: new Date(),
     color: { primary: '', secondary: '', secondaryText: '' },
     actions: [],
-    draggable: true,
+    draggable: false,
     resizable: {
-      beforeStart: true,
-      afterEnd: true,
+      beforeStart: false,
+      afterEnd: false,
     },
     groupid: null,
     userid: null
@@ -335,10 +335,10 @@ export class CalendarComponent implements OnInit {
       end: end,
       actions: this.actions,
       color: color,
-      draggable: true,
+      draggable: false,
       resizable: {
-        beforeStart: true,
-        afterEnd: true,
+        beforeStart: false,
+        afterEnd: false,
       },
       groupid: groupid,
       userid: userid
