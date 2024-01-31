@@ -25,6 +25,7 @@ export class VideoplayerComponent implements OnInit {
   @Input()
   resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
   src: SafeResourceUrl;
+  videoId: string = "mVjYG9TSN88";
   constructor(public msg: NzMessageService, @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private router: Router, private sanitizer: DomSanitizer) {
     this.src = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/CsAT8LQf8gw?autoplay=1');
   }

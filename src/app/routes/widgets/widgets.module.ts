@@ -21,6 +21,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { VideoplayerComponent } from './videoplayer/videoplayer.component';
+import { YouTubePlayerModule, YouTubePlayer } from '@angular/youtube-player';
 
 
 const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent, CarouselComponent, VideoplayerComponent];
@@ -34,6 +35,7 @@ const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent, Caro
     NzGridModule,
     NzTypographyModule,
     NzSelectModule,
+    YouTubePlayerModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,

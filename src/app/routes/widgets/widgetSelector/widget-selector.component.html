@@ -1,4 +1,6 @@
 <app-carousel *ngIf="widget['type'] === 'carousel'" [resizeEvent]="resizeEvent" [changeEvent]="changeEvent"
     [widget]="widget"></app-carousel>
 <calendar-widget *ngIf="widget['type'] === 'calendar'" [resizeEvent]="resizeEvent" [widget]="widget"></calendar-widget>
-<videoplayer *ngIf="widget['type'] === 'videoplayer'" [resizeEvent]="resizeEvent" [widget]="widget"></videoplayer>
+<ng-container *ngIf="widget['type'] === 'videoplayer'" class="bg-video-color">
+    <videoplayer [resizeEvent]="resizeEvent" [widget]="widget"></videoplayer>
+</ng-container>
