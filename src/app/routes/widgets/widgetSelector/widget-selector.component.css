@@ -1,0 +1,12 @@
+.bg-video-color {
+    background-color: black;
+    width: 100%;
+    height: 100%;
+}
+
+.videoplayer {
+    background-color: black !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+}

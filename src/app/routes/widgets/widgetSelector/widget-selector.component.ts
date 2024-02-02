@@ -18,6 +18,7 @@ import { WidgetCComponent } from './widgetC.component';
   selector: 'widget-selector',
   templateUrl: './widget-selector.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['widget-selector.component.css'],
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [NgIf, WidgetsModule]
