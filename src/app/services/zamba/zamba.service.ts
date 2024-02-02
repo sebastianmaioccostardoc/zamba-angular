@@ -182,7 +182,7 @@ export class ZambaService {
         // Aquí realizas la lógica de tu llamada HTTP
         return this.http
             .post(
-                `${environment.apiRestBasePath}/executeRuleDashboard`,
+                `${environment["apiRestBasePath"]}/executeRuleDashboard`,
                 genericRequest,
                 null,
                 {
