@@ -2,7 +2,7 @@
     [nzAutoPlaySpeed]="AutoPlaySpeed" [nzAutoPlay]="AutoPlay" [nzLoop]="Loop" #myCarousel>
 
     <div nz-carousel-content *ngFor="let item of listContent">
-        <img draggable="false" *ngIf="images" [src]="item" alt="">
+        <img [style]="classImg" class="elementos-dinamicos" draggable="false" *ngIf="images" [src]="item">
         <h1 *ngIf="!images">NO HAY RESULTADOS</h1>
     </div>
 </nz-carousel>

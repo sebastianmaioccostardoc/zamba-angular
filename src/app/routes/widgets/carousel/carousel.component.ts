@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Inject, Input, EventEmitter, ChangeDetectorRef, ElementRef, Renderer2, QueryList, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, Input, EventEmitter, ChangeDetectorRef, ElementRef, Renderer2, QueryList, SimpleChanges, ViewChild, ViewChildren, AfterViewInit } from '@angular/core';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { CarouselService } from "./service/carousel.service";
 import { GridsterItem, GridsterItemComponent } from 'angular-gridster2';
@@ -13,7 +13,7 @@ import { NzCarouselComponent, NzCarouselModule } from 'ng-zorro-antd/carousel';
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.less']
 })
-export class CarouselComponent implements OnInit {
+export class CarouselComponent implements OnInit, AfterViewInit {
   @Input() showImages: boolean = false;
   @ViewChild('myCarousel') myCarousel!: NzCarouselComponent;
 
@@ -49,7 +49,7 @@ export class CarouselComponent implements OnInit {
   AutoPlay = true;
   EnableSwipe = true;
   Loop = true;
-
+  classImg = "max-width: 100%";
 
   carouselItems = [
     { image: 'path/to/image1.jpg', caption: 'Caption 1' },
@@ -66,17 +66,56 @@ export class CarouselComponent implements OnInit {
     this.showImages = !this.showImages;
   }
 
+  @ViewChildren('elementosDinamicos') elementosDinamicos!: QueryList<ElementRef>;
+
+  ngAfterViewInit() {
+  }
+
   ngOnInit(): void {
     this.getCarouselConfig();
     this.getCarouselContent();
 
     this.resizeSubscription = this.resizeEvent.subscribe((event: any) => {
+      debugger;
 
       if (this.widget["name"] == event.item["name"]) {
+        var Height = event.itemComponent.el.offsetHeight;
+        var Width = event.itemComponent.el.offsetWidth;
+
+        //TODO: Hacer cambio de dimensiones con los elementos y no con el evento.
+
+        //Primera carga de los elementos
+        var imgs = event.itemComponent.el.getElementsByTagName('img');
+        //imgs = this.myCarousel.el.getElementsByTagName('img');
+
         this.showImages = false;
         this.cdr.detectChanges();
 
         this.showImages = true;
+        this.cdr.detectChanges();
+
+        for (let index = 0; index < imgs.length; index++) {
+
+          if (Height > Width) {
+
+            if (imgs[index].offsetHeight < Height) {
+              imgs[index].style["max-width"] = Width + "px";
+              this.classImg = "max-height: 100%";
+            } else {
+              imgs[index].style["max-height"] = Height + "px";
+              this.classImg = "max-width: 100%";
+            }
+          } else {
+            if (imgs[index].offsetWidth < Width) {
+              imgs[index].style["max-height"] = Height + "px";
+              this.classImg = "max-width: 100%";
+            } else {
+              imgs[index].style["max-width"] = Width + "px";
+              this.classImg = "max-height: 100%";
+            }
+          }
+        }
+
         this.cdr.detectChanges();
       }
 
@@ -86,10 +125,6 @@ export class CarouselComponent implements OnInit {
 
     });
 
-  }
-
-  ngAfterViewInit() {
-    console.log('console ngAfterViewInit');
   }
 
   ngOnDestroy() {
@@ -128,6 +163,7 @@ export class CarouselComponent implements OnInit {
         }
 
         this.cdr.detectChanges();
+
       },
         (error) => {
           this.images = false;
