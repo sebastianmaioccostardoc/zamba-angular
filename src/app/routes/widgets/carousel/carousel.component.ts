@@ -76,7 +76,6 @@ export class CarouselComponent implements OnInit, AfterViewInit {
     this.getCarouselContent();
 
     this.resizeSubscription = this.resizeEvent.subscribe((event: any) => {
-      debugger;
 
       if (this.widget["name"] == event.item["name"]) {
         var Height = event.itemComponent.el.offsetHeight;
