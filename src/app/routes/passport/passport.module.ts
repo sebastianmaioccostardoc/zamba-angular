@@ -12,8 +12,13 @@ import { RecaptchaModule } from 'ng-recaptcha';
 import { ValidateComponent } from "./validate.component";
 import { ResendVerificationEmailComponent } from './resend-verification-email/resend-verificationemail.component';
 import { ResendResultComponent } from './resend-result/resend-result.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ResetResultComponent } from './reset-result/reset-result.component';
+import { ChangePasswordExpiredComponent } from './change-password-expired/change-password-expired';
+import { ChangePasswordResultComponent } from './change-password-result/change-password-result.component';
 
-const COMPONENTS = [UserLoginV2Component, UserRegisterResultComponent, UserRegisterComponent, UserLockComponent, CallbackComponent, ValidateComponent, ResendVerificationEmailComponent, ResendResultComponent];
+const COMPONENTS = [UserLoginV2Component, UserRegisterResultComponent, UserRegisterComponent, UserLockComponent, CallbackComponent, ValidateComponent, ResendVerificationEmailComponent, ResendResultComponent, ResetPasswordComponent, ChangePasswordComponent, ResetResultComponent, ChangePasswordExpiredComponent, ChangePasswordResultComponent];
 
 @NgModule({
   imports: [SharedModule, PassportRoutingModule, RecaptchaModule],

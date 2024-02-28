@@ -10,6 +10,11 @@ import { LayoutPassportComponent } from '../../layout/passport/passport.componen
 import { ValidateComponent } from './validate.component';
 import { ResendVerificationEmailComponent } from './resend-verification-email/resend-verificationemail.component';
 import { ResendResultComponent } from './resend-result/resend-result.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ResetResultComponent } from './reset-result/reset-result.component';
+import { ChangePasswordExpiredComponent } from './change-password-expired/change-password-expired';
+import { ChangePasswordResultComponent } from './change-password-result/change-password-result.component';
 
 const routes: Routes = [
   // passport
@@ -51,7 +56,35 @@ const routes: Routes = [
         path: 'resendverificationemail',
         component: ResendVerificationEmailComponent,
         data: { title: 'Registrarse', titleI18n: 'app.register.register' }
+      },
+      {
+        path: 'resetpassword',
+        component: ResetPasswordComponent,
+        data: { title: 'Registrarse', titleI18n: 'app.register.register' }
+      },
+      {
+        path: 'changepassword',
+        component: ChangePasswordComponent,
+        data: { title: 'Registrarse', titleI18n: 'app.register.register' }
+      },
+      {
+        path: 'resetresult',
+        component: ResetResultComponent,
+        data: { title: 'Registrarse', titleI18n: 'app.register.register' }
+      },
+      {
+        path: 'changepasswordexpired',
+        component: ChangePasswordExpiredComponent,
+        data: { title: 'Registrarse', titleI18n: 'app.register.register' }
       }
+      ,
+      {
+        path: 'changepasswordresult',
+        component: ChangePasswordResultComponent,
+        data: { title: 'Registrarse', titleI18n: 'app.register.register' }
+      }
+
+
     ]
   },
   // 单页不包裹Layout

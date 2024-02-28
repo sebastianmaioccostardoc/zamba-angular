@@ -138,7 +138,9 @@
   "app.register.register": "Register",
   "app.register.resend-verification": "Resend verification email",
   "app.register.question-resend-verification": "Didn't receive the verification email?",
- 
+
+  "app.register.reset-password-title": "Reset Password",
+  "app.register.reset-password-submit-button": "Reset Password",
 
   "app.register.form-company-name-placeholder": "Company Name",
   "app.register.form-name-placeholder": "Name",
@@ -158,12 +160,18 @@
   "app.register.resend-verification-email": "Resend",
   "app.register-result.msg": "Account：registered at {{email}}",
   "app.resend-result.msg": "The verification email has been sent to: {{email}}",
+  "app.reset-result.msg": "We have sent an email to: {{email}}",
+  "app.reset-result.sub.msg": "Please log in to your email and click on the link in the email to reset your password.",
   "app.register-result.activation-account": "Your account has been activated successfully.",
   "app.register-result.activation-email":
     "The activation email has been sent to your email address. Please log in to the email and click on the link in the email to activate the account.",
   "app.register-result.resend-email-result": "Please log in to the email and click on the link in the email to activate the account.",
   "app.validate.account": "Account activation successful.",
   "app.register-result.back-home": "Back to home",
+  "app.change-password-expired.go-home": "Go to home page",
+  "app.change-password-result.error-msg": "Sorry, an error has occurred. Please try again.",
+  "app.change-password-result.success-msg": "The password has been changed successfully.",
+  "app.change-password-expired.msg": "The link to change the password has expired. Please request a new link.",
   "app.register-result.view-mailbox": "View mailbox",
   "validation.username.required": "Please enter your username!",
   "validation.username.maxLength": "The username cannot exceed 50 characters!",

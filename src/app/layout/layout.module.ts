@@ -49,8 +49,12 @@ const HEADERCOMPONENTS = [
 
 // passport
 import { LayoutPassportComponent } from './passport/passport.component';
-const PASSPORT = [LayoutPassportComponent];
+import { NZ_ICONS } from 'ng-zorro-antd/icon';
+import { IconDefinition } from '@ant-design/icons-angular';
+import { EyeInvisibleOutline, EyeOutline, EyeFill, EyeInvisibleFill } from '@ant-design/icons-angular/icons';
 
+const PASSPORT = [LayoutPassportComponent];
+const icons: IconDefinition[] = [EyeInvisibleOutline, EyeOutline, EyeFill, EyeInvisibleFill];
 @NgModule({
   imports: [
     CommonModule,
@@ -75,6 +79,9 @@ const PASSPORT = [LayoutPassportComponent];
     NzCardModule
   ],
   declarations: [...COMPONENTS, ...HEADERCOMPONENTS, ...PASSPORT],
-  exports: [...COMPONENTS, ...PASSPORT]
+  exports: [...COMPONENTS, ...PASSPORT],
+  providers: [
+    { provide: NZ_ICONS, useValue: icons }
+  ]
 })
-export class LayoutModule {}
+export class LayoutModule { }
