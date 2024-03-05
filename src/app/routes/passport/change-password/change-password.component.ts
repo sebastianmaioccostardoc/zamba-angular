@@ -1,5 +1,5 @@
 import { HttpContext } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, Optional } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, Optional, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StartupService } from '@core';
@@ -9,6 +9,7 @@ import { SettingsService, _HttpClient } from '@delon/theme';
 import { environment } from '@env/environment';
 import { NzTabChangeEvent } from 'ng-zorro-antd/tabs';
 import { catchError, finalize, throwError } from 'rxjs';
+import { LoadingService, LoadingShowOptions } from '@delon/abc/loading';
 
 @Component({
   selector: 'change-password',
@@ -19,6 +20,10 @@ import { catchError, finalize, throwError } from 'rxjs';
 })
 export class ChangePasswordComponent implements OnDestroy, OnInit {
   token = '';
+  validatingToken = true;
+
+  LoadingType: LoadingShowOptions = { type: 'spin', text: '' };
+  private readonly loadingSrv = inject(LoadingService);
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -34,9 +39,8 @@ export class ChangePasswordComponent implements OnDestroy, OnInit {
     private cdr: ChangeDetectorRef
   ) { }
   ngOnInit(): void {
+    this.loadingSrv.open(this.LoadingType);
     this.token = this.route.snapshot.queryParams['token'] || '';
-
-    console.log("token: ", this.token);
     const genericRequest = {
       UserId: 0,
       Params: { tokendata: this.token }
@@ -53,15 +57,22 @@ export class ChangePasswordComponent implements OnDestroy, OnInit {
       .pipe(
         catchError((error) => {
           console.error('Error en la solicitud:', error);
+          this.validatingToken = false;
           this.serverError = true;
+          this.loadingSrv.close();
+          this.cdr.detectChanges();
           return throwError(() => error);
         }),
         finalize(() => {
           this.loading = false;
+          this.validatingToken = false;
           this.cdr.detectChanges();
         })
       )
       .subscribe(res => {
+        this.validatingToken = false;
+        this.loadingSrv.close();
+        this.cdr.detectChanges();
         res = JSON.parse(res);
         console.log(res);
         if (res != 'ok') {
@@ -91,6 +102,7 @@ export class ChangePasswordComponent implements OnDestroy, OnInit {
   count = 0;
   interval$: any;
   passwordVisible = false;
+  passwordVisible2 = false;
 
 
 
