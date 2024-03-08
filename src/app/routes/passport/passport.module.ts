@@ -18,7 +18,9 @@ import { ResetResultComponent } from './reset-result/reset-result.component';
 import { ChangePasswordExpiredComponent } from './change-password-expired/change-password-expired';
 import { ChangePasswordResultComponent } from './change-password-result/change-password-result.component';
 
-const COMPONENTS = [UserLoginV2Component, UserRegisterResultComponent, UserRegisterComponent, UserLockComponent, CallbackComponent, ValidateComponent, ResendVerificationEmailComponent, ResendResultComponent, ResetPasswordComponent, ChangePasswordComponent, ResetResultComponent, ChangePasswordExpiredComponent, ChangePasswordResultComponent];
+import { InitialPasswordWizardComponent } from "../welcome/initial-password-wizard/initial-password-wizard.component";
+
+const COMPONENTS = [UserLoginV2Component, UserRegisterResultComponent, UserRegisterComponent, UserLockComponent, CallbackComponent, ValidateComponent, ResendVerificationEmailComponent, ResendResultComponent, ResetPasswordComponent, ChangePasswordComponent, ResetResultComponent, ChangePasswordExpiredComponent, ChangePasswordResultComponent, InitialPasswordWizardComponent];
 
 @NgModule({
   imports: [SharedModule, PassportRoutingModule, RecaptchaModule],
