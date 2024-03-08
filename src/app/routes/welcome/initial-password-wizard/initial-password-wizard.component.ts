@@ -10,6 +10,7 @@ import { environment } from '@env/environment';
 import { catchError, finalize, throwError } from 'rxjs';
 import { LoadingService, LoadingShowOptions } from '@delon/abc/loading';
 
+
 @Component({
   selector: 'app-initial-password-wizard',
   templateUrl: './initial-password-wizard.component.html',
