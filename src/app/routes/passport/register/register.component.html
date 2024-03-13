@@ -113,8 +113,8 @@
       <nz-input-group nzSize="large" [nzAddOnBefore]="addOnBeforeTemplate">
         <ng-template #addOnBeforeTemplate>
           <nz-select formControlName="mobilePrefix" style="width: 100px">
-            <nz-option [nzLabel]="'+86'" [nzValue]="'+86'" />
-            <nz-option [nzLabel]="'+87'" [nzValue]="'+87'" />
+            <nz-option *ngFor="let prefix of mobilePrefixes" [nzLabel]="prefix.code + ' ' + prefix.dial_code"
+              [nzValue]="prefix.dial_code"></nz-option>
           </nz-select>
         </ng-template>
         <input formControlName="mobile" nz-input placeholder="{{ 'app.register.form-phone-placeholder' | i18n }}" />
@@ -145,7 +145,8 @@
     <a class="login" routerLink="/passport/login">{{ 'app.register.sign-in' | i18n }}</a>
   </nz-form-item>
   <nz-form-item>
-    <p>{{'app.register.question-resend-verification' | i18n}} <b><a routerLink="/passport/resendverificationemail">{{ 'app.register.do-click-here' | i18n }}</a></b>
+    <p>{{'app.register.question-resend-verification' | i18n}} <b><a routerLink="/passport/resendverificationemail">{{
+          'app.register.do-click-here' | i18n }}</a></b>
     </p>
   </nz-form-item>
 </form>

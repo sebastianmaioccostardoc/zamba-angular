@@ -7,6 +7,7 @@ import { _HttpClient } from '@delon/theme';
 import { MatchControl } from '@delon/util/form';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { catchError, finalize, throwError } from 'rxjs';
+import { allMobilePrefixes } from '../../../services/phone-prefixes.service';
 
 import { environment } from '@env/environment';
 
@@ -26,6 +27,7 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
   ) {
   }
   ngOnInit(): void {
+    this.setCurrentPhonePrefix();
     this.getDepartment();
   }
 
@@ -40,7 +42,7 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
       mail: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/), UserRegisterComponent.checkPassword.bind(this)]],
       confirm: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
-      mobilePrefix: ['+86'],
+      mobilePrefix: ['+94'],
       mobile: ['', [Validators.required, Validators.maxLength(50)]],
     },
     {
@@ -48,6 +50,7 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
     }
   );
 
+  mobilePrefixes = allMobilePrefixes;
   disableSubmitButton = true;
   error = '';
   serverError = false;
@@ -186,4 +189,36 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
         this.listDepartments = JSON.parse(data);
       });
   }
+
+
+  setCurrentPhonePrefix() {
+    this.http
+      .post(`https://ipapi.co/json`, null, null, {
+        context: new HttpContext().set(ALLOW_ANONYMOUS, true)
+      })
+      .pipe(
+        catchError((error) => {
+          console.error('Error en la solicitud a https://ipapi.co/json:', error);
+          let mobilePrefix = this.form.get('mobilePrefix');
+          let ARG = "+54";
+          if (mobilePrefix != null)
+            mobilePrefix.setValue(ARG);
+          return throwError(() => error);
+        }),
+        finalize(() => {
+          this.loading = false;
+          this.cdr.detectChanges();
+        })
+      )
+      .subscribe((data) => {
+        const countryCode = data.country;
+        const countryInfo = allMobilePrefixes.find(prefix => prefix.code.toUpperCase() === countryCode.toUpperCase());
+        if (countryInfo) {
+          let mobilePrefix = this.form.get('mobilePrefix');
+          if (mobilePrefix != null)
+            mobilePrefix.setValue(countryInfo.dial_code);
+        }
+      });
+  }
+
 }
