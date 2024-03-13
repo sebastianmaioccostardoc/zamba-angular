@@ -16,6 +16,8 @@ import { ResetResultComponent } from './reset-result/reset-result.component';
 import { ChangePasswordExpiredComponent } from './change-password-expired/change-password-expired';
 import { ChangePasswordResultComponent } from './change-password-result/change-password-result.component';
 
+import { InitialPasswordWizardComponent } from "../welcome/initial-password-wizard/initial-password-wizard.component";
+
 const routes: Routes = [
   // passport
   {
@@ -86,6 +88,10 @@ const routes: Routes = [
 
 
     ]
+  },
+  {
+    path: 'welcome',
+    component: InitialPasswordWizardComponent
   },
   // 单页不包裹Layout
   { path: 'passport/callback/:type', component: CallbackComponent }
