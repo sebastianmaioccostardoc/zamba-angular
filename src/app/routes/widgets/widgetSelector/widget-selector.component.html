@@ -4,3 +4,4 @@
 <ng-container *ngIf="widget['type'] === 'videoplayer'" class="bg-video-color">
     <videoplayer [resizeEvent]="resizeEvent" [widget]="widget"></videoplayer>
 </ng-container>
+<pending-tasks *ngIf="widget['type'] === 'pending-tasks'" [resizeEvent]="resizeEvent" [widget]="widget"></pending-tasks>

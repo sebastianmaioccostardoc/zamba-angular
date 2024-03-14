@@ -20,11 +20,15 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { VideoplayerComponent } from './videoplayer/videoplayer.component';
 import { YouTubePlayerModule, YouTubePlayer } from '@angular/youtube-player';
 
+import { PendingTasksComponent } from './pending-tasks/pending-tasks.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
-const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent, CarouselComponent, VideoplayerComponent];
+
+const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent, CarouselComponent, VideoplayerComponent, PendingTasksComponent];
 
 @NgModule({
   imports: [SharedModule, WidgetsRoutingModule, NzCarouselModule, G2MiniBarModule, G2MiniAreaModule,
@@ -41,7 +45,9 @@ const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent, Caro
       useFactory: adapterFactory,
     }),
     NzLayoutModule,
-    ContextMenuModule
+    ContextMenuModule,
+    NzSkeletonModule,
+    ScrollingModule
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS,

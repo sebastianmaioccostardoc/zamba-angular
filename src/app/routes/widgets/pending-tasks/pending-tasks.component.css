@@ -1,0 +1,33 @@
+.title {
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #1890ff;
+}
+
+.title span {
+    color: white;
+}
+
+
+.item-container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: rgba(0, 0, 0, 0.3) #ffffff;
+    height: 450px;
+}
+
+.nz-list-item {
+    transition: background-color 0.3s ease;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.nz-list-item:hover {
+    background-color: #ebebeb;
+    /* Color al hacer hover */
+}
+
+div span a {
+    color: #00000073;
+}
