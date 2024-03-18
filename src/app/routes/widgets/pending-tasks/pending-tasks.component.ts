@@ -74,6 +74,7 @@ export class PendingTasksComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     const tokenData = this.tokenService.get();
+
     if (tokenData != null && tokenData["userid"] != null) {
       var genericRequest = {
         UserId: tokenData["userid"],

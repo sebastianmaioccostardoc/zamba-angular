@@ -131,7 +131,7 @@ export class ZambaService {
 
 
 
-    public GetinfoSideBar() {
+    public GetSidebarItems() {
         const tokenData = this.tokenService.get();
         let genericRequest = {}
         let groupsid: any[] = []
@@ -152,7 +152,7 @@ export class ZambaService {
 
         this.http
             .post(
-                `${environment['apiRestBasePath']}/getinfoSideBar`,
+                `${environment['apiRestBasePath']}/getSidebarItems`,
                 genericRequest,
                 null,
                 {
@@ -161,11 +161,11 @@ export class ZambaService {
             ).pipe(
                 catchError(res => {
                     console.warn(`StartupService.load: Network request failed`, res);
-                    setTimeout(() => this.router.navigateByUrl(`/exception/500`));
                     return of(null);
                 }),
                 map((appData: NzSafeAny) => {
                     appData = JSON.parse(appData);
+                    console.log(appData);
                     if (appData) {
                         this.settingService.setApp(appData.app);
                         this.settingService.setUser(appData.user);

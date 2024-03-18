@@ -14,7 +14,7 @@ export class LayoutBasicComponent implements OnInit {
     private settings: SettingsService,
     private ZambaService: ZambaService) { }
   ngOnInit(): void {
-    this.ZambaService.GetinfoSideBar();
+    this.ZambaService.GetSidebarItems();
   }
 
 

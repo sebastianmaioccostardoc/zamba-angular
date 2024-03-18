@@ -51,10 +51,10 @@ const HEADERCOMPONENTS = [
 import { LayoutPassportComponent } from './passport/passport.component';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { IconDefinition } from '@ant-design/icons-angular';
-import { EyeInvisibleOutline, EyeOutline, EyeFill, EyeInvisibleFill } from '@ant-design/icons-angular/icons';
+import { EyeInvisibleOutline, EyeOutline, EyeFill, EyeInvisibleFill, UserAddOutline } from '@ant-design/icons-angular/icons';
 
 const PASSPORT = [LayoutPassportComponent];
-const icons: IconDefinition[] = [EyeInvisibleOutline, EyeOutline, EyeFill, EyeInvisibleFill];
+const icons: IconDefinition[] = [EyeInvisibleOutline, EyeOutline, EyeFill, EyeInvisibleFill, UserAddOutline];
 @NgModule({
   imports: [
     CommonModule,
