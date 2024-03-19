@@ -9,8 +9,8 @@ import { PendingTasksService } from './service/pending-tasks.service';
 
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
-import { catchError, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject, of, throwError } from 'rxjs';
+import { catchError, finalize, takeUntil } from 'rxjs/operators';
 
 interface ItemData {
   gender: string;
@@ -46,23 +46,7 @@ export class PendingTasksComponent implements OnInit, OnDestroy {
   videoId: string = "";
 
   loading = false;
-  data = [
-    {
-      title: 'Solicitud de vacaciones',
-      description: 'Ir al formulario de solicitud de vacaciones y completar los campos requeridos'
-    },
-    {
-      title: 'Completar datos personales',
-      description: 'Ir al formulario de datos personales y completar los campos requeridos'
-    },
-    {
-      title: 'Solicitud de dias por enfermedad',
-      description: 'Ver instrucciones para solicitar dias por enfermedad'
-    },
-    {
-      title: 'Solicitud de dias por maternidad',
-      description: 'Ver instrucciones para solicitar dias por maternidad'
-    }
+  data: any = [
   ];
   private destroy$ = new Subject<boolean>();
   constructor(public nzMessage: NzMessageService, @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private router: Router, private pendingTasksService: PendingTasksService, private cdr: ChangeDetectorRef, private http: HttpClient) {
@@ -74,13 +58,40 @@ export class PendingTasksComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     const tokenData = this.tokenService.get();
-
+    console.log("Token data:", tokenData);
     if (tokenData != null && tokenData["userid"] != null) {
       var genericRequest = {
-        UserId: tokenData["userid"],
+        UserId: 22242,//tokenData["userid"],
         Params: ""
       };
+      this.pendingTasksService.getMyTasks(genericRequest).pipe(
+        catchError((error) => {
+          console.error('Error en la solicitud:', error);
+          return throwError(() => error);
+        }),
+        finalize(() => {
+          this.loading = false;
+          this.cdr.detectChanges();
+        })
+      )
+        .subscribe(res => {
+          try {
+            this.data = res;
+          } catch (error) {
+            console.log("Resultado de buscar mis tareas:", res);
+          }
+        });
     }
+  }
 
+  OpenTask(url: string): void {
+    const tokenData = this.tokenService.get();
+    if (tokenData != null && tokenData["token"] != null) {
+      try {
+        window.open(url + "&t=" + tokenData["token"], "_blank");
+      } catch (error) {
+        console.log("Error al abrir la tarea: ", error);
+      }
+    }
   }
 }

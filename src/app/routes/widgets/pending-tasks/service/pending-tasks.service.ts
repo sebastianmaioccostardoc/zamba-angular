@@ -11,11 +11,9 @@ export class PendingTasksService {
 
   constructor(private http: _HttpClient) { }
 
-  getVideoplayerURL(genericRequest: any) {
-    /*
-    return this.http.post(`${environment['apiRestBasePath']}/getVideoplayerURL`, genericRequest, null, {
+  getMyTasks(genericRequest: any) {
+    return this.http.post(`${environment['apiRestBasePath']}/getMyTasks`, genericRequest, null, {
       context: new HttpContext().set(ALLOW_ANONYMOUS, true)
     })
-    */
   }
 }
