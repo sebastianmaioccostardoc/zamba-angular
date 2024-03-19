@@ -61,7 +61,7 @@ export class PendingTasksComponent implements OnInit, OnDestroy {
     console.log("Token data:", tokenData);
     if (tokenData != null && tokenData["userid"] != null) {
       var genericRequest = {
-        UserId: 22242,//tokenData["userid"],
+        UserId: tokenData["userid"],
         Params: ""
       };
       this.pendingTasksService.getMyTasks(genericRequest).pipe(
