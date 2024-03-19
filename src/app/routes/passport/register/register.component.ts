@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 import { ALLOW_ANONYMOUS } from '@delon/auth';
 import { _HttpClient } from '@delon/theme';
 import { MatchControl } from '@delon/util/form';
+import { environment } from '@env/environment';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { catchError, finalize, throwError } from 'rxjs';
-import { allMobilePrefixes } from '../../../services/phone-prefixes.service';
 
-import { environment } from '@env/environment';
+import { allMobilePrefixes } from '../../../services/phone-prefixes.service';
 
 @Component({
   selector: 'passport-register',
@@ -18,14 +18,12 @@ import { environment } from '@env/environment';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserRegisterComponent implements OnDestroy, OnInit {
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private http: _HttpClient,
-    private cdr: ChangeDetectorRef,
-  ) {
-  }
+    private cdr: ChangeDetectorRef
+  ) {}
   ngOnInit(): void {
     this.setCurrentPhonePrefix();
     this.getDepartment();
@@ -40,10 +38,19 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
       lastname: ['', [Validators.required, Validators.maxLength(50)]],
       department: ['', [Validators.required]],
       mail: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/), UserRegisterComponent.checkPassword.bind(this)]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(50),
+          Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/),
+          UserRegisterComponent.checkPassword.bind(this)
+        ]
+      ],
       confirm: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
       mobilePrefix: ['+94'],
-      mobile: ['', [Validators.required, Validators.maxLength(50)]],
+      mobile: ['', [Validators.required, Validators.maxLength(50)]]
     },
     {
       validators: MatchControl('password', 'confirm')
@@ -68,7 +75,7 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
   listDepartments = new Array();
   listRols = new Array();
 
-  body: String = "";
+  body: String = '';
 
   // #endregion
 
@@ -97,13 +104,12 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
     }
   }
 
-
   resolved(captchaResponse: string) {
     console.log(`Resolved captcha with response: ${captchaResponse}`);
     this.disableSubmitButton = false;
-    console.log("disabledSubmitButton", this.disableSubmitButton);
-    console.log("invalid form: ", this.form.invalid);
-    console.log(this.form.errors)
+    console.log('disabledSubmitButton', this.disableSubmitButton);
+    console.log('invalid form: ', this.form.invalid);
+    console.log(this.form.errors);
     this.cdr.detectChanges();
   }
 
@@ -135,7 +141,7 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
         context: new HttpContext().set(ALLOW_ANONYMOUS, true)
       })
       .pipe(
-        catchError((error) => {
+        catchError(error => {
           console.error('Error en la solicitud:', error);
           this.serverError = true;
           return throwError(() => error);
@@ -145,10 +151,9 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
           this.cdr.detectChanges();
         })
       )
-      .subscribe((response) => {
+      .subscribe(response => {
         var dataResponse = JSON.parse(response.body);
-        if (dataResponse != null && dataResponse != undefined && dataResponse != "") {
-
+        if (dataResponse != null && dataResponse != undefined && dataResponse != '') {
           if (dataResponse.emailIsTaken) {
             const mailControl = this.form.get('mail');
             if (mailControl) {
@@ -174,7 +179,7 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
       .post(`${environment['apiRestBasePath']}/getRol`, null, null, {
         context: new HttpContext().set(ALLOW_ANONYMOUS, true)
       })
-      .subscribe((data) => {
+      .subscribe(data => {
         this.listRols = JSON.parse(data);
       });
   }
@@ -185,11 +190,10 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
       .post(`${environment['apiRestBasePath']}/getDepartment`, null, null, {
         context: new HttpContext().set(ALLOW_ANONYMOUS, true)
       })
-      .subscribe((data) => {
+      .subscribe(data => {
         this.listDepartments = JSON.parse(data);
       });
   }
-
 
   setCurrentPhonePrefix() {
     this.http
@@ -197,12 +201,11 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
         context: new HttpContext().set(ALLOW_ANONYMOUS, true)
       })
       .pipe(
-        catchError((error) => {
+        catchError(error => {
           console.error('Error en la solicitud a https://ipapi.co/json:', error);
           let mobilePrefix = this.form.get('mobilePrefix');
-          let ARG = "+54";
-          if (mobilePrefix != null)
-            mobilePrefix.setValue(ARG);
+          let ARG = '+54';
+          if (mobilePrefix != null) mobilePrefix.setValue(ARG);
           return throwError(() => error);
         }),
         finalize(() => {
@@ -210,15 +213,13 @@ export class UserRegisterComponent implements OnDestroy, OnInit {
           this.cdr.detectChanges();
         })
       )
-      .subscribe((data) => {
+      .subscribe(data => {
         const countryCode = data.country;
         const countryInfo = allMobilePrefixes.find(prefix => prefix.code.toUpperCase() === countryCode.toUpperCase());
         if (countryInfo) {
           let mobilePrefix = this.form.get('mobilePrefix');
-          if (mobilePrefix != null)
-            mobilePrefix.setValue(countryInfo.dial_code);
+          if (mobilePrefix != null) mobilePrefix.setValue(countryInfo.dial_code);
         }
       });
   }
-
 }

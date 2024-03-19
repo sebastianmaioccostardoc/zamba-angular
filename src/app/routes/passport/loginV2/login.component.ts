@@ -30,10 +30,9 @@ export class UserLoginV2Component implements OnDestroy {
     private startupSrv: StartupService,
     private http: _HttpClient,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {}
 
   // #region fields
-
 
   // ...
 
@@ -48,7 +47,7 @@ export class UserLoginV2Component implements OnDestroy {
   serverError = false;
   type = 0;
   loading = false;
-  errorUserIsNotActive = false
+  errorUserIsNotActive = false;
 
   // #region get captcha
 
@@ -77,16 +76,11 @@ export class UserLoginV2Component implements OnDestroy {
     this.loading = true;
     this.cdr.detectChanges();
     this.http
-      .post(
-        `${environment['apiRestBasePath']}/login`,
-        genericRequest,
-        null,
-        {
-          context: new HttpContext().set(ALLOW_ANONYMOUS, true)
-        }
-      )
+      .post(`${environment['apiRestBasePath']}/login`, genericRequest, null, {
+        context: new HttpContext().set(ALLOW_ANONYMOUS, true)
+      })
       .pipe(
-        catchError((error) => {
+        catchError(error => {
           console.error('Error en la solicitud:', error);
           this.serverError = true;
           return throwError(() => error);
@@ -103,14 +97,13 @@ export class UserLoginV2Component implements OnDestroy {
           this.error = res.msg;
           this.cdr.detectChanges();
           return;
-        }
-        else if (res.msg == "ok" && res.isActive == false) {
+        } else if (res.msg == 'ok' && res.isActive == false) {
           this.errorUserIsNotActive = true;
           this.cdr.detectChanges();
           return;
         }
         this.reuseTabService.clear();
-        res.user.time = +new Date()
+        res.user.time = +new Date();
         //res.user.expired = +new Date() + 1000 * 60 * 5;
         res.user.expired = -1;
         this.tokenService.set(res.user);

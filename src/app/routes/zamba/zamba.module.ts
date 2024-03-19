@@ -14,4 +14,4 @@ const COMPONENTS = [RuleComponent];
   imports: [SharedModule, ZambaRoutingModule, DownFileModule, FullContentModule, QRModule, G2MiniBarModule],
   declarations: COMPONENTS
 })
-export class ZambaModule { }
+export class ZambaModule {}

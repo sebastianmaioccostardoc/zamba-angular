@@ -7,15 +7,15 @@ import { Environment } from '@delon/theme';
 export const environment = {
   production: false,
   useHash: true,
-  apiRestBasePath: "http://localhost/zamba.restapi/api/Dashboard",
-  apiWebViews: "http://localhost/zamba.web/Views",
+  apiRestBasePath: 'http://www.zambabpm.com.ar/zambaweb.restapi/api/Dashboard',
+  apiWebViews: 'http://www.zambabpm.com.ar/zamba.web/Views',
   cliente: 'zamba',
   api: {
     baseUrl: './',
     refreshTokenEnabled: true,
     refreshTokenType: 'auth-refresh'
   },
-  modules: [DelonMockModule.forRoot({ data: MOCKDATA })],
+  modules: [DelonMockModule.forRoot({ data: MOCKDATA })]
 } as Environment;
 /*
  * In development mode, to ignore zone related error stack frames such as

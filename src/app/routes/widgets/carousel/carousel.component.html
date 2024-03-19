@@ -1,10 +1,17 @@
-<nz-carousel *ngIf="showImages" class="carousel-container" [nzDotPosition]="dotPosition" [nzEnableSwipe]="EnableSwipe"
-    [nzAutoPlaySpeed]="AutoPlaySpeed" [nzAutoPlay]="AutoPlay" [nzLoop]="Loop" #myCarousel>
-
-    <div nz-carousel-content *ngFor="let item of listContent">
-        <img [style]="classImg" class="elementos-dinamicos" draggable="false" *ngIf="images" [src]="item">
-        <h1 *ngIf="!images">NO HAY RESULTADOS</h1>
-    </div>
+<nz-carousel
+  *ngIf="showImages"
+  class="carousel-container"
+  [nzDotPosition]="dotPosition"
+  [nzEnableSwipe]="EnableSwipe"
+  [nzAutoPlaySpeed]="AutoPlaySpeed"
+  [nzAutoPlay]="AutoPlay"
+  [nzLoop]="Loop"
+  #myCarousel
+>
+  <div nz-carousel-content *ngFor="let item of listContent">
+    <img [style]="classImg" class="elementos-dinamicos" draggable="false" *ngIf="images" [src]="item" />
+    <h1 *ngIf="!images">NO HAY RESULTADOS</h1>
+  </div>
 </nz-carousel>
 
 <!-- Flecha izquierda para retroceder -->

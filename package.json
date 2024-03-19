@@ -36,7 +36,15 @@
     "test-coverage": "ng test --code-coverage --watch=false",
     "color-less": "ng-alain-plugin-theme -t=colorLess",
     "theme": "ng-alain-plugin-theme -t=themeCss",
-    "icon": "ng g ng-alain:plugin icon"
+    "icon": "ng g ng-alain:plugin icon",
+    "build:qa": "npm run lint && npm run  test && ng build --base-href=./ --configuration=qa",
+    "build:dev": "npm run lint && npm run  test && ng build --base-href=./ --configuration=qa",
+    "build:prod": "npm run lint &&  npm run test && ng build --base-href=./ --configuration=prod"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run lint && npm test"
+    }
   },
   "dependencies": {
     "@angular/animations": "^16.2.0",

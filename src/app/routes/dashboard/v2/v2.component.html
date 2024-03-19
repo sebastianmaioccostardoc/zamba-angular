@@ -31,8 +31,16 @@
         <p class="text-nowrap mb0">Website Traffics</p>
       </div>
       <div nz-col nzSpan="12">
-        <g2-mini-bar *ngIf="webSite" height="35" color="#fff" borderWidth="3" [padding]="[5, 30]" [data]="webSite"
-          tooltipType="mini" (ready)="fixDark($event)" />
+        <g2-mini-bar
+          *ngIf="webSite"
+          height="35"
+          color="#fff"
+          borderWidth="3"
+          [padding]="[5, 30]"
+          [data]="webSite"
+          tooltipType="mini"
+          (ready)="fixDark($event)"
+        />
       </div>
     </div>
   </div>
@@ -43,8 +51,16 @@
         <p class="text-nowrap mb0">Website Impressions</p>
       </div>
       <div nz-col nzSpan="12">
-        <g2-mini-bar *ngIf="webSite" height="35" color="#fff" borderWidth="3" [padding]="[5, 30]" [data]="webSite"
-          tooltipType="mini" (ready)="fixDark($event)" />
+        <g2-mini-bar
+          *ngIf="webSite"
+          height="35"
+          color="#fff"
+          borderWidth="3"
+          [padding]="[5, 30]"
+          [data]="webSite"
+          tooltipType="mini"
+          (ready)="fixDark($event)"
+        />
       </div>
     </div>
   </div>
@@ -55,8 +71,16 @@
         <p class="text-nowrap mb0">Total Sales</p>
       </div>
       <div nz-col nzSpan="12">
-        <g2-mini-bar *ngIf="webSite" height="35" color="#fff" borderWidth="3" [padding]="[5, 30]" [data]="webSite"
-          tooltipType="mini" (ready)="fixDark($event)" />
+        <g2-mini-bar
+          *ngIf="webSite"
+          height="35"
+          color="#fff"
+          borderWidth="3"
+          [padding]="[5, 30]"
+          [data]="webSite"
+          tooltipType="mini"
+          (ready)="fixDark($event)"
+        />
       </div>
     </div>
   </div>
@@ -67,8 +91,16 @@
         <p class="text-nowrap mb0">Support Tickets</p>
       </div>
       <div nz-col nzSpan="12">
-        <g2-mini-bar *ngIf="webSite" height="35" color="#fff" borderWidth="3" [padding]="[5, 30]" [data]="webSite"
-          tooltipType="mini" (ready)="fixDark($event)" />
+        <g2-mini-bar
+          *ngIf="webSite"
+          height="35"
+          color="#fff"
+          borderWidth="3"
+          [padding]="[5, 30]"
+          [data]="webSite"
+          tooltipType="mini"
+          (ready)="fixDark($event)"
+        />
       </div>
     </div>
   </div>
@@ -89,8 +121,12 @@
         Growth Rate
         <small class="text-sm font-weight-normal">Business Expectations & Retail Sales Statistics</small>
       </ng-template>
-      <g2-timeline *ngIf="offlineChartData" [data]="offlineChartData" [height]="289"
-        [titleMap]="{ y1: 'passenger flow', y2: 'Number of payments' }" />
+      <g2-timeline
+        *ngIf="offlineChartData"
+        [data]="offlineChartData"
+        [height]="289"
+        [titleMap]="{ y1: 'passenger flow', y2: 'Number of payments' }"
+      />
     </nz-card>
   </div>
 </div>

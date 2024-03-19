@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { IconDefinition } from '@ant-design/icons-angular';
+import { EyeInvisibleOutline, EyeOutline, EyeFill, EyeInvisibleFill } from '@ant-design/icons-angular/icons';
 import { GlobalFooterModule } from '@delon/abc/global-footer';
 import { HotkeyModule } from '@delon/abc/hotkey';
 import { NoticeIconModule } from '@delon/abc/notice-icon';
@@ -16,7 +18,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 
@@ -49,9 +51,6 @@ const HEADERCOMPONENTS = [
 
 // passport
 import { LayoutPassportComponent } from './passport/passport.component';
-import { NZ_ICONS } from 'ng-zorro-antd/icon';
-import { IconDefinition } from '@ant-design/icons-angular';
-import { EyeInvisibleOutline, EyeOutline, EyeFill, EyeInvisibleFill } from '@ant-design/icons-angular/icons';
 
 const PASSPORT = [LayoutPassportComponent];
 const icons: IconDefinition[] = [EyeInvisibleOutline, EyeOutline, EyeFill, EyeInvisibleFill];
@@ -80,8 +79,6 @@ const icons: IconDefinition[] = [EyeInvisibleOutline, EyeOutline, EyeFill, EyeIn
   ],
   declarations: [...COMPONENTS, ...HEADERCOMPONENTS, ...PASSPORT],
   exports: [...COMPONENTS, ...PASSPORT],
-  providers: [
-    { provide: NZ_ICONS, useValue: icons }
-  ]
+  providers: [{ provide: NZ_ICONS, useValue: icons }]
 })
-export class LayoutModule { }
+export class LayoutModule {}

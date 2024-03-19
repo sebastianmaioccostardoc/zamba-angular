@@ -3,13 +3,12 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestro
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StartupService } from '@core';
+import { LoadingService, LoadingShowOptions } from '@delon/abc/loading';
 import { ReuseTabService } from '@delon/abc/reuse-tab';
 import { ALLOW_ANONYMOUS, DA_SERVICE_TOKEN, ITokenService, SocialOpenType, SocialService } from '@delon/auth';
 import { SettingsService, _HttpClient } from '@delon/theme';
 import { environment } from '@env/environment';
-import { NzTabChangeEvent } from 'ng-zorro-antd/tabs';
 import { catchError, finalize, throwError } from 'rxjs';
-import { LoadingService, LoadingShowOptions } from '@delon/abc/loading';
 
 @Component({
   selector: 'change-password',
@@ -37,7 +36,7 @@ export class ChangePasswordComponent implements OnDestroy, OnInit {
     private startupSrv: StartupService,
     private http: _HttpClient,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {}
   ngOnInit(): void {
     this.loadingSrv.open(this.LoadingType);
     this.token = this.route.snapshot.queryParams['token'] || '';
@@ -46,16 +45,11 @@ export class ChangePasswordComponent implements OnDestroy, OnInit {
       Params: { tokendata: this.token }
     };
     this.http
-      .post(
-        `${environment['apiRestBasePath']}/ValidateResetToken`,
-        genericRequest,
-        null,
-        {
-          context: new HttpContext().set(ALLOW_ANONYMOUS, true)
-        }
-      )
+      .post(`${environment['apiRestBasePath']}/ValidateResetToken`, genericRequest, null, {
+        context: new HttpContext().set(ALLOW_ANONYMOUS, true)
+      })
       .pipe(
-        catchError((error) => {
+        catchError(error => {
           console.error('Error en la solicitud:', error);
           this.validatingToken = false;
           this.serverError = true;
@@ -81,21 +75,23 @@ export class ChangePasswordComponent implements OnDestroy, OnInit {
         }
       });
   }
-  form = this.fb.group({
-    password: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)]],
-    repassword: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)]],
-  }, { validator: this.passwordMatchValidator });
+  form = this.fb.group(
+    {
+      password: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)]],
+      repassword: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)]]
+    },
+    { validator: this.passwordMatchValidator }
+  );
   error = '';
   serverError = false;
   type = 0;
   loading = false;
-  errorUserIsNotActive = false
+  errorUserIsNotActive = false;
 
   passwordMatchValidator(g: FormGroup) {
     let password = g.get('password')?.value;
     let repassword = g.get('repassword')?.value;
-    return password === repassword
-      ? null : { 'mismatch': true };
+    return password === repassword ? null : { mismatch: true };
   }
   // #region get captcha
 
@@ -103,8 +99,6 @@ export class ChangePasswordComponent implements OnDestroy, OnInit {
   interval$: any;
   passwordVisible = false;
   passwordVisible2 = false;
-
-
 
   submit(): void {
     this.error = '';
@@ -130,16 +124,11 @@ export class ChangePasswordComponent implements OnDestroy, OnInit {
     this.loading = true;
     this.cdr.detectChanges();
     this.http
-      .post(
-        `${environment['apiRestBasePath']}/ResetPassword`,
-        genericRequest,
-        null,
-        {
-          context: new HttpContext().set(ALLOW_ANONYMOUS, true)
-        }
-      )
+      .post(`${environment['apiRestBasePath']}/ResetPassword`, genericRequest, null, {
+        context: new HttpContext().set(ALLOW_ANONYMOUS, true)
+      })
       .pipe(
-        catchError((error) => {
+        catchError(error => {
           console.error('Error en la solicitud:', error);
           this.serverError = true;
           return throwError(() => error);
@@ -152,7 +141,7 @@ export class ChangePasswordComponent implements OnDestroy, OnInit {
       .subscribe(res => {
         res = JSON.parse(res);
         this.cdr.detectChanges();
-        this.router.navigateByUrl('/passport/changepasswordresult?rv=' + res);
+        this.router.navigateByUrl(`/passport/changepasswordresult?rv=${res}`);
       });
   }
   ngOnDestroy(): void {

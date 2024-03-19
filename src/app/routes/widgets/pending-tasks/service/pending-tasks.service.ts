@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
 import { HttpContext } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { ALLOW_ANONYMOUS } from '@delon/auth';
-import { environment } from '@env/environment';
 import { _HttpClient } from '@delon/theme';
+import { environment } from '@env/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PendingTasksService {
-
-  constructor(private http: _HttpClient) { }
+  constructor(private http: _HttpClient) {}
 
   getVideoplayerURL(genericRequest: any) {
     /*

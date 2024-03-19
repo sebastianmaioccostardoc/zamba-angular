@@ -51,7 +51,7 @@ export class HeaderNotifyComponent {
     private msg: NzMessageService,
     private nzI18n: NzI18nService,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {}
 
   private updateNoticeData(notices: NoticeIconList[]): NoticeItem[] {
     const data = this.data.slice();

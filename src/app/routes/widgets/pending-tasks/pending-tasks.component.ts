@@ -1,3 +1,5 @@
+import { CollectionViewer, DataSource } from '@angular/cdk/collections';
+import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -5,12 +7,10 @@ import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { _HttpClient } from '@delon/theme';
 import { GridsterItem } from 'angular-gridster2';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { PendingTasksService } from './service/pending-tasks.service';
-
-import { CollectionViewer, DataSource } from '@angular/cdk/collections';
-import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
 import { catchError, takeUntil } from 'rxjs/operators';
+
+import { PendingTasksService } from './service/pending-tasks.service';
 
 interface ItemData {
   gender: string;
@@ -23,7 +23,6 @@ interface Name {
   first: string;
   last: string;
 }
-
 
 @Component({
   selector: 'pending-tasks',
@@ -43,7 +42,7 @@ export class PendingTasksComponent implements OnInit, OnDestroy {
   };
   @Input()
   resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
-  videoId: string = "";
+  videoId: string = '';
 
   loading = false;
   data = [
@@ -65,8 +64,14 @@ export class PendingTasksComponent implements OnInit, OnDestroy {
     }
   ];
   private destroy$ = new Subject<boolean>();
-  constructor(public nzMessage: NzMessageService, @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private router: Router, private pendingTasksService: PendingTasksService, private cdr: ChangeDetectorRef, private http: HttpClient) {
-  }
+  constructor(
+    public nzMessage: NzMessageService,
+    @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
+    private router: Router,
+    private pendingTasksService: PendingTasksService,
+    private cdr: ChangeDetectorRef,
+    private http: HttpClient
+  ) {}
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
@@ -74,12 +79,11 @@ export class PendingTasksComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     const tokenData = this.tokenService.get();
-    if (tokenData != null && tokenData["userid"] != null) {
+    if (tokenData != null && tokenData['userid'] != null) {
       var genericRequest = {
-        UserId: tokenData["userid"],
-        Params: ""
+        UserId: tokenData['userid'],
+        Params: ''
       };
     }
-
   }
 }

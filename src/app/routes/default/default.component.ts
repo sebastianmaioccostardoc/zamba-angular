@@ -11,9 +11,11 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefaultComponent implements OnInit {
-  constructor(public msg: NzMessageService, @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private router: Router) {
-
-  }
+  constructor(
+    public msg: NzMessageService,
+    @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
+    private router: Router
+  ) {}
   ngOnInit(): void {
     const tokenData = this.tokenService.get();
   }
