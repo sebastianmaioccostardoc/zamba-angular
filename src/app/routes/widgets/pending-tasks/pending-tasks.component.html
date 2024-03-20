@@ -4,13 +4,19 @@
   >
 </div>
 <div class="item-container">
-    <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
-        <ng-container *ngFor="let item of data">
-            <nz-list-item [nzNoFlex]="true" class="nz-list-item" (dblclick)="OpenTask(item.url)">
-                <div><span nz-typography><strong>{{item.Tarea}}</strong></span></div>
-                <div><span nz-typography>Etapa: {{item.Etapa}}</span></div>
-            </nz-list-item>
-            <nz-list-empty *ngIf="data.length === 0"></nz-list-empty>
-        </ng-container>
-    </nz-list>
+  <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
+    <ng-container *ngFor="let item of data">
+      <nz-list-item [nzNoFlex]="true" class="nz-list-item" (dblclick)="OpenTask(item.url)">
+        <div
+          ><span nz-typography
+            ><strong>{{ item.Tarea }}</strong></span
+          ></div
+        >
+        <div
+          ><span nz-typography>Etapa: {{ item.Etapa }}</span></div
+        >
+      </nz-list-item>
+      <nz-list-empty *ngIf="data.length === 0" />
+    </ng-container>
+  </nz-list>
 </div>

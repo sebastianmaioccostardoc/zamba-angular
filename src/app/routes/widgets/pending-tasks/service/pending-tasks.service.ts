@@ -13,6 +13,6 @@ export class PendingTasksService {
   getMyTasks(genericRequest: any) {
     return this.http.post(`${environment['apiRestBasePath']}/getMyTasks`, genericRequest, null, {
       context: new HttpContext().set(ALLOW_ANONYMOUS, true)
-    })
+    });
   }
 }

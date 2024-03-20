@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IconDefinition } from '@ant-design/icons-angular';
-import { EyeInvisibleOutline, EyeOutline, EyeFill, EyeInvisibleFill } from '@ant-design/icons-angular/icons';
+import { EyeInvisibleOutline, EyeOutline, EyeFill, EyeInvisibleFill, UserAddOutline } from '@ant-design/icons-angular/icons';
 import { GlobalFooterModule } from '@delon/abc/global-footer';
 import { HotkeyModule } from '@delon/abc/hotkey';
 import { NoticeIconModule } from '@delon/abc/notice-icon';
@@ -51,9 +51,6 @@ const HEADERCOMPONENTS = [
 
 // passport
 import { LayoutPassportComponent } from './passport/passport.component';
-import { NZ_ICONS } from 'ng-zorro-antd/icon';
-import { IconDefinition } from '@ant-design/icons-angular';
-import { EyeInvisibleOutline, EyeOutline, EyeFill, EyeInvisibleFill, UserAddOutline } from '@ant-design/icons-angular/icons';
 
 const PASSPORT = [LayoutPassportComponent];
 const icons: IconDefinition[] = [EyeInvisibleOutline, EyeOutline, EyeFill, EyeInvisibleFill, UserAddOutline];
