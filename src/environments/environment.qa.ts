@@ -7,8 +7,8 @@ import { Environment } from '@delon/theme';
 export const environment = {
   production: false,
   useHash: true,
-  apiRestBasePath: 'http://www.zambabpm.com.ar/zambaweb.restapi/api/Dashboard',
-  apiWebViews: 'http://www.zambabpm.com.ar/zamba.web/Views',
+  apiRestBasePath: 'http://www.zamba.com.ar/zambaweb.restapi/api/Dashboard',
+  apiWebViews: 'http://www.zamba.com.ar/zamba.web/Views',
   cliente: 'zamba',
   api: {
     baseUrl: './',

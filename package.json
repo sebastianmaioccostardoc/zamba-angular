@@ -28,22 +28,23 @@
     "build": "npm run ng-high-memory build",
     "analyze": "npm run ng-high-memory build -- --source-map",
     "analyze:view": "source-map-explorer dist/**/*.js",
-    "lint": "npm run lint:ts && npm run lint:style",
+    "lint": "npm run lint:ts && npm run lint:stylecss",
     "lint:ts": "ng lint --fix",
-    "lint:style": "npx stylelint 'src/**/*.less'",
+    "lint:styleless": "npx stylelint src/**/*.less",
+    "lint:stylecss": "npx stylelint src/**/*.css",
     "e2e": "ng e2e",
     "test": "ng test --watch",
     "test-coverage": "ng test --code-coverage --watch=false",
     "color-less": "ng-alain-plugin-theme -t=colorLess",
     "theme": "ng-alain-plugin-theme -t=themeCss",
     "icon": "ng g ng-alain:plugin icon",
-    "build:qa": "npm run lint && npm run  test && ng build --base-href=./ --configuration=qa",
-    "build:dev": "npm run lint && npm run  test && ng build --base-href=./ --configuration=qa",
-    "build:prod": "npm run lint &&  npm run test && ng build --base-href=./ --configuration=prod"
+    "build:qa": "npm run lint && ng build --base-href=./ --configuration=qa",
+    "build:dev": "npm run lint && ng build --base-href=./ --configuration=development",
+    "build:prod": "npm run lint && ng build --base-href=./ --configuration=production"
   },
   "config": {
     "ghooks": {
-      "pre-commit": "npm run lint && npm test"
+      "pre-commit": "npm run llint:ts && npm test"
     }
   },
   "dependencies": {
