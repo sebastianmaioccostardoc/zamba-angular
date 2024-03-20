@@ -11,9 +11,8 @@
 
 
 .item-container {
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-color: rgba(0, 0, 0, 0.3) #ffffff;
+    overflow: auto hidden;
+    scrollbar-color: rgba(0 0 0 30%) white;
     height: 450px;
 }
 
@@ -24,7 +23,8 @@
 }
 
 .nz-list-item:hover {
-    background-color: #ebebeb;
+    background-color: rgb(235 235 235);
+
     /* Color al hacer hover */
 }
 

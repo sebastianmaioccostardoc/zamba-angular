@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter, Component, In
 import { Router } from '@angular/router';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { _HttpClient } from '@delon/theme';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { GridsterConfig, GridsterItem } from 'angular-gridster2';
-import { WidgetsContainerService } from "./service/widgets-container.service";
-import { WidgetsContainerOptions } from "./entities/WidgetsContainerOptions";
+import { NzMessageService } from 'ng-zorro-antd/message';
 
+import { WidgetsContainerOptions } from './entities/WidgetsContainerOptions';
+import { WidgetsContainerService } from './service/widgets-container.service';
 
 @Component({
   selector: 'widgets-container',
@@ -15,13 +15,17 @@ import { WidgetsContainerOptions } from "./entities/WidgetsContainerOptions";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WidgetsContainerComponent implements OnInit {
-
   options: GridsterConfig = {};
-  dashboard: Array<GridsterItem> = [];
+  dashboard: GridsterItem[] = [];
   resizeEvent: EventEmitter<any> = new EventEmitter<any>();
   changeEvent: EventEmitter<any> = new EventEmitter<any>();
-  constructor(public msg: NzMessageService, @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private router: Router, private WCService: WidgetsContainerService, private cdr: ChangeDetectorRef) {
-  }
+  constructor(
+    public msg: NzMessageService,
+    @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
+    private router: Router,
+    private WCService: WidgetsContainerService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.getWidgetsContainer();
@@ -36,22 +40,19 @@ export class WidgetsContainerComponent implements OnInit {
     };
 
     this.dashboard = [];
-
   }
-
 
   getWidgetsContainer() {
     const tokenData = this.tokenService.get();
-    let genericRequest = {}
+    let genericRequest = {};
 
     if (tokenData != null) {
       genericRequest = {
-        UserId: tokenData["userid"],
-        Params: ""
+        UserId: tokenData['userid'],
+        Params: ''
       };
 
-      this.WCService._getWidgetsContainer(genericRequest).subscribe((data) => {
-
+      this.WCService._getWidgetsContainer(genericRequest).subscribe(data => {
         var dataJson = JSON.parse(data)[0];
         var optionsJson = JSON.parse(dataJson.Options);
 
@@ -70,37 +71,37 @@ export class WidgetsContainerComponent implements OnInit {
         if (api != undefined) {
           api.optionsChanged();
         }
-
       });
-
     }
   }
-
 
   setWidgetsContainer() {
     const tokenData = this.tokenService.get();
     let genericRequest = {};
 
     if (tokenData != null) {
-      console.log("Imprimo los valores en tokenService en el service", tokenData);
+      console.log('Imprimo los valores en tokenService en el service', tokenData);
 
-      let WCOptions: WidgetsContainerOptions = new WidgetsContainerOptions(this.options.displayGrid, this.options.draggable, this.options.resizable, this.options.minCols, this.options.minRows);
+      let WCOptions: WidgetsContainerOptions = new WidgetsContainerOptions(
+        this.options.displayGrid,
+        this.options.draggable,
+        this.options.resizable,
+        this.options.minCols,
+        this.options.minRows
+      );
 
       genericRequest = {
-        UserId: tokenData["userid"],
+        UserId: tokenData['userid'],
         Params: {
           options: JSON.stringify(WCOptions),
           widgetsContainer: JSON.stringify(this.dashboard)
         }
       };
 
-      this.WCService._setWidgetsContainer(genericRequest).subscribe((data) => {
-
+      this.WCService._setWidgetsContainer(genericRequest).subscribe(data => {
         this.options = JSON.parse(data.Options);
         this.dashboard = JSON.parse(data.WidgetsContainer);
-
       });
-
     }
   }
 

@@ -16,7 +16,7 @@ export const environment = {
     refreshTokenEnabled: true,
     refreshTokenType: 'auth-refresh'
   },
-  modules: [DelonMockModule.forRoot({ data: MOCKDATA })],
+  modules: [DelonMockModule.forRoot({ data: MOCKDATA })]
 } as Environment;
 /*
  * In development mode, to ignore zone related error stack frames such as

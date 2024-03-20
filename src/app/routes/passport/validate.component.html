@@ -1,9 +1,7 @@
 <result *ngIf="showSuccessMessage && !serverError" type="success" [title]="'app.validate.account' | i18n">
-    <button routerLink="/" nz-button nzSize="large">
-        {{ 'app.register-result.back-home' | i18n }}
-    </button>
+  <button routerLink="/" nz-button nzSize="large">
+    {{ 'app.register-result.back-home' | i18n }}
+  </button>
 </result>
-<result *ngIf="!showSuccessMessage && !serverError"  type="warn" title="Activando cuenta...">
-</result>
-<result *ngIf="serverError"  type="error" title="Ha ocurrido un error. Intente nuevamente en unos minutos.">
-</result>
+<result *ngIf="!showSuccessMessage && !serverError" type="warn" title="Activando cuenta..." />
+<result *ngIf="serverError" type="error" title="Ha ocurrido un error. Intente nuevamente en unos minutos." />

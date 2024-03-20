@@ -5,6 +5,7 @@ import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { _HttpClient } from '@delon/theme';
 import { GridsterItem } from 'angular-gridster2';
 import { NzMessageService } from 'ng-zorro-antd/message';
+
 import { VideoplayerService } from './service/videoplayer.service';
 
 @Component({
@@ -26,26 +27,31 @@ export class VideoplayerComponent implements OnInit {
   @Input()
   resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
   src: SafeResourceUrl;
-  videoId: string = "";
-  constructor(public msg: NzMessageService, @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private router: Router, private sanitizer: DomSanitizer, private videoplayerService: VideoplayerService, private cdr: ChangeDetectorRef) {
+  videoId: string = '';
+  constructor(
+    public msg: NzMessageService,
+    @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
+    private router: Router,
+    private sanitizer: DomSanitizer,
+    private videoplayerService: VideoplayerService,
+    private cdr: ChangeDetectorRef
+  ) {
     this.src = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/CsAT8LQf8gw?autoplay=1');
   }
   ngOnInit(): void {
     const tokenData = this.tokenService.get();
-    if (tokenData != null && tokenData["userid"] != null) {
+    if (tokenData != null && tokenData['userid'] != null) {
       var genericRequest = {
-        UserId: tokenData["userid"],
-        Params: ""
+        UserId: tokenData['userid'],
+        Params: ''
       };
       this.videoplayerService.getVideoplayerURL(genericRequest).subscribe((res: any) => {
         var data = JSON.parse(res);
         if (data != null) {
-
           this.videoId = data.YouTubeVideoID;
           this.cdr.detectChanges();
         }
       });
     }
-
   }
 }

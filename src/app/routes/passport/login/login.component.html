@@ -42,8 +42,7 @@
               </nz-input-group>
             </nz-col>
             <nz-col [nzSpan]="8">
-              <button type="button" nz-button nzSize="large" (click)="getCaptcha()" [disabled]="count >= 0" nzBlock
-                [nzLoading]="loading">
+              <button type="button" nz-button nzSize="large" (click)="getCaptcha()" [disabled]="count >= 0" nzBlock [nzLoading]="loading">
                 {{ count ? count + 's' : ('app.register.get-verification-code' | i18n) }}
               </button>
             </nz-col>
