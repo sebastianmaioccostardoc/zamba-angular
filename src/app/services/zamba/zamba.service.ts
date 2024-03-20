@@ -83,33 +83,52 @@ export class ZambaService {
         }
       };
     }
-    //TODO: este codigo carga la visualizacion de la sidbar pensar mas adelante en ponerlo asyncronico
-    //actualmente no funciona de esa manera ya que recarga 2 veces la  interfaz
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', `${this.LOGIN_URL}/configUserSidbar`, false); // El tercer parámetro indica si la solicitud es síncrona
-    xhr.setRequestHeader('Content-Type', 'application/json');
 
-    try {
-      xhr.send(JSON.stringify(genericRequest));
-      if (xhr.status === 200) {
-        const deserealize = JSON.parse(xhr.responseText);
-        let response = JSON.parse(deserealize);
+    public GetSidebarItems() {
+        const tokenData = this.tokenService.get();
+        let genericRequest = {}
+        let groupsid: any[] = []
+        if (tokenData != null) {
+            if (tokenData["groups"] != null) {
+                tokenData["groups"].forEach(function (values: any) {
+                    groupsid.push(values["ID"])
+                })
 
-        if (response.length == 0) return false;
+                genericRequest = {
+                    UserId: tokenData["userid"],
+                    Params: {
+                        "groups": groupsid.toString()
+                    }
+                };
+            }
+        }
 
-        let valueToAnalize = parseInt(response[0].value);
-
-        if (valueToAnalize == 0) return true;
-        else return false;
-      } else {
-        // Manejar errores aquí
-        console.error('Error en la solicitud POST:', xhr.statusText);
-        return false;
-      }
-    } catch (error) {
-      // Manejar errores aquí
-      console.error('Error en la solicitud POST:', error);
-      return false;
+        this.http
+            .post(
+                `${environment['apiRestBasePath']}/getSidebarItems`,
+                genericRequest,
+                null,
+                {
+                    context: new HttpContext().set(ALLOW_ANONYMOUS, true)
+                }
+            ).pipe(
+                catchError(res => {
+                    console.warn(`StartupService.load: Network request failed`, res);
+                    return of(null);
+                }),
+                map((appData: NzSafeAny) => {
+                    appData = JSON.parse(appData);
+                    console.log(appData);
+                    if (appData) {
+                        this.settingService.setApp(appData.app);
+                        this.settingService.setUser(appData.user);
+                        this.aclService.setFull(true);
+                        this.menuService.add(appData.menu.items);
+                        this.titleService.default = '';
+                        this.titleService.suffix = appData.app.name;
+                    }
+                })
+            ).subscribe();
     }
   }
 
