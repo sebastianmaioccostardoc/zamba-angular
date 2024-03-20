@@ -1,3 +1,4 @@
+import { NgForOf } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CountDownModule } from '@delon/abc/count-down';
 import { OnboardingModule } from '@delon/abc/onboarding';
@@ -17,6 +18,7 @@ import { G2TimelineModule } from '@delon/chart/timeline';
 import { TrendModule } from '@delon/chart/trend';
 import { G2WaterWaveModule } from '@delon/chart/water-wave';
 import { SharedModule } from '@shared';
+import { GridsterComponent, GridsterItemComponent } from 'angular-gridster2';
 import { CountdownModule } from 'ngx-countdown';
 
 import { DashboardAnalysisComponent } from './analysis/analysis.component';
@@ -24,13 +26,16 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardMonitorComponent } from './monitor/monitor.component';
 import { DashboardV1Component } from './v2/v2.component';
 import { DashboardWorkplaceComponent } from './workplace/workplace.component';
+import { WidgetSelectorComponent } from '../widgets/widgetSelector/widget-selector.component';
 import { WidgetsContainerComponent } from '../widgets-container/widgets-container.component';
 
-import { NgForOf } from '@angular/common';
-import { GridsterComponent, GridsterItemComponent } from 'angular-gridster2';
-import { WidgetSelectorComponent } from '../widgets/widgetSelector/widget-selector.component';
-
-const COMPONENTS = [DashboardV1Component, DashboardAnalysisComponent, DashboardMonitorComponent, DashboardWorkplaceComponent, WidgetsContainerComponent];
+const COMPONENTS = [
+  DashboardV1Component,
+  DashboardAnalysisComponent,
+  DashboardMonitorComponent,
+  DashboardWorkplaceComponent,
+  WidgetsContainerComponent
+];
 
 @NgModule({
   imports: [
@@ -61,4 +66,4 @@ const COMPONENTS = [DashboardV1Component, DashboardAnalysisComponent, DashboardM
   ],
   declarations: [...COMPONENTS]
 })
-export class DashboardModule { }
+export class DashboardModule {}

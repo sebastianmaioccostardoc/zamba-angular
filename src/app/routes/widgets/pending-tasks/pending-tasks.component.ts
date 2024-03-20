@@ -1,3 +1,5 @@
+import { CollectionViewer, DataSource } from '@angular/cdk/collections';
+import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -12,6 +14,8 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject, of, throwError } from 'rxjs';
 import { catchError, finalize, takeUntil } from 'rxjs/operators';
 
+import { PendingTasksService } from './service/pending-tasks.service';
+
 interface ItemData {
   gender: string;
   name: Name;
@@ -23,7 +27,6 @@ interface Name {
   first: string;
   last: string;
 }
-
 
 @Component({
   selector: 'pending-tasks',
@@ -43,14 +46,20 @@ export class PendingTasksComponent implements OnInit, OnDestroy {
   };
   @Input()
   resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
-  videoId: string = "";
+  videoId: string = '';
 
   loading = false;
   data: any = [
   ];
   private destroy$ = new Subject<boolean>();
-  constructor(public nzMessage: NzMessageService, @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private router: Router, private pendingTasksService: PendingTasksService, private cdr: ChangeDetectorRef, private http: HttpClient) {
-  }
+  constructor(
+    public nzMessage: NzMessageService,
+    @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
+    private router: Router,
+    private pendingTasksService: PendingTasksService,
+    private cdr: ChangeDetectorRef,
+    private http: HttpClient
+  ) {}
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
@@ -61,8 +70,8 @@ export class PendingTasksComponent implements OnInit, OnDestroy {
     console.log("Token data:", tokenData);
     if (tokenData != null && tokenData["userid"] != null) {
       var genericRequest = {
-        UserId: tokenData["userid"],
-        Params: ""
+        UserId: tokenData['userid'],
+        Params: ''
       };
       this.pendingTasksService.getMyTasks(genericRequest).pipe(
         catchError((error) => {
@@ -93,5 +102,6 @@ export class PendingTasksComponent implements OnInit, OnDestroy {
         console.log("Error al abrir la tarea: ", error);
       }
     }
+
   }
 }

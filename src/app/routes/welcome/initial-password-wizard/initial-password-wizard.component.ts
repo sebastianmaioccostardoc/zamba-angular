@@ -3,12 +3,12 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestro
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StartupService } from '@core';
+import { LoadingService, LoadingShowOptions } from '@delon/abc/loading';
 import { ReuseTabService } from '@delon/abc/reuse-tab';
 import { ALLOW_ANONYMOUS, DA_SERVICE_TOKEN, ITokenService, SocialOpenType, SocialService } from '@delon/auth';
 import { SettingsService, _HttpClient } from '@delon/theme';
 import { environment } from '@env/environment';
 import { catchError, finalize, throwError } from 'rxjs';
-import { LoadingService, LoadingShowOptions } from '@delon/abc/loading';
 
 @Component({
   selector: 'app-initial-password-wizard',
@@ -24,22 +24,24 @@ export class InitialPasswordWizardComponent implements OnInit, OnDestroy {
   LoadingType: LoadingShowOptions = { type: 'spin', text: '' };
   private readonly loadingSrv = inject(LoadingService);
 
-  form = this.fb.group({
-    password: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)]],
-    repassword: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)]],
-  }, { validator: this.passwordMatchValidator });
+  form = this.fb.group(
+    {
+      password: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)]],
+      repassword: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)]]
+    },
+    { validator: this.passwordMatchValidator }
+  );
 
   error = '';
   serverError = false;
   type = 0;
   loading = false;
-  errorUserIsNotActive = false
+  errorUserIsNotActive = false;
 
   count = 0;
   interval$: any;
   passwordVisible = false;
   passwordVisible2 = false;
-
 
   constructor(
     private fb: FormBuilder,
@@ -54,16 +56,13 @@ export class InitialPasswordWizardComponent implements OnInit, OnDestroy {
     private startupSrv: StartupService,
     private http: _HttpClient,
     private cdr: ChangeDetectorRef
-  ) { }
-
+  ) {}
 
   passwordMatchValidator(g: FormGroup) {
     let password = g.get('password')?.value;
     let repassword = g.get('repassword')?.value;
-    return password === repassword
-      ? null : { 'mismatch': true };
+    return password === repassword ? null : { mismatch: true };
   }
-
 
   submit(): void {
     this.error = '';
@@ -89,16 +88,11 @@ export class InitialPasswordWizardComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.cdr.detectChanges();
     this.http
-      .post(
-        `${environment['apiRestBasePath']}/ResetPasswordFirstTime`,
-        genericRequest,
-        null,
-        {
-          context: new HttpContext().set(ALLOW_ANONYMOUS, true)
-        }
-      )
+      .post(`${environment['apiRestBasePath']}/ResetPasswordFirstTime`, genericRequest, null, {
+        context: new HttpContext().set(ALLOW_ANONYMOUS, true)
+      })
       .pipe(
-        catchError((error) => {
+        catchError(error => {
           console.error('Error en la solicitud:', error);
           this.serverError = true;
           return throwError(() => error);
@@ -111,7 +105,7 @@ export class InitialPasswordWizardComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         res = JSON.parse(res);
         this.cdr.detectChanges();
-        this.router.navigateByUrl('/passport/changepasswordresult?rv=' + res);
+        this.router.navigateByUrl(`/passport/changepasswordresult?rv=${res}`);
       });
   }
 
@@ -125,16 +119,11 @@ export class InitialPasswordWizardComponent implements OnInit, OnDestroy {
       Params: { tokendata: this.token }
     };
     this.http
-      .post(
-        `${environment['apiRestBasePath']}/ValidateResetToken`,
-        genericRequest,
-        null,
-        {
-          context: new HttpContext().set(ALLOW_ANONYMOUS, true)
-        }
-      )
+      .post(`${environment['apiRestBasePath']}/ValidateResetToken`, genericRequest, null, {
+        context: new HttpContext().set(ALLOW_ANONYMOUS, true)
+      })
       .pipe(
-        catchError((error) => {
+        catchError(error => {
           console.error('Error en la solicitud:', error);
           this.validatingToken = false;
           this.serverError = true;
@@ -161,12 +150,9 @@ export class InitialPasswordWizardComponent implements OnInit, OnDestroy {
       });
   }
 
-
-
   ngOnDestroy(): void {
     if (this.interval$) {
       clearInterval(this.interval$);
     }
   }
 }
-

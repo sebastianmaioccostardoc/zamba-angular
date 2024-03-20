@@ -1,7 +1,7 @@
 /* eslint-disable import/order */
 /* eslint-disable import/no-duplicates */
 import { HttpClientModule } from '@angular/common/http';
-import { default as ngLang, } from '@angular/common/locales/zh';
+import { default as ngLang } from '@angular/common/locales/zh';
 import localeEs from '@angular/common/locales/es';
 import { APP_INITIALIZER, LOCALE_ID, NgModule, Type } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,7 +12,6 @@ import { NZ_DATE_LOCALE, provideNzI18n, es_ES as zorroLang } from 'ng-zorro-antd
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { es } from 'date-fns/locale';
 import { registerLocaleData } from '@angular/common';
-
 
 registerLocaleData(localeEs, 'es');
 // #region default language
@@ -114,4 +113,4 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
   providers: [...LANG_PROVIDES, ...INTERCEPTOR_PROVIDES, ...I18NSERVICE_PROVIDES, ...APPINIT_PROVIDES],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

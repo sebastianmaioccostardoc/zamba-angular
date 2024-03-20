@@ -5,7 +5,7 @@ import { DashboardAnalysisComponent } from './analysis/analysis.component';
 import { DashboardMonitorComponent } from './monitor/monitor.component';
 import { DashboardV1Component } from './v2/v2.component';
 import { DashboardWorkplaceComponent } from './workplace/workplace.component';
-import { DefaultComponent } from "../default/default.component";
+import { DefaultComponent } from '../default/default.component';
 import { WidgetsContainerComponent } from '../widgets-container/widgets-container.component';
 
 const routes: Routes = [
@@ -22,4 +22,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule { }
+export class DashboardRoutingModule {}

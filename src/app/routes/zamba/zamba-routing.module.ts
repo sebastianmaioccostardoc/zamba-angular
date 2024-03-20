@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { aclCanActivate } from '@delon/acl';
 
 import { RuleComponent } from './rule/rule.component';
-import { ZambaService } from '../../services/zamba/zamba.service'
+import { ZambaService } from '../../services/zamba/zamba.service';
 
 const routes: Routes = [{ path: 'rule', component: RuleComponent }];
 
@@ -11,4 +11,4 @@ const routes: Routes = [{ path: 'rule', component: RuleComponent }];
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ZambaRoutingModule { }
+export class ZambaRoutingModule {}

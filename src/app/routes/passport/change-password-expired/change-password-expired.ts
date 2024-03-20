@@ -6,9 +6,5 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   templateUrl: './change-password-expired.component.html'
 })
 export class ChangePasswordExpiredComponent {
-  constructor(
-    public msg: NzMessageService
-  ) {
-
-  }
+  constructor(public msg: NzMessageService) {}
 }

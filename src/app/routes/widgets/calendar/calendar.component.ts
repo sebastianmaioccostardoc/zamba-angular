@@ -1,55 +1,59 @@
-import { HttpContext } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, Optional, ViewChild, TemplateRef, OnInit, LOCALE_ID, Directive, ElementRef, Renderer2, Input, EventEmitter } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Optional,
+  OnInit,
+  LOCALE_ID,
+  ElementRef,
+  Input,
+  EventEmitter,
+  OnDestroy
+} from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StartupService } from '@core';
 import { ReuseTabService } from '@delon/abc/reuse-tab';
-import { ALLOW_ANONYMOUS, DA_SERVICE_TOKEN, ITokenService, SocialOpenType, SocialService } from '@delon/auth';
+import { DA_SERVICE_TOKEN, ITokenService, SocialService } from '@delon/auth';
 import { SettingsService, _HttpClient } from '@delon/theme';
-import { environment } from '@env/environment';
-import { NzTabChangeEvent } from 'ng-zorro-antd/tabs';
-import { catchError, finalize, throwError, Subject, Subscription } from 'rxjs';
-import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, parse } from 'date-fns';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
-import { enUS, es } from 'date-fns/locale';
-import ngEn from '@angular/common/locales/en';
-import ngEs from '@angular/common/locales/es-AR';
+import { GridsterItem, GridsterItemComponent } from 'angular-gridster2';
 import { EventColor } from 'calendar-utils';
-import { GridsterItem, GridsterItemComponent, GridsterItemComponentInterface } from 'angular-gridster2';
-import { CalendarService } from './service/calendar.service';
+import { isSameDay, isSameMonth, parse } from 'date-fns';
+import { es } from 'date-fns/locale';
+import { Subject, Subscription } from 'rxjs';
 import { __param } from 'tslib';
+
+import { CalendarService } from './service/calendar.service';
 
 interface MyCalendarEvent extends CalendarEvent {
   groupid: any;
   userid: any;
 }
 
-
 const colors: Record<string, EventColor> = {
   red: {
     primary: '#ad2121',
-    secondary: '#FAE3E3',
+    secondary: '#FAE3E3'
   },
   blue: {
     primary: '#1e90ff',
-    secondary: '#D1E8FF',
+    secondary: '#D1E8FF'
   },
   yellow: {
     primary: '#e3bc08',
-    secondary: '#FDF1BA',
-  },
+    secondary: '#FDF1BA'
+  }
 };
-
-
 
 @Component({
   selector: 'calendar-widget',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.less'],
-  providers: [SocialService],
+  providers: [SocialService]
   //changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnDestroy {
   @Input()
   widget: GridsterItem = {
     type: '',
@@ -68,7 +72,6 @@ export class CalendarComponent implements OnInit {
 
   private resizeSubscription: Subscription | undefined;
 
-
   groups: any[] = [];
   viewDate: Date = new Date();
   events: MyCalendarEvent[] = [];
@@ -86,19 +89,19 @@ export class CalendarComponent implements OnInit {
   activeDayIsOpen: boolean = false;
 
   //event modal properties
-  eventTitle: string = "";
+  eventTitle: string = '';
   start: Date = new Date();
   end: Date = new Date();
 
   selectedValue: any = null;
 
-  eventPrimaryColor: string = "#ad2121";
+  eventPrimaryColor: string = '#ad2121';
 
-  eventSecondaryColor: string = "#cccccc";
+  eventSecondaryColor: string = '#cccccc';
 
-  eventTextColor: string = "#000000";
+  eventTextColor: string = '#000000';
 
-  modalHeaderTitle: string = "Agregar Evento";
+  modalHeaderTitle: string = 'Agregar Evento';
 
   isEditMode: boolean = false;
 
@@ -111,7 +114,7 @@ export class CalendarComponent implements OnInit {
     draggable: false,
     resizable: {
       beforeStart: false,
-      afterEnd: false,
+      afterEnd: false
     },
     groupid: null,
     userid: null
@@ -123,7 +126,7 @@ export class CalendarComponent implements OnInit {
       a11yLabel: 'Edit',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.showModalEdit(event);
-      },
+      }
     },
     {
       label: '<span> &bull; Eliminar </span>',
@@ -132,29 +135,25 @@ export class CalendarComponent implements OnInit {
         var genericRequest = {
           UserId: null,
           Params: {
-            "calendareventid": event.id,
+            calendareventid: event.id
           }
         };
-        this.calendarService.deleteEvent(genericRequest).subscribe((data) => {
-          this.events = this.events.filter((iEvent) => iEvent !== event);
+        this.calendarService.deleteEvent(genericRequest).subscribe(data => {
+          this.events = this.events.filter(iEvent => iEvent !== event);
           this.refresh.next();
           console.log('El evento ha sido eliminado!', event);
         });
-      },
-    },
+      }
+    }
   ];
 
   setView(view: CalendarView) {
     this.view = view;
   }
 
-
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
+      if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
         this.activeDayIsOpen = false;
       } else {
         this.activeDayIsOpen = true;
@@ -163,16 +162,11 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  eventTimesChanged({
-    event,
-    newStart,
-    newEnd,
-  }: CalendarEventTimesChangedEvent): void {
+  eventTimesChanged({ event, newStart, newEnd }: CalendarEventTimesChangedEvent): void {
     event.start = newStart;
     event.end = newEnd;
     this.refresh.next();
   }
-
 
   constructor(
     private fb: FormBuilder,
@@ -188,44 +182,39 @@ export class CalendarComponent implements OnInit {
     private cdr: ChangeDetectorRef,
 
     @Inject(LOCALE_ID) locale: string,
-    private calendarService: CalendarService,
-  ) {
-
-  }
+    private calendarService: CalendarService
+  ) {}
 
   ngOnInit() {
     var groupids = [];
     const tokenData = this.tokenService.get();
     if (tokenData != null) {
-      this.groups = [...tokenData["groups"]];
-      groupids = this.groups.map((group) => group.ID);
-      this.groups.unshift({ ID: -100, Name: "Mi Calendario" });
+      this.groups = [...tokenData['groups']];
+      groupids = this.groups.map(group => group.ID);
+      this.groups.unshift({ ID: -100, Name: 'Mi Calendario' });
     }
     var genericRequest = {
       UserId: null,
       Params: {
-        "groupids": JSON.stringify(groupids),
-        "userid": tokenData ? tokenData["userid"] : null
+        groupids: JSON.stringify(groupids),
+        userid: tokenData ? tokenData['userid'] : null
       }
     };
 
-    this.calendarService.getEvents(genericRequest).subscribe((data) => {
+    this.calendarService.getEvents(genericRequest).subscribe(data => {
       let calendarEvents = JSON.parse(data);
       console.log('Datos recibidos de getEvents:', calendarEvents);
       calendarEvents = calendarEvents.map((event: any) => ({
         ...event,
         start: new Date(event.start),
         end: new Date(event.end),
-        actions: this.actions,
+        actions: this.actions
       }));
 
-      this.events = [...this.events,
-      ...calendarEvents,
-      ];
+      this.events = [...this.events, ...calendarEvents];
       this.refresh.next();
       this.cdr.detectChanges();
     });
-
 
     this.resizeSubscription = this.resizeEvent.subscribe((event: any) => {
       let itemComponent: GridsterItemComponent = event['itemComponent'];
@@ -239,15 +228,12 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-
-
   handleEvent(action: string, event: CalendarEvent): void {
     /*
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
     */
   }
-
 
   handleOk(): void {
     console.log('Button ok clicked!');
@@ -260,23 +246,23 @@ export class CalendarComponent implements OnInit {
   }
   showModal(event: Event, date: Date): void {
     this.isEditMode = false;
-    this.modalHeaderTitle = "Agregar Evento";
+    this.modalHeaderTitle = 'Agregar Evento';
     this.isVisible = true;
-    this.eventTitle = "";
-    this.eventPrimaryColor = "#ad2121";
-    this.eventSecondaryColor = "#cccccc";
-    this.eventTextColor = "#000000";
+    this.eventTitle = '';
+    this.eventPrimaryColor = '#ad2121';
+    this.eventSecondaryColor = '#cccccc';
+    this.eventTextColor = '#000000';
     this.start = date;
     this.end = new Date(date.getTime());
     this.end.setHours(this.start.getHours() + 1);
     this.selectedValue = -100;
-    console.log("valor de date: ", date);
+    console.log('valor de date: ', date);
     event.preventDefault();
   }
 
   showModalEdit(event: any): void {
     this.isEditMode = true;
-    this.modalHeaderTitle = "Editar Evento";
+    this.modalHeaderTitle = 'Editar Evento';
     this.isVisible = true;
     this.eventTitle = event.title;
     this.eventPrimaryColor = event.color?.primary || this.eventPrimaryColor;
@@ -287,12 +273,11 @@ export class CalendarComponent implements OnInit {
     this.end.setHours(this.start.getHours() + 1);
     this.editableEventCalendar = event;
     this.selectedValue = -100;
-    if (event["groupid"] != null) {
-      this.selectedValue = event["groupid"];
+    if (event['groupid'] != null) {
+      this.selectedValue = event['groupid'];
     }
   }
   addEvent(): void {
-
     let start: Date;
     let end: Date;
 
@@ -301,14 +286,14 @@ export class CalendarComponent implements OnInit {
     if (this.start instanceof Date) {
       start = this.start;
     } else {
-      let formatString = "dd/MM/yyyy HH:mm";
+      let formatString = 'dd/MM/yyyy HH:mm';
       start = parse(this.start, formatString, new Date());
     }
 
     if (this.end instanceof Date) {
       end = this.end;
     } else {
-      let formatString = "dd/MM/yyyy HH:mm";
+      let formatString = 'dd/MM/yyyy HH:mm';
       end = parse(this.end, formatString, new Date());
     }
 
@@ -322,8 +307,7 @@ export class CalendarComponent implements OnInit {
     let userid = null;
 
     if (this.selectedValue == -100) {
-      if (tokenData != null)
-        userid = tokenData["userid"];
+      if (tokenData != null) userid = tokenData['userid'];
     } else {
       groupid = this.selectedValue;
     }
@@ -338,37 +322,33 @@ export class CalendarComponent implements OnInit {
       draggable: false,
       resizable: {
         beforeStart: false,
-        afterEnd: false,
+        afterEnd: false
       },
       groupid: groupid,
       userid: userid
     };
 
     var genericRequest = {
-      UserId: tokenData ? tokenData["userid"] : null,
+      UserId: tokenData ? tokenData['userid'] : null,
       Params: {
-        "groupid": groupid,
-        "eventdata": JSON.stringify(newEvent),
-        "userid": userid
+        groupid: groupid,
+        eventdata: JSON.stringify(newEvent),
+        userid: userid
       }
     };
 
-    this.calendarService.insertNewEvent(genericRequest).subscribe((data) => {
+    this.calendarService.insertNewEvent(genericRequest).subscribe(data => {
       console.log('Datos recibidos de insertar un evento:', data);
       newEvent.id = data;
-      this.events = [
-        ...this.events,
-        newEvent,
-      ];
+      this.events = [...this.events, newEvent];
       this.refresh.next();
       this.isVisible = false;
       console.log(this.events);
       console.log(JSON.stringify(this.events));
-    })
+    });
   }
 
   editEvent(): void {
-
     let start: Date;
     let end: Date;
 
@@ -377,14 +357,14 @@ export class CalendarComponent implements OnInit {
     if (this.start instanceof Date) {
       start = this.start;
     } else {
-      let formatString = "dd/MM/yyyy HH:mm";
+      let formatString = 'dd/MM/yyyy HH:mm';
       start = parse(this.start, formatString, new Date());
     }
 
     if (this.end instanceof Date) {
       end = this.end;
     } else {
-      let formatString = "dd/MM/yyyy HH:mm";
+      let formatString = 'dd/MM/yyyy HH:mm';
       end = parse(this.end, formatString, new Date());
     }
 
@@ -404,8 +384,7 @@ export class CalendarComponent implements OnInit {
     let userid = null;
 
     if (this.selectedValue == -100) {
-      if (tokenData != null)
-        userid = tokenData["userid"];
+      if (tokenData != null) userid = tokenData['userid'];
     } else {
       groupid = this.selectedValue;
     }
@@ -414,23 +393,18 @@ export class CalendarComponent implements OnInit {
     this.editableEventCalendar.userid = userid;
 
     var genericRequest = {
-      UserId: tokenData ? tokenData["userid"] : null,
+      UserId: tokenData ? tokenData['userid'] : null,
       Params: {
-        "groupid": groupid,
-        "eventdata": JSON.stringify(this.editableEventCalendar),
-        "userid": userid,
-        "calendareventid": this.editableEventCalendar.id
+        groupid: groupid,
+        eventdata: JSON.stringify(this.editableEventCalendar),
+        userid: userid,
+        calendareventid: this.editableEventCalendar.id
       }
     };
 
-    this.calendarService.updateEvent(genericRequest).subscribe((data) => {
+    this.calendarService.updateEvent(genericRequest).subscribe(data => {
       this.refresh.next();
       this.isVisible = false;
     });
-
   }
-
 }
-
-
-

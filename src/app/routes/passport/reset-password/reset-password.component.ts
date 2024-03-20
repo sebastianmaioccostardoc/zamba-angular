@@ -5,10 +5,9 @@ import { Router } from '@angular/router';
 import { ALLOW_ANONYMOUS } from '@delon/auth';
 import { _HttpClient } from '@delon/theme';
 import { MatchControl } from '@delon/util/form';
+import { environment } from '@env/environment';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { catchError, finalize, throwError } from 'rxjs';
-
-import { environment } from '@env/environment';
 
 @Component({
   selector: 'reset-password',
@@ -17,22 +16,18 @@ import { environment } from '@env/environment';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResetPasswordComponent implements OnDestroy {
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private http: _HttpClient,
-    private cdr: ChangeDetectorRef,
-  ) {
-  }
+    private cdr: ChangeDetectorRef
+  ) {}
 
   // #region fields
 
-  form = this.fb.nonNullable.group(
-    {
-      mail: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
-    }
-  );
+  form = this.fb.nonNullable.group({
+    mail: ['', [Validators.required, Validators.email, Validators.maxLength(50)]]
+  });
 
   disableSubmitButton = true;
   error = '';
@@ -48,7 +43,7 @@ export class ResetPasswordComponent implements OnDestroy {
     pool: 'exception'
   };
 
-  body: String = "";
+  body: String = '';
 
   // #endregion
 
@@ -77,13 +72,12 @@ export class ResetPasswordComponent implements OnDestroy {
     }
   }
 
-
   resolved(captchaResponse: string) {
     console.log(`Resolved captcha with response: ${captchaResponse}`);
     this.disableSubmitButton = false;
-    console.log("disabledSubmitButton", this.disableSubmitButton);
-    console.log("form valid", this.form.invalid);
-    console.log(this.form.errors)
+    console.log('disabledSubmitButton', this.disableSubmitButton);
+    console.log('form valid', this.form.invalid);
+    console.log(this.form.errors);
     this.cdr.detectChanges();
   }
 
@@ -115,7 +109,7 @@ export class ResetPasswordComponent implements OnDestroy {
         context: new HttpContext().set(ALLOW_ANONYMOUS, true)
       })
       .pipe(
-        catchError((error) => {
+        catchError(error => {
           console.error('Error en la solicitud:', error);
           this.serverError = true;
           return throwError(() => error);
@@ -125,7 +119,7 @@ export class ResetPasswordComponent implements OnDestroy {
           this.cdr.detectChanges();
         })
       )
-      .subscribe((response) => {
+      .subscribe(response => {
         this.router.navigate(['passport', 'resetresult'], { queryParams: { email: data.mail } });
       });
   }

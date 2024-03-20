@@ -8,31 +8,31 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProAccountSettingsBindingComponent {
-  constructor(public msg: NzMessageService) { }
+  constructor(public msg: NzMessageService) {}
 
   Family: any = {
-    CuitEmpresa: "",
-    Legajo: "",
-    ApellidoNombre: "",
-    CuilCuit: "",
-    Atributo: "",
-    NivelEstudio: "",
-    EstadoEstudioNivelEstudio: "",
-    InstitucionEducativa: "",
-    EstadoEstudioInstitucion: "",
-    OtraInstitucion: "",
-    TituloCertificacion: "",
-    FechaTitulacion: "",
-    Observaciones: "Aca va un comentario ... Escriba aqui... esto es un TEST.",
+    CuitEmpresa: '',
+    Legajo: '',
+    ApellidoNombre: '',
+    CuilCuit: '',
+    Atributo: '',
+    NivelEstudio: '',
+    EstadoEstudioNivelEstudio: '',
+    InstitucionEducativa: '',
+    EstadoEstudioInstitucion: '',
+    OtraInstitucion: '',
+    TituloCertificacion: '',
+    FechaTitulacion: '',
+    Observaciones: 'Aca va un comentario ... Escriba aqui... esto es un TEST.',
     piso: 1
   };
 
   Educacion: any = {
-    Nombre: "",
-    Apellido: "",
+    Nombre: '',
+    Apellido: '',
     CuilCuit: 0,
-    Nacionalidad: "",
-    TipoDocumento: "",
+    Nacionalidad: '',
+    TipoDocumento: '',
     NumeroDocumento: 0
-  }
+  };
 }
