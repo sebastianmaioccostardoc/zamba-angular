@@ -9,17 +9,16 @@
     color: white;
 }
 
-
 .item-container {
-    overflow: auto hidden;
-    scrollbar-color: rgba(0 0 0 30%) white;
-    height: 450px;
+    overflow: hidden scroll;
+    scrollbar-color: rgba(0, 0, 0, 0.3) #ffffff !important;
 }
 
 .nz-list-item {
     transition: background-color 0.3s ease;
     padding-left: 20px;
     padding-right: 20px;
+    cursor: pointer;
 }
 
 .nz-list-item:hover {

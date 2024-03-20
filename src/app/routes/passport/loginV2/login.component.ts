@@ -43,6 +43,8 @@ export class UserLoginV2Component implements OnDestroy, OnInit {
       if (event.data === 'ok') {
         console.log('Ha devueto un Ok el sitio web de zamba');
         this.router.navigateByUrl("/");
+      } else {
+        this.authServerError = true;
       }
     });
   }
@@ -56,6 +58,7 @@ export class UserLoginV2Component implements OnDestroy, OnInit {
   });
   error = '';
   serverError = false;
+  authServerError = false
   type = 0;
   loading = false;
   errorUserIsNotActive = false;
@@ -72,6 +75,7 @@ export class UserLoginV2Component implements OnDestroy, OnInit {
     this.error = '';
     this.serverError = false;
     this.errorUserIsNotActive = false;
+    this.authServerError = false;
     const { email, password } = this.form.controls;
     email.markAsDirty();
     email.updateValueAndValidity();

@@ -42,7 +42,7 @@ export class PendingTasksComponent implements OnInit, OnDestroy {
   };
   @Input()
   resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
-  videoId: string = '';
+  divHeight: number = 600;
 
   loading = false;
   data: any = [];
@@ -54,13 +54,17 @@ export class PendingTasksComponent implements OnInit, OnDestroy {
     private pendingTasksService: PendingTasksService,
     private cdr: ChangeDetectorRef,
     private http: HttpClient
-  ) {}
+  ) { }
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();
   }
   ngOnInit(): void {
+    this.resizeEvent.subscribe((item: any) => {
+      this.divHeight = item.itemComponent.height - 30;
+      this.cdr.detectChanges();
+    });
     const tokenData = this.tokenService.get();
     console.log('Token data:', tokenData);
     if (tokenData != null && tokenData['userid'] != null) {

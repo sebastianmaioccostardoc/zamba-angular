@@ -5,6 +5,8 @@
         [nzShowIcon]="true" class="mb-lg" />
       <nz-alert *ngIf="serverError" [nzType]="'error'" [nzMessage]="'app.server.error-message' | i18n"
         [nzShowIcon]="true" class="mb-lg" />
+      <nz-alert *ngIf="authServerError" [nzType]="'error'" [nzMessage]="'app.server.error-auth-message' | i18n"
+        [nzShowIcon]="true" class="mb-lg" />
       <nz-form-item>
         <nz-alert *ngIf="errorUserIsNotActive" [nzType]="'error'"
           [nzMessage]="'app.server.error-user-isnot-active' | i18n" [nzShowIcon]="true" class="mb-lg" />
