@@ -1,13 +1,21 @@
 <div class="title">
-  <span nz-typography><strong>Tareas Pendientes ({{ data.length }})</strong></span>
+  <span nz-typography><strong>Tareas Pendientes</strong></span>
+  <nz-badge [nzCount]="data.length">
+  </nz-badge>
 </div>
 <div class="item-container" [style.height.px]="divHeight">
   <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
     <ng-container *ngFor="let item of data">
       <nz-list-item [nzNoFlex]="true" class="nz-list-item" (dblclick)="OpenTask(item.url)">
-        <div><span nz-typography><strong>{{ item.Tarea }}</strong></span></div>
-        <div><span nz-typography>Etapa: {{ item.Etapa }} </span></div>
-        <div><span nz-typography>Fecha: {{ item.Fecha | date:'dd/MM/yy' }} </span></div>
+        <div><span nz-icon nzType="info-circle" nzTheme="outline"></span><span nz-typography> Descripcion <strong>{{
+              item.Tarea
+              }}</strong></span></div>
+        <div><span nz-icon nzType="apartment" nzTheme="outline"></span><span nz-typography> Etapa </span><span
+            class="text-color-grey">{{ item.Etapa }}</span>
+        </div>
+        <div><span nz-icon nzType="calendar" nzTheme="outline"></span><span nz-typography> Fecha </span><span
+            class="text-color-grey">{{ item.Fecha |
+            date:'dd/MM/yy' }}</span> </div>
       </nz-list-item>
       <nz-list-empty *ngIf="data.length === 0" />
     </ng-container>
