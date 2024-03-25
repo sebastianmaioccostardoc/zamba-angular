@@ -1,7 +1,7 @@
 .title {
-    padding-left: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     background-color: #1890ff;
 }
 
@@ -29,4 +29,36 @@
 
 div span a {
     color: #00000073;
+}
+
+.head-example {
+    width: 42px;
+    height: 42px;
+    border-radius: 4px;
+    background: #eee;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.push-badge {
+    margin-right: 10px;
+}
+
+.text-color-grey {
+    color: rgb(175, 175, 175);
+}
+
+.flex-container {
+    display: flex;
+    justify-content: flex-start;
+
+}
+
+.flex-item:first-child {
+    margin-right: 10px;
+}
+
+.icon-text {
+    display: flex;
+    align-items: center;
 }
