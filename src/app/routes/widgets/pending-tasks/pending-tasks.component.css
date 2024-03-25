@@ -47,3 +47,18 @@ div span a {
 .text-color-grey {
     color: rgb(175, 175, 175);
 }
+
+.flex-container {
+    display: flex;
+    justify-content: flex-start;
+
+}
+
+.flex-item:first-child {
+    margin-right: 10px;
+}
+
+.icon-text {
+    display: flex;
+    align-items: center;
+}
