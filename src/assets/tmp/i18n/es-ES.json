@@ -136,6 +136,7 @@
   "app.login.validate-password":"Ingrese una contraseña",
 
   "app.server.error-message": "El servidor no esta disponible, por favor intente mas tarde",
+  "app.server.error-auth-message": "Ocurrio un error al autenticar",
   "app.server.error-user-isnot-active": "El usuario no esta activo. Por favor verifique su correo electrónico para activar su cuenta",
   "app.setinitialpassword": "Establecer contraseña y activar cuenta",
   "app.passport.welcome": "Bienvenido a Zamba",

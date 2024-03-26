@@ -25,7 +25,7 @@ export class WidgetsContainerComponent implements OnInit {
     private router: Router,
     private WCService: WidgetsContainerService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getWidgetsContainer();
@@ -61,7 +61,6 @@ export class WidgetsContainerComponent implements OnInit {
         this.options.resizable = optionsJson.resizable;
         this.options.minCols = optionsJson.minCols;
         this.options.minRows = optionsJson.minRows;
-
         var WidgetsWidgetCoordinatesJson = JSON.parse(dataJson.WidgetCoordinates);
 
         this.dashboard = WidgetsWidgetCoordinatesJson;
@@ -70,6 +69,7 @@ export class WidgetsContainerComponent implements OnInit {
 
         if (api != undefined) {
           api.optionsChanged();
+          this.cdr.detectChanges();
         }
       });
     }

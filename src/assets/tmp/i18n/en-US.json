@@ -133,6 +133,7 @@
   "app.login.validate-password":"Please enter password",
 
   "app.server.error-message": "Server error, please try again later",
+  "app.server.error-auth-message": "Authentication error, please try again later",
   "app.server.error-user-isnot-active": "The user is not active. Please check your email to activate your account",
   "app.passport.welcome": "Welcome to Zamba",
   "app.register.register": "Register",

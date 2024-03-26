@@ -1,7 +1,8 @@
 import { Component, Inject, Injectable, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
+import { Location } from '@angular/common';
 
 import { environment } from '../../../../environments/environment';
 import { SharedService } from '../../../services/zamba/shared.service';
@@ -16,6 +17,13 @@ import { ZambaService } from '../../../services/zamba/zamba.service';
         width: 100%;
         height: 100%;
       }
+
+      #main-spinner{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
     `
   ]
 })
@@ -23,6 +31,8 @@ export class RuleComponent implements OnInit {
   WebUrl = environment['apiWebViews'];
   navigateUrl: SafeResourceUrl;
   constructor(
+    private location: Location,
+    private router: Router,
     private ZambaService: ZambaService,
     private route: ActivatedRoute,
     public sharedService: SharedService,
@@ -61,7 +71,7 @@ export class RuleComponent implements OnInit {
               //this.navigateUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newUrl);
               // Abre una nueva ventana o pestaña con la URL especificada
               window.open(newUrl, '_blank');
-
+              this.location.back();
               break;
           }
         },

@@ -1,6 +1,7 @@
 import { HttpContext } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, Optional } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, Optional } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { StartupService } from '@core';
 import { ReuseTabService } from '@delon/abc/reuse-tab';
@@ -17,8 +18,11 @@ import { catchError, finalize, throwError } from 'rxjs';
   providers: [SocialService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserLoginV2Component implements OnDestroy {
+export class UserLoginV2Component implements OnDestroy, OnInit {
   constructor(
+
+    private sanitizer: DomSanitizer,
+
     private fb: FormBuilder,
     private router: Router,
     private settingsService: SettingsService,
@@ -30,11 +34,20 @@ export class UserLoginV2Component implements OnDestroy {
     private startupSrv: StartupService,
     private http: _HttpClient,
     private cdr: ChangeDetectorRef
-  ) {}
 
-  // #region fields
-
-  // ...
+  ) {
+    this.safeZambaUrl = "";
+  }
+  ngOnInit(): void {
+    window.addEventListener('message', (event) => {
+      if (event.data === 'ok') {
+        console.log('Ha devueto un Ok el sitio web de zamba');
+        this.router.navigateByUrl("/");
+      } else {
+        this.authServerError = true;
+      }
+    });
+  }
 
   form = this.fb.group({
     email: ['', [Validators.required, Validators.maxLength(50)]],
@@ -45,6 +58,7 @@ export class UserLoginV2Component implements OnDestroy {
   });
   error = '';
   serverError = false;
+  authServerError = false
   type = 0;
   loading = false;
   errorUserIsNotActive = false;
@@ -54,10 +68,14 @@ export class UserLoginV2Component implements OnDestroy {
   count = 0;
   interval$: any;
 
+  safeZambaUrl: SafeResourceUrl;
+
+
   submit(): void {
     this.error = '';
     this.serverError = false;
     this.errorUserIsNotActive = false;
+    this.authServerError = false;
     const { email, password } = this.form.controls;
     email.markAsDirty();
     email.updateValueAndValidity();
@@ -112,7 +130,13 @@ export class UserLoginV2Component implements OnDestroy {
           if (url.includes('/passport')) {
             url = '/';
           }
-          this.router.navigateByUrl(url);
+          let tokenService = this.tokenService.get();
+          console.log(tokenService);
+          let userid = tokenService ? tokenService["userid"] : null;
+          let token = tokenService ? tokenService["token"] : null;
+          this.safeZambaUrl = this.sanitizer.bypassSecurityTrustResourceUrl(environment["apiWebViews"] + "/Security/LoginRRHH.aspx?" + "userid=" + userid + "&token=" + token);
+          this.cdr.detectChanges();
+          //this.router.navigateByUrl(url);
         });
       });
   }
