@@ -40,11 +40,12 @@ export class UserLoginV2Component implements OnDestroy, OnInit {
   }
   ngOnInit(): void {
     window.addEventListener('message', (event) => {
-      if (event.data === 'ok') {
+      if (event.data === 'login-rrhh-ok') {
         console.log('Ha devueto un Ok el sitio web de zamba');
         this.router.navigateByUrl("/");
-      } else {
+      } else if (event.data === 'login-rrhh-error') {
         this.authServerError = true;
+        this.cdr.detectChanges();
       }
     });
   }
