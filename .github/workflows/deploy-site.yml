@@ -29,4 +29,4 @@ jobs:
           username: w330212
           password: Stardoc2024
           local-dir: ./dist/
-          remote-dir: /public_html/ZambaDash
+          server-dir: /public_html/ZambaDash
