@@ -3,6 +3,24 @@ import { PendingVacationsService } from "./service/pending-vacations.service";
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { catchError } from 'rxjs';
 import { KeyValue } from '@angular/common';
+import {
+  Input,
+  EventEmitter,
+  ChangeDetectorRef,
+  ElementRef,
+  Renderer2,
+  QueryList,
+  SimpleChanges,
+  ViewChild,
+  ViewChildren,
+  AfterViewInit,
+  OnDestroy
+} from '@angular/core';
+import { GridsterItem } from 'angular-gridster2';
+import { NzCarouselComponent } from 'ng-zorro-antd/carousel';
+import { Subscription } from 'rxjs';
+import { NzButtonSize } from 'ng-zorro-antd/button';
+import { Vacation } from './entitie/vacation';
 
 @Component({
   selector: 'app-pending-vacations',
@@ -10,10 +28,12 @@ import { KeyValue } from '@angular/common';
   styleUrls: ['./pending-vacations.component.less']
 })
 export class PendingVacationsComponent implements OnInit {
-  emi = new Array();
+  vacations: Vacation[] = [];
+  TotalDays: number = 0;
+  size: NzButtonSize = 'large';
+  info: boolean = true;
 
-
-  constructor(@Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private PVService: PendingVacationsService) { }
+  constructor(@Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private cdr: ChangeDetectorRef, private PVService: PendingVacationsService,) { }
 
   ngOnInit(): void {
     this.GetExternalsearchInfo();
@@ -37,49 +57,53 @@ export class PendingVacationsComponent implements OnInit {
         })
       )
         .subscribe(data => {
-          debugger;
-          this.emi = JSON.parse(data);
-
-          if (this.emi != null) {
-          }
         });
     }
   }
 
+  submit() { }
   GetExternalsearchInfo() {
     const tokenData = this.tokenService.get();
     let genericRequest = {};
-
-    interface KeyValue {
-      [key: string]: any;
-    }
 
     if (tokenData != null) {
       genericRequest = {
         UserId: tokenData['userid'],
         Params: {
-          EntityID: '',
-          query: '',
-          ArrayInt: ''
+          EntityID: '258',
+          DoctypesId: '110'
         }
       };
 
       this.PVService._GetExternalsearchInfo(genericRequest).pipe(
         catchError(error => {
           console.error('Error al obtener datos:', error);
-          throw error; // Puedes relanzar el error o retornar un valor por defecto
+          throw error;
         })
       )
         .subscribe(data => {
-          debugger;
-          this.emi = JSON.parse(data);
+          var JsonData = JSON.parse(data);
 
-          if (this.emi != null) {
+          if (this.vacations != null) {
+            for (let item of JsonData) {
 
+              var vacationItem: Vacation = new Vacation();
+
+              vacationItem.AuthorizeOption = item["AuthorizeOption"];
+              vacationItem.RequestedDaysOption = item["RequestedDaysOption"];
+              vacationItem.VacationFromOption = item["VacationFromOption"];
+              vacationItem.VacationToOption = item["VacationToOption"];
+
+              this.TotalDays = item["TotalDays"].toString();
+              this.vacations.push(vacationItem);
+
+            }
           }
+
+          this.cdr.detectChanges();
+
         });
-
-
     }
   }
 }
+

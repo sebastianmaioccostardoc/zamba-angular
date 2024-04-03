@@ -1,1 +1,30 @@
-<h1>pending-vacations works!</h1>
+<ng-container *ngIf="info; then result; else noInfo"></ng-container>
+
+<ng-template #result>
+
+    <div class="headerWidget" nz-row>
+        <div nz-col nzSpan="12">
+            <span>{{TotalDays}} DIAS DISPONIBLES</span>
+        </div>
+
+        <div nz-col class="BtnEnd" nzSpan="12">
+            <button nz-button nzType="primary" [nzSize]="size" nzShape="circle">
+                <span nz-icon nzType="plus"></span>
+            </button>
+        </div>
+
+    </div>
+
+    <p>Proximas vacaciones: </p>
+
+    <div *ngFor="let item of vacations">
+        <span>{{item.VacationFromOption | date: 'dd/MM/yyyy'}}
+            hasta el {{item.VacationToOption | date: 'dd/MM/yyyy'}}</span>
+    </div>
+
+
+</ng-template>
+
+<ng-template #noInfo>
+    <h1>SIN INFORMACION...</h1>
+</ng-template>
