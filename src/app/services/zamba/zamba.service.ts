@@ -92,7 +92,7 @@ export class ZambaService {
         const deserealize = JSON.parse(xhr.responseText);
         let response = JSON.parse(deserealize);
 
-        if (response.length == 0) return false;
+        if (response.length == 0) return true;
 
         let valueToAnalize = parseInt(response[0].value);
 
@@ -140,7 +140,7 @@ export class ZambaService {
         }),
         map((appData: NzSafeAny) => {
           appData = JSON.parse(appData);
-          console.log(appData);
+          console.log('appData: ', appData);
           if (appData) {
             this.settingService.setApp(appData.app);
             this.settingService.setUser(appData.user);
