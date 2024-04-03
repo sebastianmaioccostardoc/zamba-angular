@@ -10,7 +10,8 @@ import {
   EyeInvisibleFill,
   UserAddOutline,
   StepForwardOutline,
-  ApartmentOutline
+  ApartmentOutline,
+  HomeOutline
 } from '@ant-design/icons-angular/icons';
 import { GlobalFooterModule } from '@delon/abc/global-footer';
 import { HotkeyModule } from '@delon/abc/hotkey';
@@ -68,7 +69,8 @@ const icons: IconDefinition[] = [
   EyeInvisibleFill,
   UserAddOutline,
   StepForwardOutline,
-  ApartmentOutline
+  ApartmentOutline,
+  HomeOutline
 ];
 @NgModule({
   imports: [
@@ -97,4 +99,4 @@ const icons: IconDefinition[] = [
   exports: [...COMPONENTS, ...PASSPORT],
   providers: [{ provide: NZ_ICONS, useValue: icons }]
 })
-export class LayoutModule {}
+export class LayoutModule { }
