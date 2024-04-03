@@ -58,7 +58,7 @@ export class UserLoginV2Component implements OnDestroy, OnInit {
     private startupService: StartupService,
     private cdr: ChangeDetectorRef,
     private passportService: PassportService
-  ) {}
+  ) { }
   ngOnInit(): void {
     window.addEventListener('message', event => {
       if (event.data === 'login-rrhh-ok') {
@@ -70,6 +70,7 @@ export class UserLoginV2Component implements OnDestroy, OnInit {
       }
     });
   }
+
   submit(): void {
     this.error = '';
     this.serverError = false;
