@@ -1,7 +1,7 @@
 .title {
-    padding-left: 20px;
     padding-top: 15px;
     padding-bottom: 15px;
+    padding-left: 20px;
     background-color: #1890ff;
 }
 
@@ -10,15 +10,15 @@
 }
 
 .item-container {
+    scrollbar-color: #4d4d4d !important;
     overflow: hidden scroll;
-    scrollbar-color: rgba(0, 0, 0, 0.3) #ffffff !important;
 }
 
 .nz-list-item {
-    transition: background-color 0.3s ease;
-    padding-left: 20px;
-    padding-right: 20px;
     cursor: pointer;
+    padding-right: 20px;
+    padding-left: 20px;
+    transition: background-color 0.3s ease;
 }
 
 .nz-list-item:hover {
@@ -32,12 +32,12 @@ div span a {
 }
 
 .head-example {
+    display: inline-block;
     width: 42px;
     height: 42px;
-    border-radius: 4px;
-    background: #eee;
-    display: inline-block;
     vertical-align: middle;
+    background: #eee;
+    border-radius: 4px;
 }
 
 .push-badge {
@@ -45,7 +45,7 @@ div span a {
 }
 
 .text-color-grey {
-    color: rgb(175, 175, 175);
+    color: #afafaf;
 }
 
 .flex-container {

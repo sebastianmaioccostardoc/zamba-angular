@@ -3,7 +3,16 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IconDefinition } from '@ant-design/icons-angular';
-import { EyeInvisibleOutline, EyeOutline, EyeFill, EyeInvisibleFill, UserAddOutline, StepForwardOutline, ApartmentOutline } from '@ant-design/icons-angular/icons';
+import {
+  EyeInvisibleOutline,
+  EyeOutline,
+  EyeFill,
+  EyeInvisibleFill,
+  UserAddOutline,
+  StepForwardOutline,
+  ApartmentOutline,
+  HomeOutline
+} from '@ant-design/icons-angular/icons';
 import { GlobalFooterModule } from '@delon/abc/global-footer';
 import { HotkeyModule } from '@delon/abc/hotkey';
 import { NoticeIconModule } from '@delon/abc/notice-icon';
@@ -53,7 +62,16 @@ const HEADERCOMPONENTS = [
 import { LayoutPassportComponent } from './passport/passport.component';
 
 const PASSPORT = [LayoutPassportComponent];
-const icons: IconDefinition[] = [EyeInvisibleOutline, EyeOutline, EyeFill, EyeInvisibleFill, UserAddOutline, StepForwardOutline, ApartmentOutline];
+const icons: IconDefinition[] = [
+  EyeInvisibleOutline,
+  EyeOutline,
+  EyeFill,
+  EyeInvisibleFill,
+  UserAddOutline,
+  StepForwardOutline,
+  ApartmentOutline,
+  HomeOutline
+];
 @NgModule({
   imports: [
     CommonModule,

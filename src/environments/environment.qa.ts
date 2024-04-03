@@ -8,8 +8,7 @@ export const environment = {
   production: false,
   useHash: true,
   apiRestBasePath: 'http://www.zamba.com.ar/zambaweb.restapi/api/Dashboard',
-  apiWebViews: 'http://www.zamba.com.ar/zamba.web/Views',
-  zambaWeb: "http://www.zamba.com.ar/Zamba.Web",
+  zambaWeb: 'http://www.zamba.com.ar/Zamba.Web',
   cliente: 'zamba',
   api: {
     baseUrl: './',

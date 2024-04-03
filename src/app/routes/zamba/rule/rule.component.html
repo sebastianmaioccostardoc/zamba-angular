@@ -1,2 +1,2 @@
-<span *ngIf="!navigateUrl">ejecutando la regla</span>
+<nz-spin *ngIf="!navigateUrl" nzTip="" id="main-spinner" />
 <iframe id="ruleComponentIframe" *ngIf="navigateUrl" [src]="navigateUrl" frameborder="0"></iframe>
