@@ -19,8 +19,8 @@ export class LayoutBasicComponent implements OnInit {
   }
 
   options: LayoutDefaultOptions = {
-    logoExpanded: `./assets/logo-full.svg`,
-    logoCollapsed: `./assets/logo.svg`,
+    logoExpanded: `./assets/logo-zamba-rrhh-t.png`,
+    logoCollapsed: `./assets/logo-zamba-rrhh-iso.png`,
     hideAside: environment['cliente'] == `zamba` ? this.ZambaService.GetConfigUserSidbar() : false
   };
   searchToggleStatus = false;

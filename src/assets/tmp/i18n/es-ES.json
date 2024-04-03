@@ -118,7 +118,7 @@
   "app.lock": "Bloqueo",
   "app.login.message-invalid-credentials": "Correo o contraseña no válidos",
   "app.login.message-invalid-verification-code": "Código de verificación inválido",
-  "app.login.tab-login-credentials": "Credenciales",
+  "app.login.tab-login-credentials": "Inicia sesión para continuar",
   "app.login.tab-login-reset-password": "Restablecer contraseña",
   "app.login.tab-login-mobile": "Número de móvil",
   "app.login.remember-me": "Rercuérdame",
