@@ -10,7 +10,7 @@
 }
 
 .item-container {
-    scrollbar-color: rgba(0, 0, 0, 30%) !important;
+    scrollbar-color: #4d4d4d !important;
     overflow: hidden scroll;
 }
 
