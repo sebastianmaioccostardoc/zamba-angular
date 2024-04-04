@@ -7,7 +7,8 @@ import { ZambaService } from '../../services/zamba/zamba.service';
 
 @Component({
   selector: 'layout-basic',
-  templateUrl: './basic.component.html'
+  templateUrl: './basic.component.html',
+  styleUrls: ['./basic.component.less']
 })
 export class LayoutBasicComponent implements OnInit {
   constructor(
@@ -20,7 +21,7 @@ export class LayoutBasicComponent implements OnInit {
   }
 
   options: LayoutDefaultOptions = {
-    logoExpanded: `./assets/logo-zamba-rrhh-t.png`,
+    logoExpanded: `./assets/logo-zamba-rrhh-t.svg`,
     logoCollapsed: `./assets/logo-zamba-rrhh-iso.png`,
     hideAside: false
   };
