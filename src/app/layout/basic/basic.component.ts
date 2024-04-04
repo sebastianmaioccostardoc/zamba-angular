@@ -13,15 +13,16 @@ export class LayoutBasicComponent implements OnInit {
   constructor(
     private settings: SettingsService,
     private ZambaService: ZambaService
-  ) {}
+  ) { }
   ngOnInit(): void {
     this.ZambaService.GetSidebarItems();
+    this.settings.setLayout('collapsed', true);
   }
 
   options: LayoutDefaultOptions = {
     logoExpanded: `./assets/logo-zamba-rrhh-t.png`,
     logoCollapsed: `./assets/logo-zamba-rrhh-iso.png`,
-    hideAside: environment['cliente'] == `zamba` ? this.ZambaService.GetConfigUserSidbar() : false
+    hideAside: false
   };
   searchToggleStatus = false;
   showSettingDrawer = !environment.production;
