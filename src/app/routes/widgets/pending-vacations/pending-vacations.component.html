@@ -1,35 +1,29 @@
-<ng-container *ngIf="info; then result; else noInfo"></ng-container>
+<ng-container *ngIf="info; then result; else noInfo" />
 
 <ng-template #result>
-
-    <div class="displayFlex alignCenter headerWidget" nz-row>
-        <div nz-col nzSpan="12">
-            <span class="marginRight10Px truncate">
-                {{TotalDays}} DIAS DISPONIBLES zxzx
-            </span>
-        </div>
-
-        <div nz-col class="displayFlex BtnEnd" nzSpan="12">
-            <button nz-button nzType="primary" [nzSize]="size">
-                <span nz-icon nzType="plus"></span>
-            </button>
-        </div>
-
+  <div class="displayFlex alignCenter headerWidget" nz-row>
+    <div nz-col nzSpan="12">
+      <span class="marginRight10Px truncate"> {{ TotalDays }} DIAS DISPONIBLES zxzx </span>
     </div>
 
-    <!-- <span>Proximas vacaciones: </span> -->
-    <nz-alert nzBanner nzMessage="Warning text"></nz-alert>
-    <div *ngFor="let item of vacations">
-        <span>
-            {{item.VacationFromOption | date: 'dd/MM/yyyy'}}
-            hasta
-            {{item.VacationToOption | date: 'dd/MM/yyyy'}}
-        </span>
+    <div nz-col class="displayFlex BtnEnd" nzSpan="12">
+      <button nz-button nzType="primary" [nzSize]="size">
+        <span nz-icon nzType="plus"></span>
+      </button>
     </div>
+  </div>
 
-
+  <!-- <span>Proximas vacaciones: </span> -->
+  <nz-alert nzBanner nzMessage="Warning text" />
+  <div *ngFor="let item of vacations">
+    <span>
+      {{ item.VacationFromOption | date: 'dd/MM/yyyy' }}
+      hasta
+      {{ item.VacationToOption | date: 'dd/MM/yyyy' }}
+    </span>
+  </div>
 </ng-template>
 
 <ng-template #noInfo>
-    <h1>SIN INFORMACION...</h1>
+  <h1>SIN INFORMACION...</h1>
 </ng-template>
