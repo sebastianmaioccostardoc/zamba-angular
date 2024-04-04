@@ -1,12 +1,12 @@
-import { Component, Inject, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { PendingVacationsService } from "./service/pending-vacations.service";
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
-import { NzButtonSize } from 'ng-zorro-antd/button';
-import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
-import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { catchError } from 'rxjs';
-
+import { ChangeDetectorRef } from '@angular/core';
+import { NzButtonSize } from 'ng-zorro-antd/button';
 import { Vacation } from './entitie/vacation';
-import { PendingVacationsService } from './service/pending-vacations.service';
+import { NZ_ICONS } from 'ng-zorro-antd/icon';
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 
 @Component({
   selector: 'app-pending-vacations',
@@ -19,11 +19,7 @@ export class PendingVacationsComponent implements OnInit {
   size: NzButtonSize = 'large';
   info: boolean = true;
 
-  constructor(
-    @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
-    private cdr: ChangeDetectorRef,
-    private PVService: PendingVacationsService
-  ) {}
+  constructor(@Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private cdr: ChangeDetectorRef, private PVService: PendingVacationsService,) { }
 
   ngOnInit(): void {
     this.GetExternalsearchInfo();
@@ -40,18 +36,18 @@ export class PendingVacationsComponent implements OnInit {
         Params: ''
       };
 
-      this.PVService._GetVacation(genericRequest)
-        .pipe(
-          catchError(error => {
-            console.error('Error al obtener datos:', error);
-            throw error; // Puedes relanzar el error o retornar un valor por defecto
-          })
-        )
-        .subscribe(data => {});
+      this.PVService._GetVacation(genericRequest).pipe(
+        catchError(error => {
+          console.error('Error al obtener datos:', error);
+          throw error; // Puedes relanzar el error o retornar un valor por defecto
+        })
+      )
+        .subscribe(data => {
+        });
     }
   }
 
-  submit() {}
+  submit() { }
   GetExternalsearchInfo() {
     const tokenData = this.tokenService.get();
     let genericRequest = {};
@@ -65,32 +61,35 @@ export class PendingVacationsComponent implements OnInit {
         }
       };
 
-      this.PVService._GetExternalsearchInfo(genericRequest)
-        .pipe(
-          catchError(error => {
-            console.error('Error al obtener datos:', error);
-            throw error;
-          })
-        )
+      this.PVService._GetExternalsearchInfo(genericRequest).pipe(
+        catchError(error => {
+          console.error('Error al obtener datos:', error);
+          throw error;
+        })
+      )
         .subscribe(data => {
           var JsonData = JSON.parse(data);
 
           if (this.vacations != null) {
             for (let item of JsonData) {
+
               var vacationItem: Vacation = new Vacation();
 
-              vacationItem.AuthorizeOption = item['AuthorizeOption'];
-              vacationItem.RequestedDaysOption = item['RequestedDaysOption'];
-              vacationItem.VacationFromOption = item['VacationFromOption'];
-              vacationItem.VacationToOption = item['VacationToOption'];
+              vacationItem.AuthorizeOption = item["AuthorizeOption"];
+              vacationItem.RequestedDaysOption = item["RequestedDaysOption"];
+              vacationItem.VacationFromOption = item["VacationFromOption"];
+              vacationItem.VacationToOption = item["VacationToOption"];
 
-              this.TotalDays = item['TotalDays'].toString();
+              this.TotalDays = item["TotalDays"].toString();
               this.vacations.push(vacationItem);
+
             }
           }
 
           this.cdr.detectChanges();
+
         });
     }
   }
 }
+

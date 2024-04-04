@@ -21,19 +21,12 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { PendingTasksComponent } from './pending-tasks/pending-tasks.component';
-import { PendingVacationsComponent } from './pending-vacations/pending-vacations.component';
 import { VideoplayerComponent } from './videoplayer/videoplayer.component';
 import { WidgetsComponent } from './widgets/widgets.component';
 import { WidgetsRoutingModule } from './widgets-routing.module';
+import { PendingVacationsComponent } from "./pending-vacations/pending-vacations.component";
 
-const COMPONENTS: Array<Type<void>> = [
-  WidgetsComponent,
-  CalendarComponent,
-  CarouselComponent,
-  VideoplayerComponent,
-  PendingTasksComponent,
-  PendingVacationsComponent
-];
+const COMPONENTS: Array<Type<void>> = [WidgetsComponent, CalendarComponent, CarouselComponent, VideoplayerComponent, PendingTasksComponent, PendingVacationsComponent];
 
 @NgModule({
   imports: [
@@ -62,4 +55,4 @@ const COMPONENTS: Array<Type<void>> = [
   declarations: COMPONENTS,
   exports: COMPONENTS
 })
-export class WidgetsModule {}
+export class WidgetsModule { }
