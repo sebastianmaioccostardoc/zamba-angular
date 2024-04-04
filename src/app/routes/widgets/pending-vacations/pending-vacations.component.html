@@ -2,24 +2,29 @@
 
 <ng-template #result>
 
-    <div class="headerWidget" nz-row>
+    <div class="displayFlex alignCenter headerWidget" nz-row>
         <div nz-col nzSpan="12">
-            <span>{{TotalDays}} DIAS DISPONIBLES</span>
+            <span class="marginRight10Px truncate">
+                {{TotalDays}} DIAS DISPONIBLES
+            </span>
         </div>
 
-        <div nz-col class="BtnEnd" nzSpan="12">
-            <button nz-button nzType="primary" [nzSize]="size" nzShape="circle">
+        <div nz-col class="displayFlex BtnEnd" nzSpan="12">
+            <button nz-button nzType="primary" [nzSize]="size">
                 <span nz-icon nzType="plus"></span>
             </button>
         </div>
 
     </div>
 
-    <p>Proximas vacaciones: </p>
-
+    <!-- <span>Proximas vacaciones: </span> -->
+    <nz-alert nzBanner nzMessage="Warning text"></nz-alert>
     <div *ngFor="let item of vacations">
-        <span>{{item.VacationFromOption | date: 'dd/MM/yyyy'}}
-            hasta el {{item.VacationToOption | date: 'dd/MM/yyyy'}}</span>
+        <span>
+            {{item.VacationFromOption | date: 'dd/MM/yyyy'}}
+            hasta
+            {{item.VacationToOption | date: 'dd/MM/yyyy'}}
+        </span>
     </div>
 
 

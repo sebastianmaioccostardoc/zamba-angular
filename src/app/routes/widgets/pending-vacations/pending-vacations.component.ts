@@ -2,25 +2,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { PendingVacationsService } from "./service/pending-vacations.service";
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { catchError } from 'rxjs';
-import { KeyValue } from '@angular/common';
-import {
-  Input,
-  EventEmitter,
-  ChangeDetectorRef,
-  ElementRef,
-  Renderer2,
-  QueryList,
-  SimpleChanges,
-  ViewChild,
-  ViewChildren,
-  AfterViewInit,
-  OnDestroy
-} from '@angular/core';
-import { GridsterItem } from 'angular-gridster2';
-import { NzCarouselComponent } from 'ng-zorro-antd/carousel';
-import { Subscription } from 'rxjs';
+import { ChangeDetectorRef } from '@angular/core';
 import { NzButtonSize } from 'ng-zorro-antd/button';
 import { Vacation } from './entitie/vacation';
+import { NZ_ICONS } from 'ng-zorro-antd/icon';
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 
 @Component({
   selector: 'app-pending-vacations',
