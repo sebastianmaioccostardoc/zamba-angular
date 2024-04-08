@@ -89,7 +89,8 @@ const routes: Routes = [
     path: 'welcome',
     component: InitialPasswordWizardComponent
   },
-  { path: 'passport/callback/:type', component: CallbackComponent }
+  { path: 'passport/callback/:type', component: CallbackComponent },
+  { path: '**', redirectTo: 'passport/login' }
 ];
 
 @NgModule({
