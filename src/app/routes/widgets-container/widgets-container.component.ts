@@ -4,6 +4,7 @@ import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { _HttpClient } from '@delon/theme';
 import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { filter } from 'rxjs';
 
 import { WidgetsContainerOptions } from './entities/WidgetsContainerOptions';
 import { WidgetsContainerService } from './service/widgets-container.service';
@@ -52,26 +53,28 @@ export class WidgetsContainerComponent implements OnInit {
         Params: ''
       };
 
-      this.WCService._getWidgetsContainer(genericRequest).subscribe(data => {
-        var dataJson = JSON.parse(data)[0];
-        var optionsJson = JSON.parse(dataJson.Options);
+      this.WCService._getWidgetsContainer(genericRequest)
+        .pipe(filter(data => data != '[]'))
+        .subscribe(data => {
+          var dataJson = JSON.parse(data)[0];
+          var optionsJson = JSON.parse(dataJson.Options);
 
-        this.options.displayGrid = optionsJson.displayGrid;
-        this.options.draggable = optionsJson.draggable;
-        this.options.resizable = optionsJson.resizable;
-        this.options.minCols = optionsJson.minCols;
-        this.options.minRows = optionsJson.minRows;
-        var WidgetsWidgetCoordinatesJson = JSON.parse(dataJson.WidgetCoordinates);
+          this.options.displayGrid = optionsJson.displayGrid;
+          this.options.draggable = optionsJson.draggable;
+          this.options.resizable = optionsJson.resizable;
+          this.options.minCols = optionsJson.minCols;
+          this.options.minRows = optionsJson.minRows;
+          var WidgetsWidgetCoordinatesJson = JSON.parse(dataJson.WidgetCoordinates);
 
-        this.dashboard = WidgetsWidgetCoordinatesJson;
+          this.dashboard = WidgetsWidgetCoordinatesJson;
 
-        var api: any | null = this.options.api;
+          var api: any | null = this.options.api;
 
-        if (api != undefined) {
-          api.optionsChanged();
-          this.cdr.detectChanges();
-        }
-      });
+          if (api != undefined) {
+            api.optionsChanged();
+            this.cdr.detectChanges();
+          }
+        });
     }
   }
 

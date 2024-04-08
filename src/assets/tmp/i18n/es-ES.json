@@ -163,7 +163,7 @@
   "app.register.get-verification-code": "Obtener código",
   "app.register.sign-in": "¿Ya tiene una cuenta?",
   "app.register.do-click-here": "Haz click aquí",
-  "app.register-result.msg": "Cuenta： registrada con {{email}}",
+  "app.register-result.msg": "Cuenta registrada con {{email}}",
   "app.change-password-expired.msg": "Lo sentimos, este enlace ha caducado. Por favor, solicita el cambio de contraseña nuevamente.",
   "app.resend-result.msg": "El correo de verificación se ha enviado a: {{email}}",
   
@@ -174,7 +174,7 @@
   "app.register-result.activation-email":
     "El correo electrónico de activación se ha enviado a su dirección de correo electrónico. Por favor, inicie sesión en su correo electrónico y haga click en el enlace del correo electrónico para activar la cuenta.",
   "app.register-result.resend-email-result": "Por favor, inicie sesión en su correo electrónico y haga click en el enlace del correo electrónico para activar la cuenta.", 
-  "app.register-result.back-home": "Volver a la página de inicio",
+  "app.register-result.back-home": "Ingresar",
   "app.change-password-expired.go-home": "Ir al inicio",
   "app.change-password-result.error-msg": "Lo sentimos, ha ocurrido un error. Por favor, intente nuevamente.",
   "app.change-password-result.success-msg": "La contraseña se ha cambiado exitosamente.",

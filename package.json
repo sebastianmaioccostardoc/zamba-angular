@@ -1,16 +1,16 @@
 {
-  "name": "ng-alain",
+  "name": "zamba",
   "version": "16.4.2",
   "description": "ng-zorro-antd admin panel front-end framework",
   "author": "cipchk <cipchk@qq.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ng-alain/ng-alain.git"
+    "url": "git+https://github.com/zamba/zamba.git"
   },
   "bugs": {
-    "url": "https://github.com/ng-alain/ng-alain/issues"
+    "url": "https://github.com/zamba/zamba/issues"
   },
-  "homepage": "https://ng-alain.com",
+  "homepage": "https://zamba.com",
   "license": "MIT",
   "keywords": [
     "delon",

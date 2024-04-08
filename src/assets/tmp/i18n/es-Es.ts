@@ -162,7 +162,7 @@ export const esEs = {
     "app.register-result.activation-email":
         "El correo electrónico de activación se ha enviado a su dirección de correo electrónico. Por favor, inicie sesión en su correo electrónico y haga click en el enlace del correo electrónico para activar la cuenta.",
     "app.register-result.resend-email-result": "Por favor, inicie sesión en su correo electrónico y haga click en el enlace del correo electrónico para activar la cuenta.",
-    "app.register-result.back-home": "Volver a la página de inicio",
+    "app.register-result.back-home": "Ingresar",
     "app.register-result.view-mailbox": "Ver buzón",
     "validation.email.required": "¡Por favor, introduzca su correo electrónico!",
     "validation.email.maxLength": "¡El correo electrónico no puede tener más de 50 caracteres!",

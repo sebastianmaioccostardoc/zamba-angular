@@ -63,7 +63,7 @@ export class UserLoginV2Component implements OnDestroy, OnInit {
     window.addEventListener('message', event => {
       if (event.data === 'login-rrhh-ok') {
         console.log('Ha devueto un Ok el sitio web de zamba');
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/dashboard');
       } else if (event.data === 'login-rrhh-error') {
         this.authServerError = true;
         this.cdr.detectChanges();
@@ -117,20 +117,18 @@ export class UserLoginV2Component implements OnDestroy, OnInit {
             return;
           }
           this.reuseTabService.clear();
-          this.startupService.load().subscribe(() => {
-            let url = this.tokenService.referrer!.url || '/';
-            if (url.includes('/passport')) {
-              url = '/';
-            }
-            let tokenService = this.tokenService.get();
-            console.log(tokenService);
-            let userid = tokenService ? tokenService['userid'] : null;
-            let token = tokenService ? tokenService['token'] : null;
-            this.safeZambaUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-              `${environment['zambaWeb']}/Views/Security/LoginRRHH.aspx?` + `userid=${userid}&token=${token}`
-            );
-            this.cdr.detectChanges();
-          });
+          let url = this.tokenService.referrer!.url || '/';
+          if (url.includes('/passport')) {
+            url = '/';
+          }
+          let tokenService = this.tokenService.get();
+          console.log(tokenService);
+          let userid = tokenService ? tokenService['userid'] : null;
+          let token = tokenService ? tokenService['token'] : null;
+          this.safeZambaUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+            `${environment['zambaWeb']}/Views/Security/LoginRRHH.aspx?` + `userid=${userid}&token=${token}`
+          );
+          this.cdr.detectChanges();
         })
     );
   }

@@ -135,7 +135,7 @@ export class ZambaService {
       })
       .pipe(
         catchError(res => {
-          console.warn(`StartupService.load: Network request failed`, res);
+          console.warn(`Network request failed`, res);
           return of(null);
         }),
         map((appData: NzSafeAny) => {
