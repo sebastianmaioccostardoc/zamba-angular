@@ -4,13 +4,11 @@
 
     <div class="displayFlex alignCenter headerWidget" nz-row>
         <div nz-col nzSpan="12" class="truncate">
-            <span class="marginRight10Px truncate">
-                {{TotalDays}} DIAS DISPONIBLES
-            </span>
+            <span nz-typography><strong>{{TotalDays}} DIAS DISPONIBLES</strong></span>
         </div>
 
         <div nz-col class="displayFlex BtnEnd" nzSpan="12">
-            <button nz-button nzType="primary" [nzSize]="size">
+            <button nz-button nzType="default" nzShape="circle" [nzSize]="size" ngClick="OnClickTest()">
                 <span nz-icon nzType="plus"></span>
             </button>
         </div>
@@ -19,9 +17,7 @@
 
     <!-- <span>Proximas vacaciones: </span> -->
     <div *ngFor="let item of vacations">
-        <span>
-            Vacaciones aprobadas
-        </span>
+        <strong><nz-alert nzType="info" nzMessage="Vacaciones aprobadas"></nz-alert></strong>
 
         <nz-alert nzBanner nzMessage="
             {{item.VacationFromOption | date: 'dd/MM/yyyy'}}

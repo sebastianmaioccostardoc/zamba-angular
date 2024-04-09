@@ -1,12 +1,13 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit } from '@angular/core';
 import { PendingVacationsService } from "./service/pending-vacations.service";
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
-import { catchError } from 'rxjs';
+import { Subscription, catchError } from 'rxjs';
 import { ChangeDetectorRef } from '@angular/core';
 import { NzButtonSize } from 'ng-zorro-antd/button';
 import { Vacation } from './entitie/vacation';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
+import { GridsterItem } from 'angular-gridster2';
 
 @Component({
   selector: 'app-pending-vacations',
@@ -19,11 +20,35 @@ export class PendingVacationsComponent implements OnInit {
   size: NzButtonSize = 'large';
   info: boolean = true;
 
+  @Input()
+  widget: GridsterItem = {
+    type: '',
+    title: '',
+    cols: 0,
+    rows: 0,
+    x: 0,
+    y: 0,
+    resizeEvent: new EventEmitter<GridsterItem>()
+  };
+
+
+  @Input()
+  resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
+
+  @Input()
+  changeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
+
+  private resizeSubscription: Subscription | undefined;
+  private changeSubscription: Subscription | undefined;
+
   constructor(@Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private cdr: ChangeDetectorRef, private PVService: PendingVacationsService,) { }
 
   ngOnInit(): void {
     this.GetExternalsearchInfo();
     this.GetVacation();
+
+    this.resizeSubscription = this.resizeEvent.subscribe((event: any) => { });
+    this.changeSubscription = this.changeEvent.subscribe((item: any) => { });
   }
 
   private GetVacation() {
@@ -48,6 +73,7 @@ export class PendingVacationsComponent implements OnInit {
   }
 
   submit() { }
+
   GetExternalsearchInfo() {
     const tokenData = this.tokenService.get();
     let genericRequest = {};
@@ -90,6 +116,10 @@ export class PendingVacationsComponent implements OnInit {
 
         });
     }
+  }
+
+  OnClickTest() {
+    console.log('OnClickTest');
   }
 }
 
