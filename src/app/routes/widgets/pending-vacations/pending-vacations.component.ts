@@ -8,6 +8,7 @@ import { Vacation } from './entitie/vacation';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 import { GridsterItem } from 'angular-gridster2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pending-vacations',
@@ -41,14 +42,23 @@ export class PendingVacationsComponent implements OnInit {
   private resizeSubscription: Subscription | undefined;
   private changeSubscription: Subscription | undefined;
 
-  constructor(@Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private cdr: ChangeDetectorRef, private PVService: PendingVacationsService,) { }
+  constructor(@Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private cdr: ChangeDetectorRef,
+    private PVService: PendingVacationsService, private router: Router,) { }
 
   ngOnInit(): void {
     this.GetExternalsearchInfo();
     this.GetVacation();
 
-    this.resizeSubscription = this.resizeEvent.subscribe((event: any) => { });
-    this.changeSubscription = this.changeEvent.subscribe((item: any) => { });
+    this.resizeSubscription = this.resizeEvent.subscribe((event: any) => {
+      // console.log("🔴: " + event);
+      if (this.widget['name'] == event.item['name']) {
+        this.changeEvent.emit(event);
+        this.cdr.detectChanges();
+      }
+    });
+    this.changeSubscription = this.changeEvent.subscribe((item: any) => {
+      // console.log("🟢: " + item);
+    });
   }
 
   private GetVacation() {
@@ -71,8 +81,6 @@ export class PendingVacationsComponent implements OnInit {
         });
     }
   }
-
-  submit() { }
 
   GetExternalsearchInfo() {
     const tokenData = this.tokenService.get();
@@ -118,8 +126,9 @@ export class PendingVacationsComponent implements OnInit {
     }
   }
 
-  OnClickTest() {
-    console.log('OnClickTest');
+  RequestVacation() {
+    var route = "/zamba/rule";
+    this.router.navigate([route], { queryParams: { typeRule: 'executeViewTask', ruleId: "133" } });
   }
 }
 
