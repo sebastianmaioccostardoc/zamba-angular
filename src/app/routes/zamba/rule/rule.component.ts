@@ -66,9 +66,12 @@ export class RuleComponent implements OnInit {
               let urlTask = result.Vars.taskurl;
 
               let newUrl = `${this.WebUrl}${urlTask}`;
-              newUrl = `${newUrl}&modalmode=true&t=${JSON.stringify(tokenData)}`;
+              // Encode string to Base64
+              const encodedString = this.encodeStringToBase64(JSON.stringify(tokenData));
 
-              this.navigateUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newUrl);
+              newUrl = `${newUrl}&modalmode=true&t=${encodedString}`;
+
+              // this.navigateUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newUrl);
               // Abre una nueva ventana o pestaña con la URL especificada
               window.open(newUrl, '_blank');
 
@@ -82,5 +85,14 @@ export class RuleComponent implements OnInit {
         }
       });
     });
+  }
+
+  encodeStringToBase64(str: string): string {
+    return btoa(str);
+  }
+
+  // Function to decode base64 to string
+  decodeBase64ToString(base64: string): string {
+    return atob(base64);
   }
 }
