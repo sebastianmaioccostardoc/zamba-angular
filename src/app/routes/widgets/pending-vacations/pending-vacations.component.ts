@@ -21,6 +21,10 @@ export class PendingVacationsComponent implements OnInit {
   size: NzButtonSize = 'large';
   info: boolean = true;
 
+
+
+
+
   @Input()
   widget: GridsterItem = {
     type: '',
