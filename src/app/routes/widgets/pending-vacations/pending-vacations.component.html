@@ -1,35 +1,35 @@
 <ng-container *ngIf="info; then result; else noInfo"></ng-container>
 
 <ng-template #result>
-
     <div class="displayFlex alignCenter headerWidget" nz-row>
-        <div nz-col nzSpan="12" class="truncate">
+        <div nz-col nzSpan="17" class="truncate">
             <span nz-typography><strong>{{TotalDays}} DIAS DISPONIBLES</strong></span>
         </div>
 
-        <div nz-col class="displayFlex BtnEnd" nzSpan="12">
+        <div nz-col class="displayFlex BtnEnd" nzSpan="7">
             <button nz-button nzType="default" nzShape="circle" [nzSize]="size" (click)="RequestVacation()">
                 <span nz-icon nzType="plus"></span>
             </button>
         </div>
-
     </div>
 
-    <!-- <span>Proximas vacaciones: </span> -->
-    <div *ngFor="let item of vacations">
-        <strong><nz-alert nzType="info" nzMessage="Vacaciones aprobadas"></nz-alert></strong>
-
-        <nz-alert nzBanner nzMessage="
+    <div>
+        <ng-container *ngFor="let item of vacations" style="height: 500px; overflow-y: auto;">
+            <strong><nz-alert nzType="info" nzMessage="Vacaciones aprobadas"></nz-alert></strong>
+            <nz-alert nzBanner nzMessage="
             {{item.VacationFromOption | date: 'dd/MM/yyyy'}}
             hasta
             {{item.VacationToOption | date: 'dd/MM/yyyy'}}">
-        </nz-alert>
-
+            </nz-alert>
+        </ng-container>
     </div>
-
-
 </ng-template>
 
 <ng-template #noInfo>
-    <h1>SIN INFORMACION...</h1>
+    <div class="displayFlex alignCenter headerWidget" nz-row>
+        <div nz-col nzSpan="24" class="truncate">
+            <span nz-typography><strong> SIN INFORMACION... </strong></span>
+        </div>
+    </div>
+    <h1 *ngShow="result == true" style="text-align: center;"> No se pudo obtener informacionde la fuente. </h1>
 </ng-template>

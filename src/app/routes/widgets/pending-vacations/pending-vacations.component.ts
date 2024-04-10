@@ -41,13 +41,13 @@ export class PendingVacationsComponent implements OnInit {
 
   private resizeSubscription: Subscription | undefined;
   private changeSubscription: Subscription | undefined;
+  result: boolean = false;
 
   constructor(@Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private cdr: ChangeDetectorRef,
     private PVService: PendingVacationsService, private router: Router,) { }
 
   ngOnInit(): void {
     this.GetExternalsearchInfo();
-    this.GetVacation();
 
     this.resizeSubscription = this.resizeEvent.subscribe((event: any) => {
       // console.log("🔴: " + event);
@@ -60,29 +60,11 @@ export class PendingVacationsComponent implements OnInit {
       // console.log("🟢: " + item);
     });
   }
-
-  private GetVacation() {
-    const tokenData = this.tokenService.get();
-    let genericRequest = {};
-
-    if (tokenData != null) {
-      genericRequest = {
-        UserId: tokenData['userid'],
-        Params: ''
-      };
-
-      this.PVService._GetVacation(genericRequest).pipe(
-        catchError(error => {
-          console.error('Error al obtener datos:', error);
-          throw error; // Puedes relanzar el error o retornar un valor por defecto
-        })
-      )
-        .subscribe(data => {
-        });
-    }
-  }
-
   GetExternalsearchInfo() {
+    this.info = false;
+    this.result = false;
+    this.cdr.detectChanges();
+
     const tokenData = this.tokenService.get();
     let genericRequest = {};
 
@@ -104,7 +86,7 @@ export class PendingVacationsComponent implements OnInit {
         .subscribe(data => {
           var JsonData = JSON.parse(data);
 
-          if (this.vacations != null) {
+          if (JsonData != null) {
             for (let item of JsonData) {
 
               var vacationItem: Vacation = new Vacation();
@@ -114,10 +96,17 @@ export class PendingVacationsComponent implements OnInit {
               vacationItem.VacationFromOption = item["VacationFromOption"];
               vacationItem.VacationToOption = item["VacationToOption"];
 
-              this.TotalDays = item["TotalDays"].toString();
+              //TODO: Refactorizar si es que cambia la estructura de forma definitiva.
+              this.TotalDays = JsonData[JsonData.length - 1]["TotalDays"].toString();
               this.vacations.push(vacationItem);
+              this.info = true;
+              this.result = true;
 
             }
+          }
+          else {
+            this.info = false;
+            this.result = true;
           }
 
           this.cdr.detectChanges();
