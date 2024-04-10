@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutBasicComponent,
-    canActivate: [ authSimpleCanActivate],
+    canActivate: [authSimpleCanActivate],
     canActivateChild: [authSimpleCanActivateChild],
     data: {},
     children: [

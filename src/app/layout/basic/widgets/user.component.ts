@@ -35,7 +35,7 @@ export class HeaderUserComponent {
     private settings: SettingsService,
     private router: Router,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService
-  ) { }
+  ) {}
 
   logout(): void {
     this.tokenService.clear();

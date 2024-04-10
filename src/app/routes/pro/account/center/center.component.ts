@@ -3,7 +3,6 @@ import { ActivationEnd, Router } from '@angular/router';
 import { _HttpClient } from '@delon/theme';
 import { Subscription, zip, filter } from 'rxjs';
 
-
 @Component({
   selector: 'app-account-center',
   templateUrl: './center.component.html',
@@ -15,7 +14,7 @@ export class ProAccountCenterComponent implements OnInit, OnDestroy {
     private router: Router,
     private http: _HttpClient,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {}
   private router$!: Subscription;
   @ViewChild('tagInput', { static: false }) private tagInput!: ElementRef<HTMLInputElement>;
   user: any;
