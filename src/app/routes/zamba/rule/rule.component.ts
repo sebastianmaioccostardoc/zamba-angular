@@ -29,6 +29,7 @@ import { ZambaService } from '../../../services/zamba/zamba.service';
 })
 export class RuleComponent implements OnInit {
   WebUrl = environment['zambaWeb'] + "/Views";
+
   navigateUrl: SafeResourceUrl;
   constructor(
     private location: Location,
@@ -63,15 +64,20 @@ export class RuleComponent implements OnInit {
               console.log('Datos recibidos:', data);
 
               let result = JSON.parse(data);
-              let urlTask = result.Vars.scripttoexecute.split("'")[3].replace('..', '');
+              let urlTask = result.Vars.taskurl;
 
               let newUrl = `${this.WebUrl}${urlTask}`;
-              newUrl = `${newUrl}&t=${tokenData?.token}`;
+              // Encode string to Base64
+              const encodedString = this.encodeStringToBase64(JSON.stringify(tokenData));
 
-              //this.navigateUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newUrl);
+              newUrl = `${newUrl}&modalmode=true&t=${encodedString}`;
+
+              // this.navigateUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newUrl);
               // Abre una nueva ventana o pestaña con la URL especificada
               window.open(newUrl, '_blank');
-              this.location.back();
+
+              // this.router.navigate(['#','zamba','rule']);
+              // this.location.back();
               break;
           }
         },
@@ -80,5 +86,14 @@ export class RuleComponent implements OnInit {
         }
       });
     });
+  }
+
+  encodeStringToBase64(str: string): string {
+    return btoa(str);
+  }
+
+  // Function to decode base64 to string
+  decodeBase64ToString(base64: string): string {
+    return atob(base64);
   }
 }
