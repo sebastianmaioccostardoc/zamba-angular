@@ -3,7 +3,7 @@
 <ng-template #result>
     <div class="displayFlex alignCenter headerWidget" nz-row>
         <div nz-col nzSpan="17" class="truncate">
-            <span nz-typography><strong>{{TotalDays}} DIAS DISPONIBLES</strong></span>
+            <span nz-typography><strong>{{TotalDays}} {{ 'DAYSAVAILABLE' | i18n }}</strong></span>
         </div>
 
         <div nz-col class="displayFlex BtnEnd" nzSpan="7">
@@ -15,10 +15,10 @@
 
     <div>
         <ng-container *ngFor="let item of vacations" style="height: 500px; overflow-y: auto;">
-            <strong><nz-alert nzType="info" nzMessage="Vacaciones aprobadas"></nz-alert></strong>
+            <strong><nz-alert nzType="info" nzMessage="{{ 'APPROVED_VACATIONS' | i18n }}"></nz-alert></strong>
             <nz-alert nzBanner nzMessage="
             {{item.VacationFromOption | date: 'dd/MM/yyyy'}}
-            hasta
+            {{ 'VACATION_TO' | i18n }}
             {{item.VacationToOption | date: 'dd/MM/yyyy'}}">
             </nz-alert>
         </ng-container>
@@ -28,8 +28,8 @@
 <ng-template #noInfo>
     <div class="displayFlex alignCenter headerWidget" nz-row>
         <div nz-col nzSpan="24" class="truncate">
-            <span nz-typography><strong> SIN INFORMACION... </strong></span>
+            <span nz-typography><strong> {{ 'NO_INFORMATION' | i18n }} </strong></span>
         </div>
     </div>
-    <h1 *ngShow="result == true" style="text-align: center;"> No se pudo obtener informacionde la fuente. </h1>
+    <h1 *ngShow="result == true" style="text-align: center;"> {{ 'UNABLE_TO_GET_INFORMATION' | i18n }} </h1>
 </ng-template>
