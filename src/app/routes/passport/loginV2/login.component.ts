@@ -125,10 +125,11 @@ export class UserLoginV2Component implements OnDestroy, OnInit {
           console.log(tokenService);
           let userid = tokenService ? tokenService['userid'] : null;
           let token = tokenService ? tokenService['token'] : null;
-          this.safeZambaUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-            `${environment['zambaWeb']}/Views/Security/LoginRRHH.aspx?` + `userid=${userid}&token=${token}`
-          );
-          this.cdr.detectChanges();
+          this.router.navigateByUrl('/dashboard');
+          // this.safeZambaUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+          //   `${environment['zambaWeb']}/Views/Security/LoginRRHH.aspx?` + `userid=${userid}&token=${token}`
+          // );
+          // this.cdr.detectChanges();
         })
     );
   }
