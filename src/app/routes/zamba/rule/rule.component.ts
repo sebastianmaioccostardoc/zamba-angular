@@ -28,7 +28,8 @@ import { ZambaService } from '../../../services/zamba/zamba.service';
   ]
 })
 export class RuleComponent implements OnInit {
-  WebUrl = environment['zambaWeb'];
+  WebUrl = environment['zambaWeb'] + "/Views";
+
   navigateUrl: SafeResourceUrl;
   constructor(
     private location: Location,
