@@ -1,14 +1,14 @@
-import { Component, EventEmitter, Inject, Input, OnInit } from '@angular/core';
-import { PendingVacationsService } from "./service/pending-vacations.service";
-import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
-import { Subscription, catchError } from 'rxjs';
-import { ChangeDetectorRef } from '@angular/core';
-import { NzButtonSize } from 'ng-zorro-antd/button';
-import { Vacation } from './entitie/vacation';
-import { NZ_ICONS } from 'ng-zorro-antd/icon';
-import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
-import { GridsterItem } from 'angular-gridster2';
+import { Component, EventEmitter, Inject, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
+import { GridsterItem } from 'angular-gridster2';
+import { NzButtonSize } from 'ng-zorro-antd/button';
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
+import { NZ_ICONS } from 'ng-zorro-antd/icon';
+import { Subscription, catchError } from 'rxjs';
+
+import { Vacation } from './entitie/vacation';
+import { PendingVacationsService } from './service/pending-vacations.service';
 
 @Component({
   selector: 'app-pending-vacations',
@@ -21,10 +21,6 @@ export class PendingVacationsComponent implements OnInit {
   size: NzButtonSize = 'large';
   info: boolean = true;
 
-
-
-
-
   @Input()
   widget: GridsterItem = {
     type: '',
@@ -36,7 +32,6 @@ export class PendingVacationsComponent implements OnInit {
     resizeEvent: new EventEmitter<GridsterItem>()
   };
 
-
   @Input()
   resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
 
@@ -47,8 +42,12 @@ export class PendingVacationsComponent implements OnInit {
   private changeSubscription: Subscription | undefined;
   result: boolean = false;
 
-  constructor(@Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService, private cdr: ChangeDetectorRef,
-    private PVService: PendingVacationsService, private router: Router,) { }
+  constructor(
+    @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
+    private cdr: ChangeDetectorRef,
+    private PVService: PendingVacationsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.GetExternalsearchInfo();
@@ -81,47 +80,43 @@ export class PendingVacationsComponent implements OnInit {
         }
       };
 
-      this.PVService._GetExternalsearchInfo(genericRequest).pipe(
-        catchError(error => {
-          console.error('Error al obtener datos:', error);
-          throw error;
-        })
-      )
+      this.PVService._GetExternalsearchInfo(genericRequest)
+        .pipe(
+          catchError(error => {
+            console.error('Error al obtener datos:', error);
+            throw error;
+          })
+        )
         .subscribe(data => {
           var JsonData = JSON.parse(data);
 
           if (JsonData != null) {
             for (let item of JsonData) {
-
               var vacationItem: Vacation = new Vacation();
 
-              vacationItem.AuthorizeOption = item["AuthorizeOption"];
-              vacationItem.RequestedDaysOption = item["RequestedDaysOption"];
-              vacationItem.VacationFromOption = item["VacationFromOption"];
-              vacationItem.VacationToOption = item["VacationToOption"];
+              vacationItem.AuthorizeOption = item['AuthorizeOption'];
+              vacationItem.RequestedDaysOption = item['RequestedDaysOption'];
+              vacationItem.VacationFromOption = item['VacationFromOption'];
+              vacationItem.VacationToOption = item['VacationToOption'];
 
               //TODO: Refactorizar si es que cambia la estructura de forma definitiva.
-              this.TotalDays = JsonData[JsonData.length - 1]["TotalDays"].toString();
+              this.TotalDays = JsonData[JsonData.length - 1]['TotalDays'].toString();
               this.vacations.push(vacationItem);
               this.info = true;
               this.result = true;
-
             }
-          }
-          else {
+          } else {
             this.info = false;
             this.result = true;
           }
 
           this.cdr.detectChanges();
-
         });
     }
   }
 
   RequestVacation() {
-    var route = "/zamba/rule";
-    this.router.navigate([route], { queryParams: { typeRule: 'executeViewTask', ruleId: "133" } });
+    var route = '/zamba/rule';
+    this.router.navigate([route], { queryParams: { typeRule: 'executeViewTask', ruleId: '133' } });
   }
 }
-

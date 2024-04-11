@@ -28,7 +28,7 @@ import { ZambaService } from '../../../services/zamba/zamba.service';
   ]
 })
 export class RuleComponent implements OnInit {
-  WebUrl = environment['zambaWeb'] + "/Views";
+  WebUrl = environment['zambaWeb'];
 
   navigateUrl: SafeResourceUrl;
   constructor(
@@ -72,7 +72,7 @@ export class RuleComponent implements OnInit {
 
               newUrl = `${newUrl}&modalmode=true&t=${encodedString}`;
 
-              // this.navigateUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newUrl);
+              this.navigateUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newUrl);
               // Abre una nueva ventana o pestaña con la URL especificada
               window.open(newUrl, '_blank');
 
