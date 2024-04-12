@@ -45,7 +45,7 @@ div span a {
 }
 
 .text-color-grey {
-    color: #afafaf;
+    color: #00000073;
 }
 
 .flex-container {
@@ -61,4 +61,19 @@ div span a {
 .icon-text {
     display: flex;
     align-items: center;
+}
+
+#scrollbar1::-webkit-scrollbar {
+    width: 10px;
+}
+
+#scrollbar1::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: #e7e7e7;
+    border: 1px solid #cacaca;
+}
+
+#scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #d55959;
 }
