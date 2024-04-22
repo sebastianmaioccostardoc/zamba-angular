@@ -205,4 +205,7 @@ export const esEs = {
     "NO_INFORMATION": "SIN INFORMACION",
     "UNABLE_TO_GET_INFORMATION": " No se pudo obtener informacionde la fuente de datos",
 
+    "ruleExecution.an-error-has-occurred": "Ha ocurrido un error",
+    "ruleExecution.uncaught-error": "Error no capturado, vuelva a intentarlo mas tarde.",
+    "ruleExecution.rerun": "Volver a ejecutar"
 }

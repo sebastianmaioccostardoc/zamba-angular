@@ -47,7 +47,7 @@ export class PendingVacationsComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private PVService: PendingVacationsService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.GetExternalsearchInfo();

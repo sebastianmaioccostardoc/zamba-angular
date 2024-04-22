@@ -17,6 +17,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzResultModule } from 'ng-zorro-antd/result';
 
 import { CalendarComponent } from './calendar/calendar.component';
 import { CarouselComponent } from './carousel/carousel.component';
@@ -57,9 +58,10 @@ const COMPONENTS: Array<Type<void>> = [
     NzLayoutModule,
     ContextMenuModule,
     NzSkeletonModule,
-    ScrollingModule
+    ScrollingModule,
+    NzResultModule
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS
 })
-export class WidgetsModule {}
+export class WidgetsModule { }
