@@ -1,9 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivationEnd, Router } from '@angular/router';
 import { _HttpClient } from '@delon/theme';
-import { Subscription, zip, filter } from 'rxjs';
+import { Subscription, zip, filter, catchError } from 'rxjs';
 
 import { employeeUser } from './entitie/employeeUser';
+import { EmployeeUserService } from "./service/employee-user.service";
+import { TmplAstImmediateDeferredTrigger } from '@angular/compiler';
+import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 
 @Component({
   selector: 'app-account-center',
@@ -12,53 +15,41 @@ import { employeeUser } from './entitie/employeeUser';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProAccountCenterComponent implements OnInit {
-  user: employeeUser = {
-    avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png', // Employee Photo
-
-    name: 'Name',
-    lastName: 'LastName',
-    email: 'Email@Mail.Ail',
-    phone: '1100002222',
-    birthday: 'Birthday',
-
-    password: 'Password',
-
-
-    employmentStatus: 'Employment Status',
-    area: 'Area',
-    department: 'Department',
-    position: 'Position',
-
-    workMode: 'Work Mode',
-
-    /* 
-      Si trabajo con metodología Presencial: mi Ubicación Laboral.
-      Si trabajo Hibrido: La Ubicación Laboral y los días que me encuentro ahí.
-      Si trabajo Remoto: Desde que País, Ciudad, Estado cual es la diferencia horaria  y cual es el horario de trabajo
-    */
-
-    workLocation: 'Work Location',
-    country: 'Country',
-    city: 'City',
-    state: 'State',
-    timeDifference: 'Time Difference',
-    workSchedule: 'Work Schedule',
-
-  };
+  user: employeeUser = new employeeUser();
 
   constructor(
+    @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
     private router: Router,
     private http: _HttpClient,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private employeeUserService: EmployeeUserService
   ) { }
 
   ngOnInit(): void {
-    this.http.get('/account/dashboard/getEmployeeUser').subscribe((res: any) => {
-      this.user = res;
+    this.cdr.detectChanges();
 
-      this.cdr.detectChanges();
-    });
+    const tokenData = this.tokenService.get();
+    let genericRequest = {};
+
+    if (tokenData != null) {
+      genericRequest = {
+        UserId: tokenData['userid'],
+        Params: {}
+      };
+
+
+      this.employeeUserService.getEmployeeUser(genericRequest)
+        .pipe(
+          catchError(error => {
+            console.error('Error al obtener datos:', error);
+            throw error;
+          })
+        ).subscribe((res: any) => {
+          this.user = res;
+
+          this.cdr.detectChanges();
+        });
+    }
 
   }
-
 }

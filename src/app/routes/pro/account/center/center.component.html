@@ -5,7 +5,7 @@
 
         <div class="avatar-holder">
           <img src="{{ user.avatar }}" />
-          <div class="name">{{ user.name }}{{ user.lastName }}</div>
+          <div class="name">{{ user.name }} {{ user.lastName }}</div>
           <div>{{ user.position }}</div>
         </div>
 
@@ -44,7 +44,7 @@
           <div nz-col [nzSpan]="12" [nzSm]="12" [nzMd]="6">
             <nz-form-label>company</nz-form-label>
             <input nz-input formControlName="companyName" placeholder=" " [disabled]="true"
-              value="{{ user.companyName }}" />
+              value="{{ user.company }}" />
           </div>
 
           <div nz-col [nzSpan]="12" [nzSm]="12" [nzMd]="6">
