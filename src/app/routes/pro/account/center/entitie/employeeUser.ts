@@ -35,14 +35,14 @@ export class employeeUser {
      */
     constructor() {
         this.avatar = "https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png";
-        this.name = 'Ricardo';
-        this.lastName = 'Fort';
+        this.name = '';
+        this.lastName = '';
         this.password = '';
 
         this.employmentStatus = '';
         this.area = '';
         this.department = '';
-        this.position = 'Comandante';
+        this.position = '';
         this.email = '';
 
         this.workCellPhone = '';
