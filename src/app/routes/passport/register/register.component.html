@@ -138,6 +138,9 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
+    <span nz-typography nzType="danger">* campos obligatorios</span>
+  </nz-form-item>
+  <nz-form-item>
     <nz-form-control [nzErrorTip]="'validation.verification-code.required' | i18n">
       <nz-row [nzGutter]="8">
         <nz-col [nzSpan]="24">
@@ -148,6 +151,7 @@
       </nz-row>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item>
     <button nz-button nzType="primary" nzSize="large" type="submit" [nzLoading]="loading" class="submit"
       [disabled]="form.invalid || disableSubmitButton">
