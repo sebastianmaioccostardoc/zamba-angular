@@ -1,2 +1,3 @@
 <nz-spin *ngIf="!navigateUrl" nzTip="" id="main-spinner" />
-<iframe id="ruleComponentIframe" *ngIf="navigateUrl" [src]="navigateUrl" frameborder="0"></iframe>
+<iframe id="ruleComponentIframe" *ngIf="navigateUrl" [src]="navigateUrl" sandbox="allow-same-origin allow-scripts"
+    frameborder="0"></iframe>

@@ -64,6 +64,7 @@ export class RuleComponent implements OnInit {
               console.log('Datos recibidos:', data);
 
               let result = JSON.parse(data);
+
               let urlTask = result.Vars.taskurl;
 
               let newUrl = `${this.WebUrl}${urlTask}`;
@@ -72,11 +73,11 @@ export class RuleComponent implements OnInit {
 
               newUrl = `${newUrl}&modalmode=true&t=${encodedString}`;
 
-              // this.navigateUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newUrl);
+              this.navigateUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newUrl);
               // Abre una nueva ventana o pestaña con la URL especificada
-              window.open(newUrl, '_blank');
+              //window.open(newUrl, '_blank');
 
-              // this.router.navigate(['#','zamba','rule']);
+              //this.router.navigate(['#', 'zamba', 'rule']);
               // this.location.back();
               break;
           }
