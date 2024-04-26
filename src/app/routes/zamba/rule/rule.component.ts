@@ -78,13 +78,11 @@ export class RuleComponent implements OnInit {
 
               newUrl = `${newUrl}&modalmode=true&t=${encodedString}`;
 
-             this.navigateUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newUrl);
+              //this.router.navigate(['#', 'zamba', 'rule'], { replaceUrl: true });
+
+              this.navigateUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newUrl);
               this.result = true;
               this.cdr.detectChanges();
-              
-              // this.navigateUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newUrl);
-              //// Abre una nueva ventana o pestaña con la URL especificada
-              // window.open(newUrl, '_blank');
 
               break;
           }
