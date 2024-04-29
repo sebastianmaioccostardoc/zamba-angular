@@ -1,9 +1,9 @@
 import { Location } from '@angular/common';
-import { Component, Inject, Injectable, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Injectable, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
-
+import { NZ_I18N, es_ES } from 'ng-zorro-antd/i18n';
 import { environment } from '../../../../environments/environment';
 import { SharedService } from '../../../services/zamba/shared.service';
 import { ZambaService } from '../../../services/zamba/zamba.service';
@@ -29,6 +29,7 @@ import { ZambaService } from '../../../services/zamba/zamba.service';
 })
 export class RuleComponent implements OnInit {
   WebUrl = environment['zambaWeb'];
+  result: boolean;
 
   navigateUrl: SafeResourceUrl;
   constructor(
@@ -38,13 +39,18 @@ export class RuleComponent implements OnInit {
     private route: ActivatedRoute,
     public sharedService: SharedService,
     @Inject(DA_SERVICE_TOKEN) private tokenService: ITokenService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private cdr: ChangeDetectorRef
   ) {
     this.navigateUrl = '';
+    this.result = false;
   }
 
   ngOnInit(): void {
     this.navigateUrl = '';
+    this.result = false;
+    this.cdr.detectChanges();
+
     this.route.queryParams.subscribe(params => {
       const tokenData = this.tokenService.get();
       let genericRequest = {};
@@ -74,18 +80,26 @@ export class RuleComponent implements OnInit {
               newUrl = `${newUrl}&modalmode=true&t=${encodedString}`;
 
               this.navigateUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newUrl);
-              // Abre una nueva ventana o pestaña con la URL especificada
-              //window.open(newUrl, '_blank');
+              this.result = true;
+              this.cdr.detectChanges();
 
-              //this.router.navigate(['#', 'zamba', 'rule']);
+              // this.navigateUrl = this.sanitizer.bypassSecurityTrustResourceUrl(newUrl);
+              //// Abre una nueva ventana o pestaña con la URL especificada
+              // window.open(newUrl, '_blank');
+
+              // this.router.navigate(['#','zamba','rule']);
               // this.location.back();
               break;
           }
         },
         error: error => {
           console.error('Error al obtener datos:', error);
+          this.result = true;
+          this.cdr.detectChanges();
         }
       });
+
+
     });
   }
 

@@ -1,3 +1,33 @@
-<nz-spin *ngIf="!navigateUrl" nzTip="" id="main-spinner" />
-<iframe id="ruleComponentIframe" *ngIf="navigateUrl" [src]="navigateUrl" sandbox="allow-same-origin allow-scripts"
-    frameborder="0"></iframe>
+<ng-container *ngIf="navigateUrl != ''; then Ok; else noInfo" />
+
+<ng-template #Ok>
+  <iframe id="ruleComponentIframe" *ngIf="navigateUrl" [src]="navigateUrl" frameborder="0"
+    sandbox="allow-same-origin allow-scripts"></iframe>
+</ng-template>
+
+<ng-template #noInfo>
+  <div *ngIf="result == false">
+    <nz-spin nzTip="" id="main-spinner" />
+  </div>
+
+  <div *ngIf="result == true">
+    <nz-result nzTitle="{{'ruleExecution.an-error-has-occurred' | i18n}}" nzStatus="error"
+      nzSubTitle="{{'ruleExecution.uncaught-error' | i18n}}">
+      <div nz-result-content *ngShow="false">
+        <!-- <div class="desc">
+                    <ul>
+                        <li>Verifique que la URL sea correcta.</li>
+                        <li>Verifique que la URL no este bloqueada por el navegador.</li>
+                        <li>Verifique que la URL no este bloqueada por el servidor.</li>
+                        <li>Verifique que la URL no este bloqueada por el firewall.</li>
+                        <li>Verifique que la URL no este bloqueada por el antivirus.</li>
+                        <li>Verifique que la URL no este bloqueada por el proxy.</li>
+                    </ul>
+                </div> -->
+      </div>
+      <div nz-result-extra>
+        <button nz-button nzType="primary" (click)="ngOnInit()">{{'ruleExecution.rerun' | i18n}}</button>
+      </div>
+    </nz-result>
+  </div>
+</ng-template>
